@@ -8,23 +8,28 @@ Prebuilt Haven & Hearth client. This repository is a ready-to-run game package, 
 2. Extract it anywhere on disk.
 3. Run `Run-MooNWide.bat`.
 
-For Steam login/integration, use `Run-MooNWide-Steam.bat`.
+For Steam login and integration, use `Run-MooNWide-Steam.bat`.
+
+## Auto update
+
+- `Run-MooNWide.bat` checks GitHub before every launch.
+- `Run-MooNWide-Steam.bat` does the same.
+- If a newer package exists, it is downloaded and installed automatically, then the launcher restarts itself.
+- For a manual check, run `Update-MooNWide.bat`.
+- If GitHub is unavailable, the client still starts with the files already on disk.
 
 ## What is included
 
 - ready client jars
 - trimmed bundled Java runtime in `jre\`
 - Windows launchers
+- built-in GitHub updater
 - required native libraries and game resources
 
 You do not need to build anything before playing.
 
 ## Notes
 
-- Crash log: `%USERPROFILE%\\.haven\\moonwide-crash.log`
-- If you move or delete `jre\`, the launchers will fall back to `JAVA_HOME` or `PATH`
-- Legal files are included in `COPYING`, `doc\\LGPL-3`, `NOTICE-MooNWide.txt`, and `THIRD_PARTY_NOTICES.txt`
-
-## Коротко
-
-Это уже собранный клиент. Скачай архив репозитория и запускай `Run-MooNWide.bat`.
+- Crash log: `%USERPROFILE%\.haven\moonwide-crash.log`
+- If you move or delete `jre\`, the launchers fall back to `JAVA_HOME` or `PATH`
+- Legal files are included in `COPYING`, `doc\LGPL-3`, `NOTICE-MooNWide.txt`, and `THIRD_PARTY_NOTICES.txt`
