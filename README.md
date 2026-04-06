@@ -30,6 +30,7 @@ You do not need to build anything before playing.
 
 ## Notes
 
+- The login screen shows a `Build ...` label in the lower-left corner. Use it to confirm you and the tester are on the same client build.
 - Crash log: `%USERPROFILE%\.haven\moonwide-crash.log`
 - If you move or delete `jre\`, the launchers fall back to `JAVA_HOME` or `PATH`
 - Legal files are included in `COPYING`, `doc\LGPL-3`, `NOTICE-MooNWide.txt`, and `THIRD_PARTY_NOTICES.txt`
