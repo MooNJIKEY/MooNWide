@@ -1,0 +1,11 @@
+MooNWide — community modifications to the Haven & Hearth client.
+
+The upstream client is copyright Fredrik Tolf and Björn Johannessen and licensed
+under the GNU Lesser General Public License v3 (see COPYING and doc/LGPL-3).
+
+MooNWide changes (additional source files and assets under this distribution)
+are contributed under the same LGPL-3 terms as the Haven client, unless a
+specific file states otherwise.
+
+Game data in hafen-res.jar / builtin-res.jar remains subject to the original
+Haven & Hearth terms of use and resource licenses.

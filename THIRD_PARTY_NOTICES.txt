@@ -1,0 +1,11 @@
+Third-party components shipped alongside hafen.jar (see lib / bin JAR names):
+
+- JOGL, GlueGen — JogAmp community; BSD-style license. https://jogamp.org/
+- LWJGL — liberally licensed (BSD). https://www.lwjgl.org/
+- steamworks4j — MIT-style (check project for exact text). https://github.com/code-disaster/steamworks4j
+
+Builtin game resources (hafen-res.jar, builtin-res.jar) are part of the
+Haven & Hearth distribution; rights remain with the respective copyright holders.
+
+This list is indicative; for full license texts refer to each project’s
+repository or the JAR META-INF where applicable.
