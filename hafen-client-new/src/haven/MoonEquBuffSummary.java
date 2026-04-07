@@ -328,6 +328,8 @@ public final class MoonEquBuffSummary {
     public static final class BuffBody extends Widget {
 	public final Equipory eq;
 	private int lastDigest = -1;
+	private int queuedDigest = -1;
+	private double rebuildAt = 0.0;
 	private TexI content;
 
 	public BuffBody(Equipory eq) {
@@ -338,10 +340,16 @@ public final class MoonEquBuffSummary {
 	@Override
 	public void tick(double dt) {
 	    super.tick(dt);
+	    if(!tvisible())
+		return;
 	    int dig = equipChangeDigest(eq);
-	    if((dig != lastDigest) || (content == null)) {
+	    if((dig != queuedDigest) || (content == null)) {
+		queuedDigest = dig;
+		rebuildAt = Utils.rtime() + ((content == null) ? 0.0 : 0.18);
+	    }
+	    if(((queuedDigest != lastDigest) || (content == null)) && (Utils.rtime() >= rebuildAt)) {
 		if(rebuild())
-		    lastDigest = dig;
+		    lastDigest = queuedDigest;
 	    }
 	}
 

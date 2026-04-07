@@ -1,15 +1,6 @@
 @echo off
 setlocal
 cd /d "%~dp0"
-if not defined MOONWIDE_UPDATE_PASS if exist "%~dp0Update-MooNWide.ps1" (
-  set "MOONWIDE_UPDATE_PASS=1"
-  powershell -NoLogo -NoProfile -ExecutionPolicy Bypass -File "%~dp0Update-MooNWide.ps1" -Quiet
-  set "UPDATER_EXIT=%ERRORLEVEL%"
-  if "%UPDATER_EXIT%"=="42" (
-    call "%~f0" %*
-    exit /b 0
-  )
-)
 if not exist "hafen.jar" (
   echo [ERROR] hafen.jar not found. Download the full client package and keep all files together.
   pause

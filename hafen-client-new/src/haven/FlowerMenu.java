@@ -28,6 +28,8 @@ package haven;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.util.HashMap;
+import java.util.Map;
 import static java.lang.Math.PI;
 
 public class FlowerMenu extends Widget {
@@ -37,8 +39,21 @@ public class FlowerMenu extends Widget {
     public static final IBox pbox = Window.wbox;
     public static final Tex pbg = Window.bg;
     public static final int ph = UI.scale(30), ppl = 8;
+    private static final Map<String, Text> petalTextCache = new HashMap<>();
+    private static long petalTextGen = -1L;
     public Petal[] opts;
     private UI.Grab mg, kg;
+
+    private static Text petalText(String name) {
+	long gen = LocalizationManager.autoTranslateUiGeneration();
+	synchronized(petalTextCache) {
+	    if(petalTextGen != gen) {
+		petalTextCache.clear();
+		petalTextGen = gen;
+	    }
+	    return petalTextCache.computeIfAbsent((name == null) ? "" : name, key -> ptf.render(key, ptc));
+	}
+    }
 
     @RName("sm")
     public static class $_ implements Factory {
@@ -60,7 +75,7 @@ public class FlowerMenu extends Widget {
 	public Petal(String name) {
 	    super(Coord.z);
 	    this.name = name;
-	    text = ptf.render(name, ptc);
+	    text = petalText(name);
 	    resize(text.sz().x + UI.scale(25), ph);
 	}
 

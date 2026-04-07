@@ -9,6 +9,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.ArrayDeque;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -587,11 +588,14 @@ public final class MoonStorage {
 	    return;
 
 	int oldRevision = 0;
+	ContainerRecord prevRecord = null;
 	synchronized(lock) {
 	    ensureLoaded();
 	    ContainerRecord old = containers.get(containerId);
-	    if(old != null)
+	    if(old != null) {
 		oldRevision = old.revision;
+		prevRecord = old.copy();
+	    }
 	}
 
 	ContainerRecord rec = new ContainerRecord();
@@ -623,6 +627,7 @@ public final class MoonStorage {
 	    rec.buildingType = building.buildingType;
 	}
 
+	Map<String, ArrayDeque<ItemRecord>> prevItems = previousItemBuckets(prevRecord);
 	List<Map.Entry<GItem, WItem>> entries = new ArrayList<>(inv.wmap.entrySet());
 	Collections.sort(entries, Comparator.comparingInt(e -> slotIndex(inv, e.getValue())));
 	for(Map.Entry<GItem, WItem> e : entries) {
@@ -630,7 +635,7 @@ public final class MoonStorage {
 	    WItem wi = e.getValue();
 	    if(item == null || wi == null)
 		continue;
-	    ItemRecord ir = buildItemRecord(inv, item, wi, rec.lastSeenAt);
+	    ItemRecord ir = buildItemRecord(inv, item, wi, rec.lastSeenAt, prevItems);
 	    if(ir != null)
 		rec.items.add(ir);
 	}
@@ -643,18 +648,48 @@ public final class MoonStorage {
 	}
     }
 
-    private static ItemRecord buildItemRecord(Inventory inv, GItem item, WItem wi, long seenAt) {
+    private static ItemRecord buildItemRecord(Inventory inv, GItem item, WItem wi, long seenAt,
+					      Map<String, ArrayDeque<ItemRecord>> prevItems) {
 	ItemRecord ret = new ItemRecord();
 	ret.itemResName = safeItemResName(item);
 	ret.displayName = safeItemDisplayName(item);
-	ret.quality = safeItemQuality(item);
 	ret.quantity = Math.max(item.num, 1);
 	ret.stackSize = ret.quantity;
 	ret.slotIndex = slotIndex(inv, wi);
 	ret.slotW = Math.max(1, (wi.sz.x + Inventory.sqsz.x - 1) / Inventory.sqsz.x);
 	ret.slotH = Math.max(1, (wi.sz.y + Inventory.sqsz.y - 1) / Inventory.sqsz.y);
+	ret.quality = reuseKnownQuality(prevItems, ret);
 	ret.lastSeenAt = seenAt;
 	return ret;
+    }
+
+    private static Map<String, ArrayDeque<ItemRecord>> previousItemBuckets(ContainerRecord rec) {
+	Map<String, ArrayDeque<ItemRecord>> buckets = new HashMap<>();
+	if(rec == null || rec.items == null)
+	    return buckets;
+	for(ItemRecord item : rec.items) {
+	    if(item == null)
+		continue;
+	    buckets.computeIfAbsent(itemReuseKey(item), k -> new ArrayDeque<>()).add(item);
+	}
+	return buckets;
+    }
+
+    private static double reuseKnownQuality(Map<String, ArrayDeque<ItemRecord>> prevItems, ItemRecord current) {
+	if(prevItems == null || current == null)
+	    return 0;
+	ArrayDeque<ItemRecord> bucket = prevItems.get(itemReuseKey(current));
+	if(bucket == null || bucket.isEmpty())
+	    return 0;
+	ItemRecord prev = bucket.pollFirst();
+	return (prev == null) ? 0 : prev.quality;
+    }
+
+    private static String itemReuseKey(ItemRecord item) {
+	if(item == null)
+	    return "";
+	return normalize(item.itemResName) + "|" + normalize(item.displayName) + "|" +
+	    item.quantity + "|" + item.slotW + "|" + item.slotH;
     }
 
     private static int slotIndex(Inventory inv, WItem wi) {
@@ -1548,18 +1583,6 @@ public final class MoonStorage {
 	    return null;
 	} catch(Exception ignored) {
 	    return null;
-	}
-    }
-
-    private static double safeItemQuality(GItem item) {
-	if(item == null)
-	    return 0;
-	try {
-	    return MoonItemQuality.readQ(item.info());
-	} catch(Loading ignored) {
-	    return 0;
-	} catch(Exception ignored) {
-	    return 0;
 	}
     }
 

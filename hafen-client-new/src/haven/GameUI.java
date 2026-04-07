@@ -1498,11 +1498,9 @@ public class GameUI extends ConsoleHost implements Console.Directory, UI.Notice.
 	}
 
 	public void draw(GOut g) {
-	    if((mmapwnd == null) || !mmapwnd.ardMode()) {
-		g.chcolor(18, 12, 30, 255);
-		g.frect(Coord.z, sz);
-		g.chcolor();
-	    }
+	    g.chcolor(18, 12, 30, 255);
+	    g.frect(Coord.z, sz);
+	    g.chcolor();
 	    super.draw(g);
 	}
 
@@ -2290,8 +2288,6 @@ public class GameUI extends ConsoleHost implements Console.Directory, UI.Notice.
 	private MapMenu mapmenu;
 	private final Coord mapBaseSize;
 	private final int menuPad = UI.scale(2);
-	private boolean ardMode = Utils.getprefb("moon-minimap-ard", false);
-
 	@Override
 	protected java.awt.Color panelBodyColor() {
 	    return new java.awt.Color(18, 12, 30, 255);
@@ -2311,55 +2307,51 @@ public class GameUI extends ConsoleHost implements Console.Directory, UI.Notice.
 	}
 
 	public boolean ardMode() {
-	    return ardMode;
+	    return false;
 	}
 
 	public void setArdMode(boolean ard) {
-	    if(this.ardMode == ard)
-		return;
-	    this.ardMode = ard;
-	    Utils.setprefb("moon-minimap-ard", ard);
-	    layoutMapAndMenu();
+	    /* Removed: minimap always uses the standard MooNWide chrome. */
 	}
 
 	@Override
 	protected boolean transparentChromeMode() {
-	    return ardMode;
+	    return false;
 	}
 
 	@Override
 	protected int actionStripHeight() {
-	    return ardMode ? 0 : super.actionStripHeight();
+	    return super.actionStripHeight();
 	}
 
 	@Override
 	protected int headerHeight() {
-	    return ardMode ? 0 : super.headerHeight();
+	    return super.headerHeight();
 	}
 
 	@Override
 	protected int dragBandHeight() {
-	    return ardMode ? UI.scale(10) : super.dragBandHeight();
+	    return super.dragBandHeight();
 	}
 
 	/** Edge-to-edge map under the title bar (no side body padding) — removes empty bands left/right. */
 	@Override
 	public Coord wrapSize(Coord csz) {
-	    if(!chrome || ardMode)
+	    if(!chrome)
 		return(csz);
 	    return(Coord.of(csz.x, csz.y + actionStripHeight() + headerHeight() + MoonPanel.PAD * 2));
 	}
 
 	@Override
 	public Coord contentOffset() {
-	    if(!chrome || ardMode)
+	    if(!chrome)
 		return(Coord.z);
 	    return(Coord.of(0, actionStripHeight() + headerHeight() + MoonPanel.PAD));
 	}
 
 	@Override
 	public Coord contentSize() {
-	    if(!chrome || ardMode)
+	    if(!chrome)
 		return(sz);
 	    return(Coord.of(
 		Math.max(1, sz.x),
@@ -2445,7 +2437,7 @@ public class GameUI extends ConsoleHost implements Console.Directory, UI.Notice.
     public class MapMenu extends Widget {
 	private final int mmGap = UI.scale(2);
 	private final int mmBtn = UI.scale(22);
-	private MoonStripToggle claim, vil, rlm, mapbtn, icons, nav, ard;
+	private MoonStripToggle claim, vil, rlm, mapbtn, icons, nav;
 
 	/** Small text toggle matching {@link MoonPanel} chrome. */
 	public class MoonStripToggle extends ACheckBox {
@@ -2542,12 +2534,6 @@ public class GameUI extends ConsoleHost implements Console.Directory, UI.Notice.
 	    nav.state(() -> ((moonTeleportWnd != null) && moonTeleportWnd.visible()) || TeleportManager.isMapPickArmed())
 		.click(GameUI.this::toggleMoonTeleportWindow);
 	    nav.settip(LocalizationManager.tr("map.tip.nav"));
-	    ard = add(new MoonStripToggle("A"));
-	    ard.state(() -> (mmapwnd != null) && mmapwnd.ardMode()).click(() -> {
-		    if(mmapwnd != null)
-			mmapwnd.setArdMode(!mmapwnd.ardMode());
-		});
-	    ard.settip("ARD borderless");
 	    relayout(UI.scale(176));
 	    if(map != null) {
 		if(Utils.getprefb("moon-mapmenu-cplot", false))
@@ -2561,7 +2547,7 @@ public class GameUI extends ConsoleHost implements Console.Directory, UI.Notice.
 	}
 
 	public void relayout(int width) {
-	    MoonStripToggle[] row = {claim, vil, rlm, mapbtn, icons, nav, ard};
+	    MoonStripToggle[] row = {claim, vil, rlm, mapbtn, icons, nav};
 	    int n = row.length;
 	    int btnw = Math.max(mmBtn, (width - (n - 1) * mmGap) / n);
 	    int x = 0;
