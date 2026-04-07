@@ -1,0 +1,2102 @@
+{
+  "updated": "2026-04-04",
+  "source": "https://havenandhearth.fandom.com/api.php",
+  "recipes": [
+    {
+      "title": "Apple Core",
+      "skill": "",
+      "materials": "Apple",
+      "reference": "Apple tree",
+      "how": "Take an apple from an apple tree. You get one after eating the apple. Ordinary wild apple trees are q10. If you find a tree with apples that are below q10 or above q10 it is not wild. Someone planted it. It is not considered polite to chop down apple trees becuase they keep new players from starving. Also,it can be used to feed domesticated animals.",
+      "description": "Apple cores are used to plant more seed of::apple trees by placing them in a filled Treeplanter's Pot."
+    },
+    {
+      "title": "Ash",
+      "skill": "",
+      "materials": "Baked Goods (unbaked or baked)",
+      "reference": "Oven",
+      "how": "Baked goods or Items left in a lit oven or Kiln for too long will become ash. Generally, it is the result of user error. However, should you wish to purposefully create ash, bread is the simplest baked good to produce, while honey buns turn into ash quicker and require only one more ingredient than bread (that being honey).",
+      "description": "The remains of overcooked food, used to produce a couple of clothing objects."
+    },
+    {
+      "title": "Backpack",
+      "skill": "",
+      "materials": "",
+      "reference": "",
+      "how": "Craft [C] > Leather Working [L] > Backpack [p] It takes 4 pieces of leather and the leather working skill Category:Equipment Category:Clothing",
+      "description": "Backpacks use the \"back\" equipment slot, which is the sixth equipment slot on the right. While equipped, it extends inventory space by 2 vertical bars. As with all items that provide extra storage, these bonuses are cumulative. Because it uses the back slot, it cannot be used simultaneously with a quiver."
+    },
+    {
+      "title": "Bar of Copper",
+      "skill": "",
+      "materials": "Copper Ore",
+      "reference": "Ore Smelter}}",
+      "how": "",
+      "description": ""
+    },
+    {
+      "title": "Bar of Tin",
+      "skill": "",
+      "materials": "Tin Ore",
+      "reference": "Ore Smelter",
+      "how": "",
+      "description": "Tin is a soft metal that is unsuitable for making durable tools or equipment, but it is the only metal that can be used to produce Tankards, which are currently the only drinking vessel that can be used to hold and drink Beer. Aside from this unique use, the main reason to produce tin is as an ingredient in the making of Bronze, which is a much stronger metal that can be used to produce a much greater variety of tools. Tin can also be used in the construction of any tool or building that requires a Bar of Common Metal, such as a Cauldron. In order to make Tin Nuggets you need an Alloying Crucible."
+    },
+    {
+      "title": "Bar of Wrought Iron",
+      "skill": "",
+      "materials": "",
+      "reference": "",
+      "how": "Craft [C] > Metal Working [e] > Wrought Iron [W] Place any number of bars of Cast Iron from 1-9 into the Finery Forge and fuel it with 2 charcoals after a few minutes the cast iron left inside has a 50% chance of turning into either a bloom or slag. At an anvil with a smithy's hammer equipped, one unit of bloom can be converted into a bar of wrought iron with a one-in-three chance. If the bloom does not become a bar of wrought iron, it instead becomes a bar of cast iron. For a character who is neutral on the nature/industry slider, this means that the inputs to a finery forge can become the following with the stated chances: # 1-in-2 chance of becoming slag (50%). # 1-in-3 chance of becoming cast iron (33.3%). # 1-in-6 chance of becoming wrought iron (16.7%). This is after one iteration. Cast iron created this way can be used in the finery forge again with identical chances as in the first iteration. This means that after an infinite number of iterations, the chances of becoming wrought iron are: 1/6 + 1/3 * (1/6 + 1/3 * (1/6 + 1/3 * (...))) = 1/6 * (1/3^0 + 1/3^1 + 1/3^2 + ...) = .25.",
+      "description": "Wrought iron, in bar form, can be used to produce a variety of medium-grade metal goods."
+    },
+    {
+      "title": "Battleaxe of the Twelfth Bay",
+      "skill": "",
+      "materials": "",
+      "reference": "",
+      "how": "Craft > Metal Working > Battleaxe of the Twelfth Bay It requires a massive Twelve steel, and two leather. This is considered the most expensive item in the game.",
+      "description": "{{infobox object | name = | image = Image:.png | caption = | type = Equipment, Inventory | skillreq = Steelmaking | objectsreq = Bar of Steel x12, Leather x2 | reqby = Nothing |xsize = 2|ysize = 3}} The Battleaxe of the Twelfth Bay (B12, for short) deals 500 base damage. [http://pastebin.com/eyj6qqC8]"
+    },
+    {
+      "title": "Bear Tooth Talisman",
+      "skill": "",
+      "materials": "",
+      "reference": "",
+      "how": "Craft [C] > Jewelry [J] > Bear Tooth Talisman [B] +3 Strength +5 Charisma, , '''Q42 Bear Tooth + Q14 Taproot''', '''Q40''': +7 Strength +10 Charisma (Neutral Slider), '''Q42: '''+6 STR and +10 Charisma, '''Q60''': +7 STR and +12 Charisma (Neutral Slider) Category:Equipment Category:Clothing",
+      "description": "A piece of equipment that grants a base of 3 Strength and 5 Charisma. The boost you get is also dependant on your civilization/barbarism slider and changes as that slider does. The closer your Personal Beliefs are to civ, the higher the CHA boost will be and vise versa. The quality of the Bear Tooth Talisman is affected by Psyche and Bear Tooth quality. The Quality of the String has no effect on the final quality of the talisman, only the Quality of the tooth matters."
+    },
+    {
+      "title": "Birchbark",
+      "skill": "",
+      "materials": "None",
+      "reference": "Birch Tree",
+      "how": "",
+      "description": "Find a birch tree. They have white tree trunks and yellow leaves. Right click on the tree to bring up the option \"Take bark\"."
+    },
+    {
+      "title": "Black Tea Leaves",
+      "skill": "",
+      "materials": "Fresh Tea Leaves",
+      "reference": "Herbalist Table",
+      "how": "Gained from leaving Fresh Tea Leaves onto a Herbalist Table for approx 8-9 RL hours.",
+      "description": "Together with Green Tea Leaves they currently serve the same purpose in making Tea. Because the quality of Black Tea Leaves are influenced by the Herbalist Table twice, the quality of tea is closer to the table than tea from Green Tea Leaves."
+    },
+    {
+      "title": "Bloody Rag",
+      "skill": "",
+      "materials": "Gauze",
+      "reference": "Nothing",
+      "how": "",
+      "description": "When you remove gauze from your head, it turns into a Bloody Rag. At the moment the only use for it is to sacrifice rags to ancestors. If you don't plan on aquiring Numen, you might just discard Bloody Rags."
+    },
+    {
+      "title": "Bone Ash",
+      "skill": "",
+      "materials": "Bone Material",
+      "reference": "Kiln",
+      "how": "Burn Bone in a Kiln, it needs 2 branches.",
+      "description": "Bone Ash is an ingredient of Bone Clay, which is used to make Porcelain plates."
+    },
+    {
+      "title": "Bone Clay",
+      "skill": "",
+      "materials": "Bone Ash x5, Cave Clay, Feldspar",
+      "reference": "",
+      "how": "",
+      "description": "Bone Clay is currently only used to make Porcelain Plate and Ceramic Meat Grinder."
+    },
+    {
+      "title": "Bread Dough",
+      "skill": "",
+      "materials": "Water (1.0 liter), Wheat Flour",
+      "reference": "",
+      "how": "Have wheat flour and a container filled with at least 1.0 liter of water in your inventory, then craft bread dough. Craft > Cooking > Baking > Bread",
+      "description": "Wheat Flour and Water combined into a dough, ready for baking."
+    },
+    {
+      "title": "Bronze Nugget",
+      "skill": "",
+      "materials": "Bar of Bronze",
+      "reference": "Alloying Crucible",
+      "how": "",
+      "description": "Bronze nuggets are made by using the craft with an Alloying Crucible while holding a Bar of Bronze. This gives 10 Bronze Nuggets, usable in crafting or smeltable back to a bar. The quality of a nugget depends only on the quality of the bar used Qnugget = Qbar."
+    },
+    {
+      "title": "Bunny Slippers",
+      "skill": "",
+      "materials": "",
+      "reference": "",
+      "how": "Craft > Cloth Making > Bunny Slippers",
+      "description": "are cosy footwear. They provide no armor bonuses, but are the only shoes that are indestructable. {| border=\"1\" cellpadding=\"1\" cellspacing=\"1\" style=\"width: 200px;\" | style=\"text-align: center;\"|Quality | style=\"text-align: center;\"|Agility |- | style=\"text-align: center;\"|10 | style=\"text-align: center;\"| +2 |- | style=\"text-align: center;\"|<10 | style=\"text-align: center;\"| +1 |}"
+    },
+    {
+      "title": "Cast Iron Nugget",
+      "skill": "",
+      "materials": "Bar of Cast Iron",
+      "reference": "Alloying Crucible",
+      "how": "",
+      "description": "Cast Iron nuggets are made by using the craft with an Alloying Crucible while holding a Bar of Cast Iron. This gives 10 Cast Iron Nuggets, usable in crafting or smeltable back to a bar. The quality of a nugget depends only on the quality of the bar used Qnugget = Qbar."
+    },
+    {
+      "title": "Chef's Hat",
+      "skill": "",
+      "materials": "",
+      "reference": "",
+      "how": "Craft > Cloth Making > Hats > Chef's Hat Category:Equipment Category:Clothing",
+      "description": "Wearing a Chef's Hat will boost your cooking skill by 5 plus 1 per 10 quality of the hat (5+x/10 rounded up)."
+    },
+    {
+      "title": "Chicken Egg",
+      "skill": "",
+      "materials": "Chicken",
+      "reference": "Chicken Coop",
+      "how": "Chicken eggs are laid by hens in a chicken coop. It takes roughly 24 hours for a hen to lay an egg. There needs to be at least one empty square directly below the hen, otherwise the egg won't appear. If there is a cock in the coop with the hen, the produced egg will be fertile and will hatch into a chick. Fertile eggs need to be brooded by a hen in order to hatch. To brood, the egg needs to be in a square space directly below the hen.",
+      "description": "An egg laid by chicken. Required by several cooking recipes, can be eaten fried or boiled."
+    },
+    {
+      "title": "Chicken Feather",
+      "skill": "",
+      "materials": "Dead Chicken, Dead Cock",
+      "reference": "Nothing",
+      "how": "Butchering a Dead Chicken or a Dead Cock provides you with several materials, including three chicken feathers.",
+      "description": "s can be used as quills, which, along with ink and parchment, are used to draw maps. The has a chance of breaking when used in this fashion. They are also required for Feather Fly, Tin Fly, and Sturdy Bed."
+    },
+    {
+      "title": "Chieftain's Hat",
+      "skill": "",
+      "materials": "",
+      "reference": "",
+      "how": "Craft > Cloth Making > Hats > Chieftain's Hat ru:Chieftain's Hat Category:Equipment Category:Clothing Category:Armor",
+      "description": "You can only equip this if you are a Chieftain. this gives +3 CHA(1L). A quality 31 hat gives +33 CHA Q10 = 19 CHA"
+    },
+    {
+      "title": "Copper Nugget",
+      "skill": "",
+      "materials": "Bar of Copper",
+      "reference": "Alloying Crucible",
+      "how": "",
+      "description": "Copper nuggets are made by using the craft with an Alloying Crucible while holding a Bar of Copper. This gives 10 Copper Nuggets, usable in crafting or smeltable back to a bar. The quality of a nugget depends only on the quality of the bar used Qnugget = Qbar."
+    },
+    {
+      "title": "Cured Tobacco Leaf",
+      "skill": "",
+      "materials": "Fresh Tobacco Leaf",
+      "reference": "Herbalist Table",
+      "how": "Gained from a Fresh Tobacco Leaf after drying it on a Herbalist Table for 24 hours real life time.",
+      "description": "You need a cured tobacco leaf in order to make Tobacco."
+    },
+    {
+      "title": "Dawn Chain",
+      "skill": "",
+      "materials": "Gold Nugget x3",
+      "reference": "Nothing",
+      "how": "",
+      "description": "+1 Day Personal Belief, Boost to Exploration."
+    },
+    {
+      "title": "Deer Antlers",
+      "skill": "",
+      "materials": "",
+      "reference": "Hand|skillreq = none}}",
+      "how": "Kill a deer, then right click to collect bones on a deer skeleton after skinning and/or butchering the remains. You will get one set of antlers with other bone materials of the same quality. Quality is determined by the formula DeerLevel*5+Survival/2.",
+      "description": "The antlers of a deer. Deer Antlers also count as bone material for recipes. {{infobox object | name = | image = Image:.png | xsize = 1 | ysize = 1 | caption = | type = Inventory | skillreq = Unknown | objectsreq = Deer Skeleton }} {{Infobox curiositie | name = | image = Image:.png |xsize = 1 |ysize = 1 |lpgain = 0 |att = 20 |time = 38hours |producedby = Hand|skillreq = none}}"
+    },
+    {
+      "title": "Dried Hide",
+      "skill": "",
+      "materials": "Raw Hide",
+      "reference": "Drying Frame",
+      "how": "Acquired by skinning a cow, deer, aurochs, or boar. Then hanging that skin on a drying frame. Category:Hides",
+      "description": "Dried Hide is a generic hide taken from larger animals other than bears. If tanned, you will receive four pieces of leather. There are no items that specifically require a Dried Hide over any other animal hide, but deer hides provide pretty decent quality, which is good for newer players that are in need of decent quality slings and leather armor."
+    },
+    {
+      "title": "Druid's Helm",
+      "skill": "",
+      "materials": "",
+      "reference": "",
+      "how": "Simply, Craft, Metal Working, Armor, Druid's Helm Category:Equipment Category:Clothing Category:Armor",
+      "description": "Druid's Helm is part of the wrought iron armor set. {|width=\"300\" cellspacing=\"1\" cellpadding=\"1\" border=\"1\" !nowrap=\"nowrap\" width=\"30%\" scope=\"col\"|hit points !width=\"30%\" scope=\"col\"|deflect !width=\"30%\" scope=\"col\"|absorb |- |align=\"center\"|225 |align=\"center\"|30 |align=\"center\"|10 |}"
+    },
+    {
+      "title": "Dusk Chain",
+      "skill": "",
+      "materials": "| objectsreq = Silver Nugget x3",
+      "reference": "",
+      "how": "",
+      "description": "Boosts Night Personal Belief and Stealth. Night belief boost doesn't depend on quality of Dusk Chain, it will give +1 at any quality. Base Stealth boost is +10."
+    },
+    {
+      "title": "Family Heirloom",
+      "skill": "",
+      "materials": "Gold Nugget x3",
+      "reference": "",
+      "how": "",
+      "description": "The Family Heirloom is a piece of jewelry, which gives +2 Tradition Personal Belief while worn."
+    },
+    {
+      "title": "Feather Duster",
+      "skill": "",
+      "materials": "",
+      "reference": "",
+      "how": "To acquire a Feather Duster, you must Butcher at least two Chicken Corpses for Feathers, obtain String through Farming or Foraging, and Chop a Log into Blocks, then under Crafting>Curiosities>Feather Duster, Click 'Craft'.",
+      "description": "The Feather Duster is a Curiosity that takes 4 attention points and 10 hours to study. Softcapped by Carpentry. After the Feather Duster is studied the player will gain 960 learning points."
+    },
+    {
+      "title": "Gold Nugget",
+      "skill": "",
+      "materials": "Gold Ore",
+      "reference": "Ore Smelter",
+      "how": "",
+      "description": "Gold Nuggets are made from smelting Gold Ore in an Ore Smelter. Gold Nuggets can also be crafted into Bar of Gold and melted back into gold nuggets."
+    },
+    {
+      "title": "Green Tea Leaves",
+      "skill": "",
+      "materials": "Fresh Tea Leaves",
+      "reference": "Herbalist Table",
+      "how": "Gained from Fresh Tea Leaves after having them on a Herbalist Table for half an hour.",
+      "description": "Together with Black Tea Leaves they currently serve the same purpose in making Tea."
+    },
+    {
+      "title": "Hide Cloak",
+      "skill": "",
+      "materials": "Dried Bear Hide or Dried Fox Hide or Dried Hide or Dried Sheep Skin or Rabbit Fur",
+      "reference": "",
+      "how": "A hide cloak is crafted with a dried hide and has no use other than character customization.Its an item some newbies wear. Despite the game saying it requires a \"Dried Cow Hide\", a dried hide from any animal will work. Note: It looks like a toga. Category:Equipment Category:Clothing",
+      "description": ""
+    },
+    {
+      "title": "Kuksa",
+      "skill": "",
+      "materials": "",
+      "reference": "",
+      "how": "Craft > Tools > Kuksa",
+      "description": "This is a type of cup used to gather river or well water, which can be consumed to recover stamina. However, water is less effective at recovering stamina than tea. The Kuksa holds 0.3 L of water and drains hunger while recovering stamina."
+    },
+    {
+      "title": "Leech",
+      "skill": "",
+      "materials": "None",
+      "reference": "Swamp",
+      "how": "Walk around or stand in a swamp with empty equipment slots, and leeches will soon attach themselves or put them in a basket (any storage will work) and get them there.",
+      "description": "Leeches decrease your SHP slowly, but for every point of SHP damage there's a chance of them healing a point of HHP. formula. Each time a leech drains your SHP, its quality will increase or decrease towards your constitution. Once a leech becomes bloated it will no longer have any effect on you, but bloated leeches will become skinny again after sitting in your inventory or a container. It is a good idea to collect leeches and store them for future use."
+    },
+    {
+      "title": "Malted Wheat",
+      "skill": "",
+      "materials": "Germinated Wheat Seeds",
+      "reference": "Kiln",
+      "how": "Place germinated wheat seeds in a kiln. Fire for ~5-6 minutes (one branch worth of fuel).",
+      "description": "Malted Wheat is Germinated Wheat Seeds heated in a Kiln. It serves no other purpose other than one of the process in making Wort, one of the ingredients for Weißbier."
+    },
+    {
+      "title": "Militia Sword",
+      "skill": "",
+      "materials": "",
+      "reference": "",
+      "how": "Craft > Metal Working > Weapons > Militia Sword Category:Equipment Category:Sharp Tools Category:Weapons",
+      "description": "The Militia Sword deals 250 base damage. It is the weakest of the swords."
+    },
+    {
+      "title": "Miner's Helm",
+      "skill": "",
+      "materials": "",
+      "reference": "",
+      "how": "You need to equip a smithy's hammer and you need an anvil to make a Miner's Helm. Craft > Metal Working > Miner's Helm",
+      "description": "When a Candle is added to a miner's helm, it becomes a hands-free source of light, perfect for use with a Pickaxe."
+    },
+    {
+      "title": "Mug",
+      "skill": "",
+      "materials": "",
+      "reference": "",
+      "how": "To make a mug, you need the pottery skill and 2 blocks of clay. Craft > Ceramics > ug *Use the craft menu to mold the clay, and then fire the mug in a kiln. *You will get an empty mug. *Requires 3 sticks to fire",
+      "description": "A mug is required to drink tea from a tea pot. Mugs have a capacity of 0.3 L. Every 0.1 L of tea restores 15% stamina, hence a mug full of tea will restore a total of 45% stamina."
+    },
+    {
+      "title": "Pearl Necklace",
+      "skill": "",
+      "materials": "Pearl x20, String",
+      "reference": "Hand",
+      "how": "",
+      "description": "Increases Learning Ability by 40% at Quality 10. Quality does improve Learning Rate received from the Pearl Necklace. The formula for effect is: sqrt(Necklace Quality/10) * 40% Learning Rate When crafting, string quality is ignored. Instead the average quality of the 20 pearls is used to determine the necklace's quality. *The Learning Ability granted by the necklace is added to your total, rather than multiplied."
+    },
+    {
+      "title": "Pickaxe",
+      "skill": "",
+      "materials": "",
+      "reference": "",
+      "how": "You need to equip a Smithy's Hammer and you need an Anvil to make a pickaxe. q pickaxe = (av. q metal + q branch + q Anvil + q Smithy's Hammer)/4 soft capped by sqrt(strength*smithing) Craft > Metal Working > Pickaxe Category:Equipment Category:Mining Tools",
+      "description": "*Increases Mining speed - Reduces stamina drain *Increases Chip Stone Speed - Reduces stamina drain *Allows boulders to be removed from a Cellar so it can be used *Increases the speed things are destroyed - Deals 2 additional damage to buildings."
+    },
+    {
+      "title": "Poor Man's Belt",
+      "skill": "",
+      "materials": "",
+      "reference": "",
+      "how": "Craft [C] > Leather Working [L] > Poor Man's Belt [l] Category:Equipment Category:Clothing",
+      "description": "It's key to complete the hobo look, why use anything else when a single strip of leather can make ones junk not flail for the world to see. It has been said that wielding this can increase the clients' speed as the amount of textures needed to draw the graphics are halved via the medium of hefty graphical oddness. However, this has been found to be extremely untrue. Cosmetic. Equips to (3R)."
+    },
+    {
+      "title": "Raw Fox Hide",
+      "skill": "",
+      "materials": "",
+      "reference": "Sharp Tool",
+      "how": "Equip any sharp tool, then right click on the corpse and select \"Skin\" from the action list. Category:Hides",
+      "description": "The quality of a is affected by survival and the sharp tool quality (ie.: stone axe)."
+    },
+    {
+      "title": "Ring of Brodgar Dough",
+      "skill": "",
+      "materials": "Water (0.5 liters), Wheat Flour, Honey (0.1 liter), Poppy Seeds x2",
+      "reference": "Cauldron or Clay Cauldron",
+      "how": "Craft > Cooking > Baking > reads > Ring of Brodgar *1. Light a Cauldron. Wait for it to boil. *2. Have Honey and Water in your inventory (in buckets or other containers), along with Wheat Flour, and 2 handfuls of Poppy Seeds *3. Right-click the cauldron and initiate the recipe. To bake, place the dough in an oven with 3 branches and light it.",
+      "description": "You need a cauldron to make a Ring of Brodgar dough."
+    },
+    {
+      "title": "Roasted Meat",
+      "skill": "",
+      "materials": "",
+      "reference": "",
+      "how": "Craft [C] > Cooking [k] > Roasted Meat [R]. Meat can be roasted on a Fire to provide a small food boost, and to provide FEP. FEP provided is QL / 10 * Chicken meat: Dexterity * Boar meat: Strength * Bear meat: Strength * Rabbit meat: Agility * Mutton meat: Charisma * Beef: Constitution * Deer meat: Perception * Fox meat: Intelligence",
+      "description": "| image = Image:.png | caption = | type = Inventory |xsize = 1 |ysize = 1 |lpgain = 5 | skillreq = Wilderness Survival (?) | objectsreq = Raw Meat | producedby = Fire (lit) | reqby = Nothing }}"
+    },
+    {
+      "title": "Saw",
+      "skill": "",
+      "materials": "",
+      "reference": "",
+      "how": "Requires the Metal Working skill, one branch, and one Bar of Wrought Iron. Built in the Craft Menu (C) under Tools (T)",
+      "description": ""
+    },
+    {
+      "title": "Silver Nugget",
+      "skill": "",
+      "materials": "Silver Ore",
+      "reference": "Ore Smelter",
+      "how": "",
+      "description": "Silver nuggets are made from smelting Silver Ore in an Ore Smelter. Silver Nuggets can also be crafted into Bar of Silver and melted back into silver nuggets. Silver Nuggets are also used to make Silver for the Ferryman."
+    },
+    {
+      "title": "Smithy's Hammer",
+      "skill": "",
+      "materials": "",
+      "reference": "",
+      "how": "Craft if while using an Anvil. <span style=\"color:rgb(0,0,0);font-size:11px;\">Craft > Metal Working > Smithy's Hammer</span> Category:Equipment",
+      "description": "==How to Acquire== Craft if while using an Anvil. <span style=\"color:rgb(0,0,0);font-size:11px;\">Craft > Metal Working > Smithy's Hammer</span> Category:Equipment"
+    },
+    {
+      "title": "Soldier's Helmet",
+      "skill": "",
+      "materials": "",
+      "reference": "",
+      "how": "Craft>Metal Working>Armor>Soldier helmet Q45 Soldier Helmet = Hitpoints 900, Armor class 106/53 Category:Equipment Category:Clothing Category:Armor",
+      "description": "Base (10ql) stats: ~425 Hitpoints, AC 50/25"
+    },
+    {
+      "title": "Sprucecap",
+      "skill": "",
+      "materials": "Fir Bough x2, String",
+      "reference": "",
+      "how": "Craft > Cloth Making > Hats > Sprucecap",
+      "description": "Headgear that is that is made from intertwined Fir Boughs. Increases Stealth. {| border=\"1\" cellpadding=\"1\" cellspacing=\"1\" style=\"width: 200px;\" | style=\"text-align: center;\"|'''Quality''' | style=\"text-align: center;\"|'''Stealth''' |- | style=\"text-align: center;\"|10 | style=\"text-align: center;\"| +2 |- | style=\"text-align: center;\"|40 | style=\"text-align: center;\"| +4 |- | style=\"text-align: center;\"|90 | style=\"text-align: center;\"| +6 |}"
+    },
+    {
+      "title": "Steel Nugget",
+      "skill": "",
+      "materials": "Bar of Steel",
+      "reference": "Alloying Crucible",
+      "how": "",
+      "description": "Steel nuggets are made by using the craft with an Alloying Crucible while holding a Bar of Steel. This gives 10 Steel Nuggets, usable in crafting or smeltable back to a bar. The quality of a nugget depends only on the quality of the bar used Qnugget = Qbar."
+    },
+    {
+      "title": "Stone",
+      "skill": "",
+      "materials": "Large Stone, Stone Boulder",
+      "reference": "Mountain",
+      "how": "Right-click a Large Stone or Stone Boulder and hit \"Chip Stone\". Furthermore, you can dig in mountain terrain to get stones. Most stones have a quality of 10, but higher quality stones can be found on mountains and acquired by smelting by-products.",
+      "description": "s are used in the making of various items. Also, chipped stones are used as ammunition for Slings."
+    },
+    {
+      "title": "Tea Pot",
+      "skill": "",
+      "materials": "",
+      "reference": "",
+      "how": "To make a tea pot, you need the pottery skill and 4 blocks of clay. Craft > Ceramics > Tea ot *Use the craft menu to mold the clay, and then fire the tea pot in a kiln. *You will get an empty tea pot. * It requires 4 branches to fire it, and can be fired alongside a mug.",
+      "description": "Tea pots can hold 1.0 L of tea, but the tea must be poured into a mug in order to drink it."
+    },
+    {
+      "title": "Tin Nugget",
+      "skill": "",
+      "materials": "|producedby =",
+      "reference": "",
+      "how": "",
+      "description": "A nugget of tin.Category:ContentCategory:Objects"
+    },
+    {
+      "title": "Treeplanter's Pot",
+      "skill": "",
+      "materials": "",
+      "reference": "",
+      "how": "#Gather 10 Clay of any type. #Choose Craft > Ceramics > Treeplanter's Pt, and then click the \"Craft\" button to get an Unburnt Treeplanter's Pot. #Place the unfinished pot into a kiln with 3+ Branches in it (see Kiln for details on baking pottery). #Right-click the kiln, click \"Fire\", and wait. #Collect your finished treeplanter's pot after 20 minutes. Tip: Keep in mind that if you don't have room in your inventory for a crafted item or in your cursor it drops to the ground, and if an item drops in the water (where you were gathering the clay for example) you'll lose the item forever. Quality for planted trees depends on the Pot Q, Soil Q, Water Q, and your Farming skill ((Soil+Soil+Soil+Soil/4)+Pot+Water+Seed+table)/5''=Tree Q''",
+      "description": "A treeplanter's pot is an important tool used with Soil, Water, a Herbalist Table and any one of the tree \"seeds\" such as an Apple Core, Fir Cone, or Mulberry to grow a new Tree (full list). The quality is important for treeplanter's pots as it is one of the factors in determining the tree's quality. The quality of an unburnt treeplanter's pot is softcapped by the DEX (dexterity) of the crafter. The quality of the final pot is the average of the quality of the kiln and fuel used with the quality of the unburnt pot doubly weighted."
+    },
+    {
+      "title": "Waterflask",
+      "skill": "",
+      "materials": "",
+      "reference": "",
+      "how": "You will need Leather Working and one piece of Leather. Simply craft it from: Craft -> Tools -> Waterflask",
+      "description": "A waterflask made of leather, it is a water container that can hold up to 2 litres of water that could be used for drinking to alleviate some stamina at the cost of some hunger or to be used in a crafting recipe that requires water. The quality of the waterflask does not affect the quality of the water drawn. If there is already water in the waterflask, the quality of the water will be the total average of quality of the water in the waterflask and the water drawn. Waterflasks are the preferred water containers for hearthlings because they store the most water per inventory slot (2.0L / 1 slot) as opposed to other containers such as Kuksas (0.3L / 1 slot) and Waterskins (3.0L / 2 slots)."
+    },
+    {
+      "title": "Wrought Iron Nugget",
+      "skill": "",
+      "materials": "Bar of Wrought Iron",
+      "reference": "Alloying Crucible",
+      "how": "",
+      "description": "Wrought Iron nuggets are made by using the craft with an Alloying Crucible while holding a Bar of Wrought Iron. This gives 10 Wrought Iron Nuggets, usable in crafting or smeltable back to a bar. The quality of a nugget depends only on the quality of the bar used Qnugget = Qbar."
+    },
+    {
+      "title": "Rope",
+      "skill": "Animal Husbandry",
+      "materials": "String x10",
+      "reference": "Ropewalk",
+      "how": "The skill Animal Husbandry is required to craft a rope from ten pieces of string. Craft > Processing & Materials > Sewing & Fabrics > Rope",
+      "description": "A rope is a tool used to domesticate animals. It is also required to build a well and other structures."
+    },
+    {
+      "title": "Wool",
+      "skill": "Animal Husbandry",
+      "materials": "Sheep, or Mouflon and Four-Leaf Clover",
+      "reference": "Sharp Tool",
+      "how": "You need to equip a Sharp Tool, such as a Stone Axe, in order to shear a Sheep. Mouflons may also be sheared if fed one Four-Leaf Clover for each shearing. The q of the sheared wool is influenced by the q of the cutting tool, the survival skill and either the sewing or sqrt(sewing*dex) skill (tested with thimbles).",
+      "description": "is used for several things such as Gauze, Vapntreyiu or Yarn."
+    },
+    {
+      "title": "Bone Arrow",
+      "skill": "Archery",
+      "materials": "Bone Material",
+      "reference": "Hand",
+      "how": "raft > ools > anged Weapons > Boe Arrow",
+      "description": "A bone arrow is ammunition for the Wooden bow and Ranger's Bow. It adds 20 damage and has an IEMM of 2.0 (see Archery). You can keep up to 40 arrows in a quiver by picking up the arrows and right clicking them onto the quiver."
+    },
+    {
+      "title": "Quiver",
+      "skill": "Archery",
+      "materials": "Leather x4",
+      "reference": "Nothing",
+      "how": "A quiver is made from four pieces of leather. Craft > Leather Working > Quiver",
+      "description": "A quiver can hold up to 40 arrows (Bone Arrows or Stone Arrows). When equipped, a quiver serves as a medium to draw arrows from when fighting with a bow. '''Note:''' A backpack cannot be equipped at the same time."
+    },
+    {
+      "title": "Stone Arrow",
+      "skill": "Archery",
+      "materials": "Stone, Branch",
+      "reference": "Hand",
+      "how": "Craft > Tools > Ranged Weapons > Stone Arrow",
+      "description": "A stone arrow is ammunition for the Wooden bow and Ranger's Bow. It adds 10 damage and has an IEMM of 2.0 (see Archery). You can keep up to 40 arrows in a quiver by picking up the arrows and right clicking them onto the quiver"
+    },
+    {
+      "title": "Batter",
+      "skill": "Baking",
+      "materials": "Jar (Empty), Butter, Wheat Flour, Milk (1.0 L), Chicken Egg",
+      "reference": "",
+      "how": "Gather the ingredients and execute the recipe to make batter. Craft > Cooking > Ingredients > Batter",
+      "description": "Batter is a food ingredient, required for Fishsticks and Onion Rings."
+    },
+    {
+      "title": "River Pearl",
+      "skill": "Baking and Fishing",
+      "materials": "River Pearl Mussel",
+      "reference": "Cauldron",
+      "how": "Cook a River Pearl Mussel into Boiled River Pearl Mussel, and, very rarely, you will get a pearl in addition to a boiled mussel.",
+      "description": "River pearls are extremely rare and valuable items used mainly for crafting jewelry that boosts learning ability."
+    },
+    {
+      "title": "Beeswax",
+      "skill": "Bee Keeping",
+      "materials": "None",
+      "reference": "Bee Hive",
+      "how": "Beeswax is acquired by right clicking on a Bee Hive and selecting 'harvest wax'. While beehives can contain multiple units of beeswax, if a bee hive has no beeswax, the option will not appear.",
+      "description": "Beeswax is required to craft Candles, Coiled Rope Hotpad and Hardened Leather."
+    },
+    {
+      "title": "Germinated Wheat Seed",
+      "skill": "Beermaking",
+      "materials": "Wheat Seed",
+      "reference": "Herbalist Table",
+      "how": "Place Wheat Seeds on an Herbalist Table. Wait for them to become Germinated Wheat Seeds.",
+      "description": "==How to Acquire== Place Wheat Seeds on an Herbalist Table. Wait for them to become Germinated Wheat Seeds."
+    },
+    {
+      "title": "Wheat Grist",
+      "skill": "Beermaking",
+      "materials": "Malted Wheat",
+      "reference": "Quern",
+      "how": "raft -> Cooing -> Ingredients -> rist",
+      "description": "{{infobox object |name = |image = Image:.png |caption = |xsize = 1 |ysize = 1 |skillreq = Beermaking |objectsreq = Malted Wheat |producedby = Quern }} Wheat grist is ground up malted wheat. It is used to make wort for Weißbier. The quality of the grist is soft-capped by the player's cooking skills. Like other powders, if you drop grist on the ground you will lose it."
+    },
+    {
+      "title": "Wort",
+      "skill": "Beermaking",
+      "materials": "Water (5 liters), Wheat Grist x5, Hops Cones x2; Bucket (empty)",
+      "reference": "Cauldron, or Clay Cauldron",
+      "how": "To make Wort, you need the following things. *Cauldron, with at least 5L of Water in it and a branch worth of fuel so it can be lit. *2x Hops Cones *5x Wheat Grist *An empty Bucket Open and light up your Cauldron, keep the Cauldron's window open, and craft your Wort. This will fill your Bucket with 5L of Wort. This can then be poured into a Wine Barrel, which if left to ferment for one week will turn into Weißbier. Category:Liquids",
+      "description": "Wort must be put in a Wine Barrel to ferment into Weißbier."
+    },
+    {
+      "title": "Candle",
+      "skill": "Candle Making",
+      "materials": "Beeswax, String",
+      "reference": "",
+      "how": "The skill Candle Making, Beeswax and Any String are required in order to craft a wax candle. Craft > Candle",
+      "description": "A candle can be added to the Miner's Helm or Candelabrum, and a candle is required for the Birthday Cake. Formula for quality appears to be (9*waxQ + stringQ)/10."
+    },
+    {
+      "title": "Board",
+      "skill": "Carpentry",
+      "materials": "Log",
+      "reference": "Bone Saw or Saw",
+      "how": "Right click on a log while having either a saw or bone saw equipped and the option \"Make Boards\" appears. A bone saw makes only 4 boards, while a metal saw makes 6. However, it is often easier to get a high quality bonesaw than it is to get an equal quality metal saw, so sometimes a bone saw is still desirable when you want quality boards. Your Carpentry skill acts as a softcap for board quality. The formula for board quality is as follows: Q''n ''= <math>\\sqrt{sawql * lumberql}</math> and if (Carpentry > Q''n'') then BoardQuality = Qn if (Carpentry < Q''n'') then BoardQuality = (Q''n'' + Carpentry) / 2",
+      "description": "The quality of the boards depends on the quality of the tree, the quality of your saw, and your carpentry skill level."
+    },
+    {
+      "title": "Bucket",
+      "skill": "Carpentry",
+      "materials": "Board x1",
+      "reference": "Nothing",
+      "how": "Craft > Tools > Bucket",
+      "description": "Buckets are used to collect and move up to ten liters each of liquid products. Buckets can store honey, milk, water, wort, grapejuice, vinegar, and wine. It cannot be used to store or carry beer, tea, or rennet. Note that when stored in a bucket, Grape Juice and Wine do not age as they do when contained in a barrel, thus making them the container of choice for long-term wine storage."
+    },
+    {
+      "title": "Clogs",
+      "skill": "Carpentry",
+      "materials": "Block of Wood x2",
+      "reference": "Nothing",
+      "how": "Craft > Clogs Category:Equipment Category:Clothing Category:Armor",
+      "description": "You can find your first clogs in the newbie chest when creating a new character. Clogs: 20 Hitpoints, Armor class 0/7 (Quality 5)"
+    },
+    {
+      "title": "Shield",
+      "skill": "Carpentry",
+      "materials": "Board x2, Leather",
+      "reference": "",
+      "how": "Craft > Shield Category:Equipment",
+      "description": "Allows the player to use the Shield maneuver. If you use the shield maneuver, you must have a shield equipped, otherwise you will have no defense at all. If you un-equip the shield, your maneuver will automatically change back to Dodge , and you will have to set it back to Shield manually next time you equip a shield. The quality of a shield does not affect anything."
+    },
+    {
+      "title": "Woodfish",
+      "skill": "Carpentry",
+      "materials": "Block of Wood",
+      "reference": "Sharp Tool",
+      "how": "You need to equip a sharp tool to make a woodfish. Craft > Tools > Fishing Gear > Woodfish The quality of the woodfish depends on your carpentry skill.",
+      "description": "A woodfish is a fishing lure, which is used together with a fully equipped fishing pole to catch fish."
+    },
+    {
+      "title": "Ink",
+      "skill": "Cartography",
+      "materials": "Jar, Water (1.0 liter), Inkweed",
+      "reference": "Nothing",
+      "how": "In order to craft ink you need an empty Jar, a container filled with at least 1.0 liter of Water and Inkweed in your inventory. Craft > Potions & Herbs > Ink Category:Liquids",
+      "description": "Cartography allows your character to draw a local map of the area you are in. You need to have a quill, ink and parchment in your inventory to draw a map."
+    },
+    {
+      "title": "Cheese Tray",
+      "skill": "Cheesemaking",
+      "materials": "Board x 1",
+      "reference": "Nothing",
+      "how": "Requires Cheesemaking, uses 1 board to produce one Cheese Tray. Craft > Tools > Cheese Tray",
+      "description": "A cheese tray can be filled with 4 curd to produce cheese. The quality of the cheese tray plays a role in the quality of the cheese after it ages. Quality of cheese tray is softcapped by your carpentry skill."
+    },
+    {
+      "title": "Rennet",
+      "skill": "Cheesemaking",
+      "materials": "Jar, Intestines, Vinegar (0.3 liters)",
+      "reference": "Cauldron or Clay Cauldron",
+      "how": "Craft > Cooking > Ingredients > Rennet In order to craft rennet you need an empty jar, intestines and at least 0.3 liters of vinegar in your inventory. Furthermore, you need a cauldron to make rennet. Add water and fuel to the cauldron, light it and execute the recipe. Category:Liquids",
+      "description": "Rennet is used to make Curd, which is required to produce Cheese."
+    },
+    {
+      "title": "Cylinder Hat",
+      "skill": "Cloth Making",
+      "materials": "Leather x4, Silk Cloth",
+      "reference": "Nothing",
+      "how": "Craft > Cloth Making > Cylinder Hat Category:Equipment Category:Clothing",
+      "description": "Cylinder Hat: +1 Industry, +5 Charisma +18 Charisma at Q16"
+    },
+    {
+      "title": "Linen Cloth",
+      "skill": "Cloth Making",
+      "materials": "Plant Fibres x5",
+      "reference": "Loom",
+      "how": "Craft > Cloth Making > Material > Linen Cloth Approach a loom by left or right clicking it, then begin crafting.",
+      "description": "==How to Acquire== Craft > Cloth Making > Material > Linen Cloth Approach a loom by left or right clicking it, then begin crafting."
+    },
+    {
+      "title": "Merchant's Robe",
+      "skill": "Cloth Making",
+      "materials": "Silk Cloth x4",
+      "reference": "Nothing",
+      "how": "Craft > Cloth Making > Capes and Cloaks > Merchant's Robe",
+      "description": "It doesn't really signify a merchant. The robes moreso signify a person has either great wealth, or a great industry in the silk business. Merchant Robes have a form of \"pocket\" that increases inventory space by 1 horizontal row: the wearer's inventory will become 5x4, or 5x6 with a backpack.<ref>See the image here for an example. In this case, the person is wearing a backpack, and thus has a 5x6 inventory.</ref> At quality 10, the robe gives +10 Intelligence and + 15 Charisma when worn."
+    },
+    {
+      "title": "Nettle Pants",
+      "skill": "Cloth Making",
+      "materials": "Stinging Nettle x5",
+      "reference": "",
+      "how": "Craft > Cloth Making > Nettle Pants",
+      "description": "Pants made from stinging nettles. {| border=\"1\" ! colspan=\"4\" style=\"background: #ffdead;\" | Nettle Pants at quality 10 |- style=\"background: beige\" ! align=\"center\"| Unarmed Combat Bonus ! align=\"center\"| Survival Bonus ! align=\"center\"| Agility Penalty |- | align=\"center\"| +1 | align=\"center\"| +2 | align=\"center\"| -1 |} {| border=\"1\" ! colspan=\"4\" style=\"background: #ffdead;\" | Nettle Pants at quality 11 |- style=\"background: beige\" ! align=\"center\"| Unarmed Combat Bonus ! align=\"center\"| Survival Bonus ! align=\"center\"| Agility Penalty |- | align=\"center\"| +1 | align=\"center\"| +2 | align=\"center\"| -2 |}"
+    },
+    {
+      "title": "Nettle Shirt",
+      "skill": "Cloth Making",
+      "materials": "Stinging Nettle x5",
+      "reference": "",
+      "how": "Craft > Cloth Making > Nettle Shirt",
+      "description": "A shirt made from stinging nettles. {| border=\"1\" ! colspan=\"4\" style=\"background: #ffdead;\" | Nettle Shirt |- style=\"background: beige\" ! align=\"center\"| Quality ! align=\"center\"| Unarmed Combat Bonus ! align=\"center\"| Survival Bonus ! align=\"center\"| Agility Penalty |- ! align=\"center\"| 10 ! align=\"center\"| +1 ! align=\"center\"| +2 ! align=\"center\"| -1 |}"
+    },
+    {
+      "title": "Toga",
+      "skill": "Cloth Making",
+      "materials": "Wool",
+      "reference": "Nothing",
+      "how": "Craft > Cloth Making > Capes and Cloaks > Togaaa Category:Equipment Category:Clothing",
+      "description": "This garment is only cosmetic and has no special advantage."
+    },
+    {
+      "title": "Hirdsman's Cape",
+      "skill": "Cloth Making, Militia Training",
+      "materials": "Ash, Yarn x2",
+      "reference": "Loom",
+      "how": "You need a loom to make a hirdsman's cape. Craft > Cloth Making > Capes and Cloaks > Hirdsman's Cape Category:Equipment Category:Clothing",
+      "description": "While anyone with the proper skills can make it, this item can only be worn by a member of the the hird, a special rank appointed by the chieftain of a village, or the chieftain and the lawspeaker themselves."
+    },
+    {
+      "title": "Vapntreyiu",
+      "skill": "Cloth Making, Militia Training",
+      "materials": "Linen Cloth x5, Wool x5",
+      "reference": "Nothing",
+      "how": "Craft > Cloth Making > Vapntreyiu",
+      "description": "A Vapntreyiu is a unique armor that gives defensive stats, but can be worn underneath defensive armor (like Leather Armor or Bronze Plate). A quality 10 Vapntreyiu has 75Hitpoint, AC 10/10. A quality 30 Vapntreyiu has 225 Hitpoint, AC 17/17. {| border=\"1\" cellpadding=\"1\" cellspacing=\"1\" style=\"width: 200px;\" | style=\"text-align: center;\"|Quality | style=\"text-align: center;\"|Hitpoints | style=\"text-align: center;\"|Armor Class |- | style=\"text-align: center;\"|8 | style=\"text-align: center;\"|60 | style=\"text-align: center;\"|8/8 |- | style=\"text-align: center;\"|10 | style=\"text-align: center;\"|75 | style=\"text-align: center;\"|10/10 |- | style=\"text-align: center;\"|30 | style=\"text-align: center"
+    },
+    {
+      "title": "Necromancer's Cloak",
+      "skill": "Cloth Making, Murder",
+      "materials": "Ash x4, Yarn x4",
+      "reference": "Nothing",
+      "how": "Craft > Cloth Making > Capes and Cloaks > Necromancer's Cloak Category:Equipment Category:Clothing",
+      "description": "To obtain a necromancer's cloak you must either have the skill Murder, or know someone with it. You have to have the skill to craft the cloak but not to wear it. It takes 4 Yarn and 4 Ash to create, and it gives a bonus of +5 INT."
+    },
+    {
+      "title": "Ranger's Cape",
+      "skill": "Cloth Making, Ranging",
+      "materials": "Linen Cloth x10, Silk Cloth x1",
+      "reference": "",
+      "how": "Craft > Cloth Making > Capes and Cloaks > Ranger's Cape",
+      "description": "A cape that forms part of the Ranger's set of clothing. Increases Stealth and Perception. {| border=\"1\" cellpadding=\"1\" cellspacing=\"1\" style=\"width: 300px;\" | style=\"text-align: center;\"|'''Quality''' | style=\"text-align: center;\"|'''Stealth''' | style=\"text-align: center;\"|'''Perception''' |- | style=\"text-align: center;\"|10 | style=\"text-align: center;\"| +10 | style=\"text-align: center;\"| +10 |- | style=\"text-align: center;\"|40 | style=\"text-align: center;\"| +20 | style=\"text-align: center;\"| +20 |- | style=\"text-align: center;\"|90 | style=\"text-align: center;\"| +30 | style=\"text-align: center;\"| +30 |}"
+    },
+    {
+      "title": "Ranger's Pants",
+      "skill": "Cloth Making, Ranging",
+      "materials": "Linen Cloth x10, Silk Cloth x1",
+      "reference": "",
+      "how": "Craft > Cloth Making > Ranger's Pants",
+      "description": "A pair of pants that form part of the Ranger's set of clothing. They increase Stealth and Exploration., {| border=\"1\" cellpadding=\"1\" cellspacing=\"1\" style=\"width: 300px;\" | style=\"text-align: center;\"|'''Quality''' | style=\"text-align: center;\"|'''Stealth''' | style=\"text-align: center;\"|'''Exploration''' |- | style=\"text-align: center;\"|10 | style=\"text-align: center;\"| +5 | style=\"text-align: center;\"| +5 |- | style=\"text-align: center;\"|40 | style=\"text-align: center;\"| +10 | style=\"text-align: center;\"| +10 |- | style=\"text-align: center;\"|90 | style=\"text-align: center;\"| +15 | style=\"text-align: center;\"| +15 |}"
+    },
+    {
+      "title": "Ranger's Shirt",
+      "skill": "Cloth Making, Ranging",
+      "materials": "Linen Cloth x10, Silk Cloth x1}}A shirt that forms part of the Ranger's set of clothing. Increases Stealth.",
+      "reference": "",
+      "how": "Craft > Cloth Making > Ranger's Shirt",
+      "description": "A shirt that forms part of the Ranger's set of clothing. Increases Stealth. {| border=\"1\" cellpadding=\"1\" cellspacing=\"1\" style=\"width: 200px;\" | style=\"text-align: center;\"|'''Quality''' | style=\"text-align: center;\"|'''Stealth''' |- | style=\"text-align: center;\"|10 | style=\"text-align: center;\"| +10 |- | style=\"text-align: center;\"|40 | style=\"text-align: center;\"| +20 |- | style=\"text-align: center;\"|90 | style=\"text-align: center;\"| +30 |}"
+    },
+    {
+      "title": "Silk Filament",
+      "skill": "Cloth Making, Sericulture",
+      "materials": "Silkworm Cocoon",
+      "reference": "Cauldron or Clay Cauldron",
+      "how": "Craft > Cloth Making > Material > Unravel Silk Cocoon",
+      "description": "Once you have your Cocoons, prepare a Cauldron water (at least 1 litre) and branches, and light it. Activate the Cauldron, and navigate to your Unravel Silk Cocoon command. Note that having max Nature will make this part of the process much more rewarding, as you will receive two filaments instead of one. Also, make sure you have enough inventory space when unraveling, as silk filaments are lost forever if dropped. The quality of the filaments equals the quality of the cocoons regardless of the quality of the cauldron or water used, softcapped by the cube root of (sewing*farming*dexterity)."
+    },
+    {
+      "title": "Silk Thread",
+      "skill": "Cloth Making, Sericulture",
+      "materials": "Silk Filament x10",
+      "reference": "Spinning Wheel",
+      "how": "Craft > Cloth Making > Material > Silk Thread Category:String",
+      "description": "Silk thread is a form of string and is created by using silk filaments which come from silkworm cocoons. The cocoons are generated as described on the silkworm page. Silk cloth and several crafted items are created from the thread."
+    },
+    {
+      "title": "Bandit's Mask",
+      "skill": "Cloth Making, Theft",
+      "materials": "Linen Cloth x2, Blood Stern x5",
+      "reference": "Nothing",
+      "how": "Craft > Cloth Making > Capes and Cloaks > Bandit's Mask",
+      "description": "Bandit's Mask: +3 Stealth"
+    },
+    {
+      "title": "Acorn",
+      "skill": "Farming",
+      "materials": "None",
+      "reference": "Oak Tree",
+      "how": "Acorns can be gathered from an Oak Tree. Put them in a Treeplanter's Pot with 4 Soil and 1 liter of Water to make a planted oak tree. Place a planted oak tree on an Herbalist Table to begin the sprouting process. If it sprouts, you have 8 hours to plant it. If it dies, you must empty the pot and start over again.",
+      "description": ""
+    },
+    {
+      "title": "Carrot Seeds",
+      "skill": "Farming",
+      "materials": "Carrot Field",
+      "reference": "Carrot Crop",
+      "how": "Carrot seeds can be initially obtained from drying a Wild Windsown Weed either on a Herbalist Table for 2.6 hours real time, or on a Drying Frame for 16 hours real time. Carrots grow through four stages: *Stage 1: The carrot field cannot be harvested. *Stage 2: Between 8 and 16 hours after planting it can be harvested for one carrot (Regardless of your nature/industry level). *Stage 3:. Between 16 and 24 hours after planting the carrot plantswill have white spots on them and can be harvested for 1 to 3 carrot seeds (Depending on your nature/industry level). *Stage 4: After 24 hours it can be harvested for 1 to 3 carrots (Depending on your nature/industry level).",
+      "description": "Carrot seeds are used to grow carrots."
+    },
+    {
+      "title": "Flax",
+      "skill": "Farming",
+      "materials": "",
+      "reference": "",
+      "how": "When harvested it produces one fibre and flax seeds (up to three seeds) depending on the harvester's Nature/Industry belief slider. Flax has the same resources as hemp, except hemp can be also harvested for their buds (Fresh Hemp Bud) Flax is mostly used to produce Plant Fibres, which is used to make herbalist tables, or for making Linen Cloth, which can be used in the making of Torches, Banners, and other clothing. Flax seeds can be placed into Food Troughs and Chicken Coops It is rumored that hemp grows faster than flax (1 hour faster), making flax obsolete.",
+      "description": "==How to Acquire== When harvested it produces one fibre and flax seeds (up to three seeds) depending on the harvester's Nature/Industry belief slider. Flax has the same resources as hemp, except hemp can be also harvested for their buds (Fresh Hemp Bud) Flax is mostly used to produce Plant Fibres, which is used to make herbalist tables, or for making Linen Cloth, which can be used in the making of Torches, Banners, and other clothing. Flax seeds can be placed into Food Troughs and Chicken Coops It is rumored that hemp grows faster than flax (1 hour faster), making flax obsolete."
+    },
+    {
+      "title": "Fresh Tea Leaves",
+      "skill": "Farming",
+      "materials": "Tea Field",
+      "reference": "Nothing",
+      "how": "Harvesting a tea field gives you 2 tea seeds and up to 2 fresh tea leaves depending on your Nature/Industry belief slider.",
+      "description": "|image = Image:.png |caption = |xsize = 1 |ysize = 1 |lpgain = 5 |skillreq = Farming |objectsreq = Tea Field |producedby = Nothing }} In order to make tea you need a harvestable tea field to obtain fresh tea leaves."
+    },
+    {
+      "title": "Fresh Tobacco Leaf",
+      "skill": "Farming",
+      "materials": "Tobacco Crop",
+      "reference": "",
+      "how": "Harvesting a tobacco crop gives you 1 fresh tobacco leaf and up to 3 Tobacco Seeds depending on your Nature/Industry belief slider.",
+      "description": "In order to make Tobacco you need a harvestable tobacco crop to obtain a fresh tobacco leaf, which can then be placed on a Herbalist Table to dry into a Cured Tobacco Leaf."
+    },
+    {
+      "title": "Giant Pumpkin",
+      "skill": "Farming",
+      "materials": "None",
+      "reference": "",
+      "how": "You must plant a pumpkin seed, wait for the pumpkin to grow to full size and harvest it (6 growing stages). Pumpkins take 5 days to a week to grow. With the Pumpkin in your inventory you can right click the pumpkin and select \"Slice\". This choice will yield 8 Pumpkin Seeds and 8 Slices of Pumpkin Flesh (which are edible)",
+      "description": "A requires a 4 x 4 empty space in your inventory in order to pick it up. If you slice a pumpkin you get 8 Pumpkin Flesh and 8 Pumpkin Seeds of the same quality of the pumpkin. It is notable that pumpkins are the only crop not affected by the nature/industry belief slider."
+    },
+    {
+      "title": "Hemp",
+      "skill": "Farming",
+      "materials": "Hemp Seed",
+      "reference": "",
+      "how": "",
+      "description": "Hemp is a plant that is harvested for Plant Fibres and Fresh Hemp Buds. Each tile harvest will yield 1-3 seeds depending on your Nature/Industry belief slider and drop a plant fibre on the ground. If hemp is harvested at the second to last stage, recognized by orange blooms, harvesting will yield Fresh Hemp Buds which can be dried on an herbalist table and smoked to gain bonus to FEP when eaten. Harvesting at this stage will not yield hemp seeds or plant fibres."
+    },
+    {
+      "title": "Hemp Seed",
+      "skill": "Farming",
+      "materials": "",
+      "reference": "Hemp",
+      "how": "",
+      "description": "Hemp seeds are produced when you harvest a Hemp Plant in it's third stage. Harvesting a Hemp Plant in it's second stage will yield Fresh Hemp Bud but will resut in the loss of the Hemp Seed."
+    },
+    {
+      "title": "Hemp Seeds",
+      "skill": "Farming",
+      "materials": "",
+      "reference": "Hemp",
+      "how": "",
+      "description": "Hemp seeds are produced when you harvest a Hemp Plant in it's third stage. Harvesting a Hemp Plant in it's second stage will yield Fresh Hemp Bud but will resut in the loss of the Hemp Seed. Category:Seeds"
+    },
+    {
+      "title": "Peppercorn",
+      "skill": "Farming",
+      "materials": "Wild Windsown Weed",
+      "reference": "",
+      "how": "*The original peppercorn can be obtained by drying Wild Windsown Weed on a Drying Frame or Herbalist Table. *Harvesting a tile of planted peppercorn gives you up to 3 peppercorn depending on your Nature/Industry belief slider.",
+      "description": "Peppercorn has no use by itself, and must be cooked into Boiled Pepper Drupes, then dried into Dried Pepper Drupes, then ground into Black Pepper before it can be applied to another food to increase it's FEP gain."
+    },
+    {
+      "title": "Poppy Flower",
+      "skill": "Farming",
+      "materials": "Poppy Field",
+      "reference": "Nothing",
+      "how": "Harvesting a poppy field gives you 1 poppy flower and up to 3 poppy seeds depending on your Nature/Industry belief slider.",
+      "description": "A red flower grown from Poppy Seeds. It can be used to create Boar Tusk Snuff and a Poppy Wobbler fishing lure."
+    },
+    {
+      "title": "Poppy Seeds",
+      "skill": "Farming",
+      "materials": "Poppy Field",
+      "reference": "Nothing",
+      "how": "Harvesting a poppy field gives you 1 poppy flower and up to 3 poppy seeds depending on your Nature/Industry belief slider. Poppy seeds can be obtained from Wild Windsown Weed.",
+      "description": "Poppy seeds grow into poppy flowers. They are an ingredient needed for Ring of Brodgar Dough."
+    },
+    {
+      "title": "Poppy Wobbler",
+      "skill": "Farming",
+      "materials": "Poppy Flower, Bone Material, Leather",
+      "reference": "Nothing",
+      "how": "You need one Poppy Flower, together with one Bone and one Leather you can craft it. Craft > Tools > Fishing Gear > Poppy Wobbler",
+      "description": "The is a Fishing Lure, which is used together with a fully equipped Fishing Pole to catch Fish."
+    },
+    {
+      "title": "Pumpkin Hat (Jack-o'-mask)",
+      "skill": "Farming",
+      "materials": "Giant Pumpkin",
+      "reference": "",
+      "how": "Craft > Cloth Making > Hats > Pumpkin Hat Category:Equipment Category:Clothing",
+      "description": "This hat is only cosmetic and has no special advantage. Many bandits and griefers, along with anyone that has access to a pumpkin patch, can wear these."
+    },
+    {
+      "title": "Pumpkin Seeds",
+      "skill": "Farming",
+      "materials": "None",
+      "reference": "Giant Pumpkin",
+      "how": "Pumpkin seeds can be initially obtained from Wild Windsown Weed. When Pumpkins are large and round, they are ripe and can be harvested for Pumpkin seeds and Pumpkin Flesh.&nbsp Harvesting a pumpkin gives you a Giant Pumpkin. Slicing this pumpkin gives you 8 Pumpkin Slices and Pumpkin Seeds each.",
+      "description": "Pumpkin seeds are used to grow pumpkins."
+    },
+    {
+      "title": "Tea Seeds",
+      "skill": "Farming",
+      "materials": "Tea Field",
+      "reference": "Nothing",
+      "how": "Harvesting a tea field gives you 2 tea seeds and up to 2 fresh tea leaves depending on your Nature/Industry belief slider. Tea seeds can be obtained from Wild Windsown Weed.",
+      "description": "In order to make tea you need a harvestable tea field to obtain fresh tea leaves."
+    },
+    {
+      "title": "Wheat Flour",
+      "skill": "Farming",
+      "materials": "Wheat Seeds x2",
+      "reference": "Quern}}",
+      "how": "Once you have the required skill(s) and object(s), right-click on the quern you wish to use, wait until your character bumps up against it, and use the commands below to begin making the flour. Craft [C] > Processing&Materials [k] > Cooking&Ingredients [n] > Flour [F]",
+      "description": "Wheat flour, made from wheat seeds, is an ingredient in all baked goods. '''Warning: Dropping flour will cause it to dissapear.'''"
+    },
+    {
+      "title": "Wheat Seeds",
+      "skill": "Farming or Foraging",
+      "materials": "Wheat Crop or Wild Windsown Weed",
+      "reference": "Wheat Crop",
+      "how": "Wheat seeds can be acquired by harvesting wheat growing on a farm. This typically produces 1 to 3 seeds and will leave a unit of straw on the ground, which can be picked up. Like harvesting any crop, in order to harvest wheat, one must have the farming skill. They can also be acquired from Wild Windsown Weeds by drying them on an Herbalist Table or a Drying Frame.",
+      "description": "Wheat seeds can be used on a quern to make wheat flour or to feed chickens on a chicken coop"
+    },
+    {
+      "title": "Gauze",
+      "skill": "First Aid, Cloth Making",
+      "materials": "Wool",
+      "reference": "Loom",
+      "how": "Shear a sheep to get a piece of wool. Take that wool to a loom. Select gauze under the craft menu. Craft > Gauze",
+      "description": "There are two ways to heal your hitpoints: #Make a gauze and bandage your head. This will continously heal some of your HHP. When the gauze has stopped healing, you will need to replace it to get full HHP. #Leeches heal up to 1 HHP (the middle number), but do damage to your SHP (the first number). They randomly attach to your equipment slots when walking through swamps."
+    },
+    {
+      "title": "Bone Hook",
+      "skill": "Fishing",
+      "materials": "Bone Material",
+      "reference": "Nothing",
+      "how": "A bone hook is made from a bone, easily obtain from animals, such as rabbits or chickens. Craft > Tools > Fishing Gear > Bone Hook The quality of the bone hook depends on your survival skill.",
+      "description": "The most accessible fish hook is the bone hook, which is used together with a fully equipped fishing pole to catch fish."
+    },
+    {
+      "title": "Bream",
+      "skill": "Fishing",
+      "materials": "Fishing Pole",
+      "reference": "Lake",
+      "how": "You must have the fishing skill and a fully equipped fishing pole in order to catch fish. Adventure > Fish is caught from fishing in deep or shallow water of a lake.",
+      "description": "A small pinkish fish. Eating a serving of roasted bream fills 30 units (3%) of your hunger bar and gives 3 intelligence, and 2 charisma in FEPs."
+    },
+    {
+      "title": "Copper Comet",
+      "skill": "Fishing",
+      "materials": "Copper Nugget, Straw",
+      "reference": "Hand",
+      "how": "",
+      "description": ""
+    },
+    {
+      "title": "Copperbrush Snapper",
+      "skill": "Fishing",
+      "materials": "Copper Nugget, Silk Filament, Silver Nugget",
+      "reference": "Hand",
+      "how": "",
+      "description": ""
+    },
+    {
+      "title": "Eel",
+      "skill": "Fishing",
+      "materials": "Fishing Pole",
+      "reference": "River or Lake",
+      "how": "You must have the fishing skill and a fully equipped fishing pole in order to catch fish. Adventure > Fish is caught from fishing in shallow water of a river using a pinecone plug, Woodfish or Rock Lobster lure and in the deep water of a lake.",
+      "description": "A long flat fish, which provides 2 filets. Eating a serving of roasted eel fills 30 units (3%) of your hunger bar and gives 4 agility FEPs."
+    },
+    {
+      "title": "Feather Fly",
+      "skill": "Fishing",
+      "materials": "Chicken Feather, Block of Wood",
+      "reference": "Nothing",
+      "how": "Craft > Tools > Fishing Gear > Feather Fly The quality of the feather fly depends on your survival skill.",
+      "description": "The is a fishing lure, which is used together with a fully equipped fishing pole to catch fish."
+    },
+    {
+      "title": "Fishing Pole",
+      "skill": "Fishing",
+      "materials": "Branch x2; Fishing Line; Fish Hook; Fishing Lure or Bait",
+      "reference": "Nothing",
+      "how": "Create a pole by crafting two branches. raft > ools > ishing Gear > ishing Pole ''Now, you need to add a line, a hook, and some kind of lure or bait before you can use the fishing pole.'' '''Fishing Line''' There are two sources of strings that can be obtained early on. The first is spindly taproot which requires the foraging skill. The other is plant fibres which requires you to find flax or hemp in which the farming skill can be used to obtain more. '''Fish Hook''' The most accessible hook is the bone hook which is made from bones easily obtain from animals, particularly rabbits and chickens. '''Fishing Lure or Bait''' Lures are objects crafted and used the same way as baits are. The difference is that lure is most likely not lost after fishing but has a low success rate. The most accessible lures are Feather Flies (block of wood + chicken feather), Pinecone Plug (cone from fir tree + birch bark), Rock Lobster Lure (stone), and Woodfish (block of wood). Bait can either be leeches obtain by walking through certain swamps or earthworms obtain through digging in the forest (although the stamina it takes to dig might cost more hunger than you would replenish through eating the fish). To equip the fishing pole with fishing line and other necessities, left click on the item to select it and then right click on the top box of the fishing pole.",
+      "description": "For more information check the Fishing page. s are tools used to catch fish which is one of the staple food source early on for beginners. Be warned that fish is almost always INT food and if you live on a diet of fish you may increase your INT stat ahead of your other stats making it harder to increase them later."
+    },
+    {
+      "title": "Gold Hook",
+      "skill": "Fishing",
+      "materials": "Gold Nugget",
+      "reference": "Hand",
+      "how": "",
+      "description": ""
+    },
+    {
+      "title": "Gold Spoon Lure",
+      "skill": "Fishing",
+      "materials": "Gold Nugget Leather",
+      "reference": "Hand",
+      "how": "",
+      "description": ""
+    },
+    {
+      "title": "Metal Hook",
+      "skill": "Fishing",
+      "materials": "Cast Iron Nugget OR Wrought Iron Nugget OR Bronze Nugget OR Steel Nugget",
+      "reference": "Hand",
+      "how": "",
+      "description": ""
+    },
+    {
+      "title": "Perch",
+      "skill": "Fishing",
+      "materials": "Fishing Pole",
+      "reference": "Lake",
+      "how": "You must have the fishing skill and a fully equipped fishing pole in order to catch fish. Adventure > Fish is caught from fishing in deep water of a lake and a river. In both area, regardless the default kind of fish, only perch is caught when Q61 or more hook is used. (***note by player - I just caught 2 perches with fishing pole q10 hook q10, so I guess this Q61 is an old information****(it's correct. it means that with hook q10 you may catch any fish, but with q over 61 only perch. ) Note: Rock Lobster Lure is good for catching Perch. Lower level perch is caught most reliably from a river using a rock lobster at midday during a small moon. (rocklobster+q5 fishing rod, got perch everytime)",
+      "description": "Eating a serving of roasted perch fills 30 units (3%) of your hunger bar and gives 4 intelligence FEP."
+    },
+    {
+      "title": "Pike",
+      "skill": "Fishing",
+      "materials": "Fishing Pole",
+      "reference": "Lake",
+      "how": "You must have the fishing skill and a fully equipped fishing pole in order to catch fish. Adventure > Fish is caught from fishing in shallow water and deep water of a lake, and can be found in the deep water of a river. This, however, is extremely rare. (but when you found a good spot it's very simple to have it)",
+      "description": "A medium grey fish, which provides 2 filets. Eating a serving of roasted pike fills 30 units (3%) of your hunger bar and gives 2 strength, 2 intelligence, and 1 constitution in FEPs."
+    },
+    {
+      "title": "Pinecone Plug",
+      "skill": "Fishing",
+      "materials": "Fir Cone, Birchbark",
+      "reference": "Nothing",
+      "how": "Craft > Tools > Fishing Gear > Pinecone Plug The quality of the pinecone plug depends on your survival skill.",
+      "description": "The is a fishing lure, which is used together with a fully equipped fishing pole to catch fish."
+    },
+    {
+      "title": "Plaice",
+      "skill": "Fishing",
+      "materials": "Fishing Pole",
+      "reference": "Lake",
+      "how": "You must have the fishing skill and a fully equipped fishing pole in order to catch fish. Adventure > Fish is most likely caught from fishing in shallow water of a lake during the full moon at night. It has also been found in river depths during a full moon using woodfish bait. Also found in lake deeps, using rock lobster lure.",
+      "description": "A small yellowish-grey fish renowned for it's perception gain. Eating a serving of roasted plaice fills 30 units (3%) of your hunger bar and gives 1 intelligence, and 3 perception in FEPs."
+    },
+    {
+      "title": "Roach",
+      "skill": "Fishing",
+      "materials": "Fishing Pole",
+      "reference": "River or Lake",
+      "how": "You must have the fishing skill and a fully equipped fishing pole in order to catch fish. Adventure > Fish is caught from fishing in deep water of a river or lake.",
+      "description": "A small light blue fish. Eating a serving of roasted roach fills 30 units (3%) of your hunger bar and gives 2 intelligence, and 2 dexterity in FEPs."
+    },
+    {
+      "title": "Salmon",
+      "skill": "Fishing",
+      "materials": "Fishing Pole",
+      "reference": "Lake",
+      "how": "You must have the fishing skill and a fully equipped fishing pole in order to catch fish. Adventure > Fish",
+      "description": "A medium light grey fish, which provides 2 filets. Eating a serving of roasted salmon fills 30 units (3%) of your hunger bar and gives 2 intelligence, and 3 charisma in FEPs."
+    },
+    {
+      "title": "Steelbrush Plunger",
+      "skill": "Fishing",
+      "materials": "Steel Nugget, Block of Wood",
+      "reference": "Hand",
+      "how": "",
+      "description": ""
+    },
+    {
+      "title": "Sturgeon",
+      "skill": "Fishing",
+      "materials": "Fishing Pole",
+      "reference": "River or Lake",
+      "how": "You must have the fishing skill and a fully equipped fishing pole in order to catch fish. Adventure > Fish is caught from fishing in shallow water and deep water of a river and deep water of a lake.",
+      "description": "A large fish with one of the few ways for psyche gain, which provides 3 filets. Eating a serving of roasted sturgeon fills 30 units (3%) of your hunger bar and gives 3 strength, and 1 psyche in FEPs."
+    },
+    {
+      "title": "Blood Stern",
+      "skill": "Foraging",
+      "materials": "None",
+      "reference": "Forest Terrain",
+      "how": "",
+      "description": "A Blood Stern is a flower growing in the forest, where they can be picked. You need at least 1250 PER*EXP to be able to start spotting them in the world."
+    },
+    {
+      "title": "Cave Clay",
+      "skill": "Foraging",
+      "materials": "None",
+      "reference": "Cave",
+      "how": "Cave Clay is found in shallow water within Caves and appears as a Forage-able item. How many Cave Clay you receive per spawn is dependent on your Nature(0.5x)/Industry(2x) Slider. I found it with 600 exploration parameter. As of November 8th, 2010 every clay has a specific color when kilned into bricks. When Kilned Cave Clay makes Blue Bricks. .",
+      "description": "Cave Clay is an ingredient of Bone Clay, which is used to make Porcelain plates and ceramic meat grinders."
+    },
+    {
+      "title": "Feldspar",
+      "skill": "Foraging",
+      "materials": "None",
+      "reference": "Moor, Mountain, and Mudflat",
+      "how": "These rocks are found in grasslands, mud flats, and other areas, with a moderate Perception * Exploration requirement. They can be harvested with Foraging: when found, right click them and select \"Pick\". Like Gray Clay, your ability to harvest Feldspar depends on your Nature/Industry slider, with 100% Nature characters only having a 50% chance to successfully harvest one feldspar rock, while 100% Industry charcters have a 100% chance to gather 2 Feldspar. Caution! The Feldspar can be used as Stones so you can pave Tiles and you can shoot with it. The minimum amount of perception ability (perception*exploration) needed to find feldspar is unknown, though there is speculation. Users have claimed the below; {| border=\"1\" ! colspan=\"3\" style=\"background: #ffdead;\" | Minimum Score Chart |- style=\"background: beige\" ! align=\"center\"| Perception ! align=\"center\"| Exploration ! align=\"center\"| Total Score |- | align=\"center\"|30 | align=\"center\"|36 | align=\"center\"| 1080 |- | align=\"center\"|21 | align=\"center\"|46 | align=\"center\"|966 |- | align=\"center\"| 21 | align=\"center\"|42 | align=\"center\"|882 |- | align=\"center\"|22 | align=\"center\"|40 | align=\"center\"|880 |- | align=\"center\"|26 | align=\"center\"|32 | align=\"center\"|832 |}",
+      "description": "Feldspar is an ingredient of Bone Clay, which is used to make porcelain plates and ceramic meat grinders."
+    },
+    {
+      "title": "Four-Leaf Clover",
+      "skill": "Foraging",
+      "materials": "None",
+      "reference": "Grassland, Heath, Moor",
+      "how": "Four-Leaf Clovers can be found on Grassland, Heath and Moor. Get your (Perception x Exploration) over 144 and you will start seeing some.",
+      "description": "left|40px Once found, it can be fed to a Mouflon or Auroch to attain Wool or Milk without having to tame the beast. To use, pick up a clover from your inventory and right-click it onto the animal. To sheer a Mouflon, feed it a clover and then right click on it and select 'sheer'. Each clover gives you 1 wool. You have to equip a sharp tool to be able to sheer (Stone Axe works fine). To milk an Auroch, feed it a clover and then pick up a bucket and right-click in on the Auroch. Each clover gives you 2 litres of milk."
+    },
+    {
+      "title": "Inkweed",
+      "skill": "Foraging",
+      "materials": "None",
+      "reference": "Grassland, Heath, Moor",
+      "how": "Inkweed can be found on Grassland, Heath and Moor. You need the Foraging skill in order to find inkweed. Your Perception*Exploration needs to be a minimum of 250 to be able to start seeing them (and 1000 to be able to see all of them).",
+      "description": "left|50px Inkweed is a herb used to make Ink, which is required for map making."
+    },
+    {
+      "title": "River Pearl Mussel",
+      "skill": "Foraging",
+      "materials": "None",
+      "reference": "Shallow Water",
+      "how": "They can be found in the shallow water of rivers and lakes. you can \"Pick\" them up in the same manner you would would a stinging nettle or rustroot. They require a certain amount of perception and exploration to see. Generally, you see the mussels around 800 per*exp(i.e 20*40). The quality of the mussel is directly related to the quality of the fish in that area. frame|River Pearl Mussel Category:Content Category:Objects",
+      "description": "Raw mussels can be cooked into Boiled Mussels. While boiling, there is a 1% chance for the mussel to contain a River Pearl. Mussels are often found in clusters but more can be seen based on perception and exploration."
+    },
+    {
+      "title": "Rustroot",
+      "skill": "Foraging",
+      "materials": "None",
+      "reference": "Forest Terrain",
+      "how": "Rustroot is a late game herb, so to find rustroots a player must have a PER*EXP of at least 500 (for example, Perception of 20 and Exploration of 25). The chance to find rustroot increases with higher PER*EXP. At a PER*EXP of at least 2000, all rustroots can be seen.",
+      "description": "left|60px Rustroot is used to make Rustroot Extract, which is required for Prospecting."
+    },
+    {
+      "title": "Stinging Nettle",
+      "skill": "Foraging",
+      "materials": "None",
+      "reference": "Forest Terrain",
+      "how": "",
+      "description": "A Stinging Nettle is a flower growing in the forest, where they can be picked. Nettles can be found when Exploration * Perception is 15 (Contrary to popular belief it is not 30). Nettles can be used as string , with the sole exception of nettles not being usable as a fishing line ."
+    },
+    {
+      "title": "Wild Windsown Weed",
+      "skill": "Foraging",
+      "materials": "none",
+      "reference": "All Terrains, most commonly found on Grassland",
+      "how": "In order to see the Wild Windsown Weed you need to have a Perception * Exploration score of at least 8-14 (total of 112). They can be found in most terrains, and are often hard to see because of their size. Have been found with as little as 10 Perception, 7 Exploration.",
+      "description": "left|75px The wild crop patches known from the second world in Haven & Hearth have been replaced with Wild Windsown Weeds (WWW's), a new wild plant that you can forage for. This wild plant, when dried, converts into a seed of some kind that you can then plant with the Farming skill. The kind of seed you obtain from Wild Windsown Weeds is random and not dependent on the type of terrain on which they are found. However, if you find several Wild Windsown Weeds in the same \"area\" they will tend to produce the same type of seed."
+    },
+    {
+      "title": "Gray Clay",
+      "skill": "Foraging, Pottery",
+      "materials": "None",
+      "reference": "Shallow Water",
+      "how": "*Locate a Gray Clay in outdoor shallow water *Right click the Gray Clay and select Pick frame|Gray Clay in Shallow Water As of November 8th, 2010 every clay has a specific color when kilned into bricks. When Grey Clay is kilned it makes Black Bricks.",
+      "description": "Gray Clay is found by foraging in shallow water, with your Exploration * Perception scores modifying your chance to spot them. They are only found in shallow water along river or lake shores, much like River Pearl Mussels. Additionally, your Nature vs Industry belief slider directly affects your gathering capabilities once you find some Gray Clay. At full nature you will have a 50% chance to get a single Gray Clay, while at full industry, you will find two every time. Note that this means it is possible for those characters at full nature to not receive any at all when attempting to pick up Gray Clay. From anonymous's personal experience, gray clay nodes have been found at 306 per*exp with n"
+    },
+    {
+      "title": "Monocle",
+      "skill": "Glassmaking",
+      "materials": "Raw Glass x1, Silver Nugget, Silk Thread",
+      "reference": "Nothing",
+      "how": "",
+      "description": "Gives 15 PERception at q10. Quality is based only on the Silk Thread and Raw Glass"
+    },
+    {
+      "title": "Spectacles",
+      "skill": "Glassmaking",
+      "materials": "Raw Glass x2, Nugget of Any Common Metal",
+      "reference": "Nothing",
+      "how": "",
+      "description": "Decent boost to perception. Gives +5 PER at quality 10. +6 PER on q15. +8 PER on q30 +10 PER on q42 Your Smithing level affects the quality of Spectacles crafted."
+    },
+    {
+      "title": "Wine Bottle",
+      "skill": "Glassmaking",
+      "materials": "Raw Glass x4",
+      "reference": "Nothing",
+      "how": "raft > Ceraics > Wine ottle '''Important: to unlock this recipe you must fill your bucket with a wine.'''",
+      "description": "Wine Bottles hold up to 0.6 liters of Vinegar, Wine or Weißbier."
+    },
+    {
+      "title": "Wicker Breadbasket",
+      "skill": "Hearth Magic",
+      "materials": "Branch x5",
+      "reference": "",
+      "how": "",
+      "description": "Q10 adds 4% Hunger Mod, 1% FEP bonus Category:The Symbel"
+    },
+    {
+      "title": "A mess...",
+      "skill": "Hunting",
+      "materials": "Chick",
+      "reference": "Hand",
+      "how": "*Right Click a wandering Chick from a Heath, Grassland, or Moor to capture it or obtain from a hatched egg in a Chicken Coop *Right Click the Chick and select Wring Neck from the flower menu",
+      "description": "A mess... is the useless guts of a Chick which was captured and had its neck wringed. There is currently no known use for this item. Killing the chick by punching it or hitting it with a weapon produces a Dead Chicken."
+    },
+    {
+      "title": "Bear Cape",
+      "skill": "Hunting",
+      "materials": "Dried Bear Hide",
+      "reference": "",
+      "how": "raft > eather Working > Bar Cape",
+      "description": "A cape and hood fashioned from the hide of a bear, making the wearer stronger. Increases strength and giving hitpoints. {| border=\"1\" cellpadding=\"1\" cellspacing=\"1\" style=\"width: 400px;\" | style=\"text-align: center;\"|Quality | style=\"text-align: center;\"|Strength | style=\"text-align: center;\"|Hitpoints | style=\"text-align: center;\"|Armor Class |- | style=\"text-align: center;\"|10 | style=\"text-align: center;\"| +10 | style=\"text-align: center;\"|100 | style=\"text-align: center;\"|0/15 |- | style=\"text-align: center;\"|55 | style=\"text-align: center;\"| +23 | style=\"text-align: center;\"|275 | style=\"text-align: center;\"|0/35 |- | style=\"text-align: center;\"|90 | style=\"text-align: center;\"| +30 | "
+    },
+    {
+      "title": "Boar Tusk",
+      "skill": "Hunting",
+      "materials": "Boar Carcass",
+      "reference": "Hand",
+      "how": "Kill a boar, then right click to collect bones on a boar skeleton after skinning and/or butchering the remains. You will receive one or two tusks along with other bone materials of the same quality. Quality is determined by the formula BoarLevel*4+Survival/2.",
+      "description": "The tusk from an aggressive boar. Boar Tusk also counts as bone material for recipes."
+    },
+    {
+      "title": "Bone Material",
+      "skill": "Hunting",
+      "materials": "Dead Chicken, Dead Cock, Dead Rabbit, Skeleton",
+      "reference": "Nothing",
+      "how": "Collect bones from the skeletons left behind by slaughtered corpses. Furthermore, you can kill and butcher a rabbit, hen or cock to get bones. Deer Antlers, Boar tusks and Bear Teeth also count as bones, for purposes other than producing Bone Ash, for Bone Clay. pl:Bone Material",
+      "description": "You will need the Hunting skill to get bones, which are required by several things, such as Bone Arrows or Bone Hooks. You don't need to have the hunting skill if you find some animal dead."
+    },
+    {
+      "title": "Chick",
+      "skill": "Hunting",
+      "materials": "Chicken Egg, Chicken, Chicken Coop",
+      "reference": "Grassland, Moor, Heath",
+      "how": "There are two possibilities: *Wild flocks of chicken may randomly spawn on Grassland, Moor, or Heath. Right-clicking a chick will cause your character to chase it. The chick will flee, so running is necessary unless you are standing directly next to it. Once caught, it will appear in your inventory. *Build a Chicken Coop for breeding hens and cocks. A fertile Chicken Egg will hatch into a chick, if brooded by a hen inside a chicken coop.",
+      "description": "A chick is a young chicken. They seem to disappear after being placed in your inventory or a container for an extended period of time. Some players have noticed a glitch where if you capture a chick and butcher it, you get A mess, but if you release the chicken and kill it (punching, shooting, etc.) on the ground will be a dead chicken. This could be helpful as to not need to wait for chicks to mature to butcher them."
+    },
+    {
+      "title": "Chicken",
+      "skill": "Hunting",
+      "materials": "Chick, Chicken Coop",
+      "reference": "Grassland, Moor, Heath",
+      "how": "*They are found roaming Grasslands, Moors and Heath biomes. From there they can simply be picked up similar to a Rabbit, however they are very slow, and can be caught at Run speed.",
+      "description": "The chicken is a domesticated fowl. In the game, it refers mainly to the female chicken. A male chicken is called a cock."
+    },
+    {
+      "title": "Cock",
+      "skill": "Hunting",
+      "materials": "Chick, Chicken Coop",
+      "reference": "Grassland, Moor, Heath",
+      "how": "There are two possibilities: *Wild flocks of chicken may randomly spawn on Grassland, Moor, or Heath. Right-clicking a cock will cause your character to chase it. The cock will flee, so running is necessary unless you are standing directly next to it. Once caught, it will appear in your inventory. *Build a chicken coop for breeding hens and cocks. When a chick is placed inside a chicken coop with sufficient fodder, it will turn into a hen or cock.",
+      "description": "A cock, also called a rooster or chanticleer, is a male chicken."
+    },
+    {
+      "title": "Dead Chicken",
+      "skill": "Hunting",
+      "materials": "Chicken",
+      "reference": "Nothing",
+      "how": "To get a dead chicken all you have to do is right click on a Chicken in your inventory and select \"Wring Neck\"; or you can simply kill a live chicken, which is running around on Grassland, Moor or Heath.",
+      "description": "Right-click and select \"Butcher\" to convert a dead chicken into Raw Chicken Meat, Bone Material, and three Chicken Feathers."
+    },
+    {
+      "title": "Dead Cock",
+      "skill": "Hunting",
+      "materials": "Cock",
+      "reference": "Nothing",
+      "how": "To get a dead cock all you have to do is right click the Cock in your inventory and select \"Wring Neck\".",
+      "description": "Right-click and select \"Butcher\" to convert a dead cock into Raw Chicken Meat, Bone Material, and three Chicken Feathers."
+    },
+    {
+      "title": "Dead Rabbit",
+      "skill": "Hunting",
+      "materials": "Rabbit",
+      "reference": "Nothing",
+      "how": "",
+      "description": "A dead rabbit is what appears when you right-click a live Rabbit in your inventory and select \"Wring Neck\". It occupies a 1x2 space in your inventory (smaller than the 2x2 of the live rabbit), and when butchered it yields one Rabbit Meat, one Bone Material, and one Fresh Rabbit Fur, all of which start at quality 10. may sometimes yield a raw rabbits foot"
+    },
+    {
+      "title": "Rabbit",
+      "skill": "Hunting",
+      "materials": "None",
+      "reference": "Forest",
+      "how": "Rabbits are found in forests of any kind.Right-click on a rabbit to pick it up from the ground. It is recommended to be next to the rabbit before doing so as right-clicking it will cause it to flee from you at running speed (and has been seen to run through structures). If you have space for a 2x2 item the rabbit will appear in your inventory. If you try to shoot it down successfully, or punch it (one punch with 2 unarmed combat will kill it in a hit), it can give 8 LP depending on your tradition/change slider. It is worth noting that if you mess up catching a rabbit, you can end combat by clicking on the sword and olive branch next to the rabbit portrate.",
+      "description": "A live rabbit. Also called \"Kroda\". You can right-click it and select \"Wring Neck\" to kill it and receive a Dead Rabbit. The Rabbit also has a rare chance to drop a Lucky Rabits Foot, a curiosity that gives a lot of Learning Points."
+    },
+    {
+      "title": "Rat",
+      "skill": "Hunting",
+      "materials": "Nothing",
+      "reference": "",
+      "how": "",
+      "description": "Rats are one of the only creatures, alongside Chickens, Rabbits and Toads, that can be fought without them fighting back. This makes them good in helping novices figure out the Combat System. They do not have any byproducts, cannot be wrung by their neck, and can be picked up by right-clicking them. Rats do not flee in combat. Rats can only be found at night Rats can be made into Rat on a Stick. Rats are often used for Ancestral Worship. Category:Content Category:Creatures Category:Objects"
+    },
+    {
+      "title": "Toad",
+      "skill": "Hunting",
+      "materials": "",
+      "reference": "",
+      "how": "",
+      "description": "''Toads'' are the only creature, aside from Chickens, Rabbits and Rats, that can be fought without them fighting back. This makes them good in helping novices figure out the Combat System. They do not have any byproducts, cannot be wrung by their neck, and can be picked up by right-clicking them. Toads are often used for Ancestral Worship. They usually hop around in the forest and whole swarms in swamps. They stop every 5-7 steps, which makes them easy to catch. They also can be used as a curio for learning points by crafting a Enthroned Toad you need to have a foraging level of 40 or higher to get the resources for one. Killing a toad raises your unhappiness by 7-10%. Category:Content Categ"
+    },
+    {
+      "title": "Waterskin",
+      "skill": "Hunting",
+      "materials": "Dried Hide",
+      "reference": "Nothing",
+      "how": "",
+      "description": "A Waterskin carries water. made with a dried skin. Craft > Tools > Waterskin"
+    },
+    {
+      "title": "Lawspeaker's Hat",
+      "skill": "Lawspeaking",
+      "materials": "Linen Cloth x10, Yarn x5",
+      "reference": "",
+      "how": "This hat gives an amount of INT and CHA, based on quality. Q18 hat = 9 INT and 4 CHA Category:Equipment Category:Clothing",
+      "description": "{{infobox object |name = |xsize = 1 |ysize = 1 |image = Image:.png |caption = |type = Equipment, Inventory |skillreq = Lawspeaking |objectsreq = Linen Cloth x10, Yarn x5 |reqby = Nothing }} You can wear this hat only if you have the lawspeaking skill."
+    },
+    {
+      "title": "Lawspeaker's Robes",
+      "skill": "Lawspeaking",
+      "materials": "Linen Cloth x15, Yarn x5",
+      "reference": "",
+      "how": "",
+      "description": "{{infobox object |name = |xsize = 1 |ysize = 1 |image = Image:.png |caption = |type = Equipment, Inventory |skillreq = Lawspeaking |objectsreq = Linen Cloth x15, Yarn x5 |reqby = Nothing }} Wearing this item requires you to be Lawspeaker of a Village."
+    },
+    {
+      "title": "Boar Tusk Helmet",
+      "skill": "Leather Working",
+      "materials": "Boar Tusk x2, Leather x2",
+      "reference": "",
+      "how": "raft > loth Making > ats > Boar Tsk Helmet Category:Equipment Category:Clothing Category:Armor",
+      "description": "A boar tusk helmet is a basic piece of defensive headgear, made from leather and boar tusks. A battle helmet both used by boar hunters,and a small amount of raiders. {| border=\"1\" cellpadding=\"1\" cellspacing=\"1\" style=\"width: 200px;\" | style=\"text-align: center;\"|Quality | style=\"text-align: center;\"|Hitpoints | style=\"text-align: center;\"|Armor Class |- | style=\"text-align: center;\"|10 | style=\"text-align: center;\"|120 | style=\"text-align: center;\"|5/30 |- | style=\"text-align: center;\"|19 | style=\"text-align: center;\"|228 | style=\"text-align: center;\"|6/41 |- | style=\"text-align: center;\"|20 | style=\"text-align: center;\"|240 | style=\"text-align: center;\"|7/42 |} Hitpoints = Q*12 Armor Class"
+    },
+    {
+      "title": "Fox Hat",
+      "skill": "Leather Working",
+      "materials": "Dried Fox Hide",
+      "reference": "",
+      "how": "Made with a Dried Fox Hide. :raft > Cloth Making > Hats > Fox Hat",
+      "description": "Cosmetic. Resembles the Russian Ushanka or English Bearskin in styling."
+    },
+    {
+      "title": "Hardened Leather",
+      "skill": "Leather Working",
+      "materials": "Leather x3, Beeswax x2",
+      "reference": "Cauldron or Clay Cauldron",
+      "how": "You need a cauldron or clay cauldron with at least 2.5 litres of hot water to harden leather. *Gather the 5 ingredients into your inventory: 3 Leather and 2 Beeswax *Right click a boiling Cauldron or Clay Cauldron to move into position and ready it for use *Select the recipe: Craft > Leather Working > Hardened Leather *Click the \"Craft\" button",
+      "description": "Hardened Leather is leather treated with beeswax to strengthen it. It requires three pieces of Leather and two units of Beeswax, and may be used to create objects like the Mine Hole, Traveller's Sack or Cutthroat Cuirass."
+    },
+    {
+      "title": "Hide Strap",
+      "skill": "Leather Working",
+      "materials": "Any dried Hide:",
+      "reference": "",
+      "how": "raft > eather Working > Hide trap Category:String",
+      "description": "Hide straps serve as a generic string, created from any dried Hide. The quality of the hide strap created is equal to the hide used, unaffected by attributes or skill values. Hides give 2 straps per inventory slot (e.g. Rabbit Fur gives 2 straps, Dried Hide gives 8 straps, etc). They are not usable as Fishing Lines."
+    },
+    {
+      "title": "Leather",
+      "skill": "Leather Working",
+      "materials": "Tree Bark, Water, and one of the following: Dried Bear Hide, Dried Hide, Dried Fox Hide, Rabbit Fur, Dried Sheep Skin",
+      "reference": "Tanning Tub",
+      "how": "",
+      "description": "Leather is used to produce a variety of equipment. =How to Acquire= The leather working skill is required in order to make leather. Leather is not difficult to make, but its creation is a time-consuming process. *1. Acquire a raw bear hide, raw hide, raw fox hide, fresh rabbit fur, or raw sheep skin. *2. Dry the hide by placing it in a drying frame. *3. Wait for the hide to finish drying. It takes 8 hours (one full in-game day) to dry most furs, the exception being bear furs, which take 16 hours (two full in-game days). *4. Take the dried hide and place it in a tanning tub. *5. Fill a water container, such as a bucket, using either a well or an open water source. *6. Hold the full container "
+    },
+    {
+      "title": "Leather Armor",
+      "skill": "Leather Working",
+      "materials": "Leather x3",
+      "reference": "Hand",
+      "how": "Craft > Leather working > Lether Armor",
+      "description": "Leather armor is a basic piece of defensive chest armor, made from leather. {| border=\"1\" cellpadding=\"1\" cellspacing=\"1\" style=\"width: 200px;\" | style=\"text-align: center;\"|Quality | style=\"text-align: center;\"|Hitpoints | style=\"text-align: center;\"|Armor Class |- | style=\"text-align: center;\"|7 | style=\"text-align: center;\"|105 | style=\"text-align: center;\"|20/20 |- | style=\"text-align: center;\"|10 | style=\"text-align: center;\"|150 | style=\"text-align: center;\"|25/25 |- | style=\"text-align: center;\"|30 | style=\"text-align: center;\"|450 | style=\"text-align: center;\"|43/43 |}"
+    },
+    {
+      "title": "Leather Boots",
+      "skill": "Leather Working",
+      "materials": "Leather x2",
+      "reference": "Hand",
+      "how": "Craft > Leather working > Leather boots",
+      "description": "Leather boots are basic defensive footwear, made from leather. {| border=\"1\" cellpadding=\"1\" cellspacing=\"1\" style=\"width: 300px;\" | style=\"text-align: center;\"|'''Quality''' | style=\"text-align: center;\"|'''Hitpoints''' | style=\"text-align: center;\"|'''Armor Class''' |- | style=\"text-align: center;\"|10 | style=\"text-align: center;\"|100 | style=\"text-align: center;\"|0/20 |- | style=\"text-align: center;\"|40 | style=\"text-align: center;\"|400 | style=\"text-align: center;\"|0/40 |- | style=\"text-align: center;\"|90 | style=\"text-align: center;\"|900 | style=\"text-align: center;\"|0/60 |}"
+    },
+    {
+      "title": "Leather Cloak",
+      "skill": "Leather Working",
+      "materials": "Leather x6",
+      "reference": "hand",
+      "how": "Craft > Leather Working > Leather Cloak Category:Equipment Category:Clothing",
+      "description": "This leather cloak is only cosmetic."
+    },
+    {
+      "title": "Leather Pants",
+      "skill": "Leather Working",
+      "materials": "Leather x3",
+      "reference": "Hand",
+      "how": "raft > eather Working > Leaher Pants",
+      "description": "Leather pants are basic pieces of defensive leg armor, made from leather. {| border=\"1\" cellpadding=\"1\" cellspacing=\"1\" style=\"width: 200px;\" | style=\"text-align: center;\"|Quality | style=\"text-align: center;\"|Hitpoints | style=\"text-align: center;\"|Armor Class |- | style=\"text-align: center;\"|10 | style=\"text-align: center;\"|150 | style=\"text-align: center;\"|25/25 |- | style=\"vertical-align: top; text-align: center;\"|30 | style=\"vertical-align: top; text-align: center;\"|450 | style=\"vertical-align: top; text-align: center;\"|43/43 |}"
+    },
+    {
+      "title": "Newsboy Cap",
+      "skill": "Leather Working",
+      "materials": "Leather",
+      "reference": "",
+      "how": "raft > eather Working > ewsboy Cap Category:Equipment Category:Clothing",
+      "description": "One of the 2 (/3?) hats you can start the game with. It is purely cosmetic, so it does not give any bonuses in any manner."
+    },
+    {
+      "title": "Parchment",
+      "skill": "Leather Working",
+      "materials": "Dried Bear Hide or Dried Fox Hide or Dried Hide or Dried Sheep Skin or Rabbit Fur",
+      "reference": "Nothing",
+      "how": "Craft > Parchment Any type of hide works, giving 1 piece of parchment for every space it takes in your inventory: Rabbit Fur gives you 1 parchment, where the Dried Hide gives you 4 parchments. Sheep skin is an exception and gives four pieces of parchment instead of two.",
+      "description": "You need a blank parchment to draw a new map. You can also use a blank parchment to write messages, it works the same way a Runestone does."
+    },
+    {
+      "title": "Seedbag",
+      "skill": "Leather Working",
+      "materials": "Leather, String",
+      "reference": "Nothing",
+      "how": "Craft > Cloth Making > Seedbag",
+      "description": "One single seedbag holds up to 9 seeds."
+    },
+    {
+      "title": "Traveller's Sack",
+      "skill": "Leather Working",
+      "materials": "Hardened Leather x5, String x8",
+      "reference": "",
+      "how": "*Gather the 13 ingredients into your inventory: 5 Hardened Leather and 8 String *Select the recipe: [C]raft > [L]eather Working > Tra[v]elers Sack *Click the Craft button",
+      "description": "Travelers Sack takes the spot of one of your hands and increases a player's inventory space by an amount depending on its quality. Up to two may be equipped at once. Sacks below Q<sub>20</sub> will give the player an additional vertical row, while sacks above Q<sub>20</sub> will give both a vertical and horizontal row. Note: String quality does not contribute to sack quality. Only leather quality is used."
+    },
+    {
+      "title": "Ranger's Boots",
+      "skill": "Leather Working, Ranging",
+      "materials": "Leather x10, Silk Thread x2",
+      "reference": "Hand",
+      "how": "Craft > Leather Working > Ranger's Boots Category:Equipment Category:Clothing Category:Armor",
+      "description": "A pair of boots that form part of the Ranger's set of clothing. They provide the most protection of any footwear and increase Agility. {| border=\"1\" cellpadding=\"1\" cellspacing=\"1\" style=\"width: 400px;\" | style=\"text-align: center;\"|'''Quality''' | style=\"text-align: center;\"|'''Agility''' | style=\"text-align: center;\"|'''Hitpoints''' | style=\"text-align: center;\"|'''Armor Class''' |- | style=\"text-align: center;\"|10 | style=\"text-align: center;\"| +5 | style=\"text-align: center;\"|150 | style=\"text-align: center;\"|15/15 |- | style=\"text-align: center;\"|40 | style=\"text-align: center;\"| +10 | style=\"text-align: center;\"|600 | style=\"text-align: center;\"|30/30 |- | style=\"text-align: center;\"|9"
+    },
+    {
+      "title": "Key",
+      "skill": "Locks & Bolts",
+      "materials": "Nugget of Any Common Metal, Key-Mold",
+      "reference": "Nothing",
+      "how": "Begin by constructing a wall (brickwall or palisade) cornerpost and then right click on the cornerpost to expand the wall. Two free tiles, paved and flanked by cornerposts on both sides make possible a gate. Once a gate has been built, the character (the character laying the final touch on the gate) will receive a key for it.",
+      "description": "Right click on a gate to lock or unlock it, provided you have the key."
+    },
+    {
+      "title": "Key-Mold",
+      "skill": "Locks & Bolts",
+      "materials": "Clay, Key",
+      "reference": "Nothing",
+      "how": "Right-click on a piece of clay with a key to create a key-mold.",
+      "description": "Key-molds are used to create copies of keys but can only be used once."
+    },
+    {
+      "title": "Keyring",
+      "skill": "Locks & Bolts",
+      "materials": "Nugget of Any Common Metal",
+      "reference": "Nothing",
+      "how": "Craft > Tools > Keyring",
+      "description": "Keyrings will hold up to 9 keys. The keys are functional as though they were in your inventory, and can be removed at any time."
+    },
+    {
+      "title": "Block of Wood",
+      "skill": "Lumberjacking",
+      "materials": "Log or Stump",
+      "reference": "Stone Axe",
+      "how": "Blocks of wood are produced by chopping either a log or removing a stump with a stone axe. Removing a stump provides 4 blocks and chopping a log provides 12 blocks. Now, you can also right-click blocks and select the \"Split\" option in order to split the blocks into 5 branches each.",
+      "description": "|image = Image:.png |caption = |xsize = 2 |ysize = 1 |lpgain = 10 |skillreq = Lumberjacking |objectsreq = Log or Stump |producedby = Stone Axe }} The quality of the blocks is based on the quality of the tree. The quality of your stone axe has no effect.."
+    },
+    {
+      "title": "Log",
+      "skill": "Lumberjacking",
+      "materials": "Tree",
+      "reference": "Stone Axe",
+      "how": "Right click on a tree, select the \"Chop\" option to chop it down. Pine, Oak, and Maple Trees give three logs, Fir , and Elm Trees give two logs, while Apple Trees, and most other fruit trees give only one. Afterwards, a stump will remain which can be removed.",
+      "description": "You can chop a log into 12 blocks with a stone axe, or saw it into 4 boards with a bone saw or 6 with an iron saw. You need carpentry to obtain boards."
+    },
+    {
+      "title": "Bar of Bronze",
+      "skill": "Metal Working",
+      "materials": "Bar of Copper x2, and Bar of Tin",
+      "reference": "Alloying Crucible",
+      "how": "You need an alloying crucible to make a bar of bronze. It must be fueled with charcoal and lit in order to produce bronze bars. Craft > Metal Working > Bar of Bronze",
+      "description": "Two bars of copper and one bar of tin makes three bars of bronze. Bronze is a stronger metal than copper and tin, and can be used in the production of many types of tools. In addition, weapons and armor can be crafted from bronze that, while not always as strong as wrought iron or steel equipment, are generally much cheaper and less time-consuming to make. Bars of Bronze can be used to make repairs to plows made out of cast iron, and vice versa. The main hurdle in acquiring bronze is the need for two types of metal, which cannot be procured from a single mine alone. Thus trade is often required in order to acquire sufficient stocks of both metals that may be used in producing bronze."
+    },
+    {
+      "title": "Bar of Cast Iron",
+      "skill": "Metal Working",
+      "materials": "Iron Ore",
+      "reference": "Ore Smelter",
+      "how": "First, one must acquire iron ore, typically by mining it from a mine hole. Since w4, you can now mine in simple caves. Be sure to build supports so you don't get struck by a cave-in.Next, the iron ore must be loaded into an ore smelter. Four units of charcoal should also be added to the smelter by right clicking on it while holding a unit of coal. Finally, light the smelter. After approximately twenty minutes, the process will be complete. Roughly 10% of the iron ore will become bars of cast iron, with the rest becoming stone. This ratio can be modified by adjusting one's Personal Beliefs. Each point toward industry increases the chance by 2%, while each point toward nature decreases it by 2%. ru:Слиток железа",
+      "description": "Cast iron, in bar form, can be used to produce a variety of low-grade metal goods. It can also be smelted into wrought iron."
+    },
+    {
+      "title": "Bar of Gold",
+      "skill": "Metal Working",
+      "materials": "Gold Nugget x10",
+      "reference": "Ore Smelter",
+      "how": "Obtained by combining 10x Gold Nugget using the skill Metal Working.",
+      "description": "==How to Acquire== Obtained by combining 10x Gold Nugget using the skill Metal Working."
+    },
+    {
+      "title": "Bronze Plate",
+      "skill": "Metal Working",
+      "materials": "Bar of Bronze x6",
+      "reference": "Smithy's Hammer, Anvil",
+      "how": "You need to equip a smithy's hammer and you need an anvil to make a bronze plate. Craft > Metal Working > Armor > Bronze Plate Category:Equipment Category:Clothing Category:Armor",
+      "description": "Bronze Plate: 1000 Hitpoints, Armor class 100/100 {| border=\"1\" cellpadding=\"1\" cellspacing=\"1\" style=\"width: 200px;\" |QL 13 |650 HP | style=\"vertical-align: top;\"|114/114 | style=\"vertical-align: top;\"|??? |- |QL 25 |1250 HP | style=\"vertical-align: top;\"|158/158 | style=\"vertical-align: top;\"| -13 AGI |- |QL 90 |4500 HP | style=\"vertical-align: top;\"|300/300 | style=\"vertical-align: top;\"| -24 AGI |}"
+    },
+    {
+      "title": "Bronze Sword",
+      "skill": "Metal Working",
+      "materials": "Bar of Bronze x3",
+      "reference": "Smithy's Hammer, Anvil",
+      "how": "",
+      "description": "Category:ContentCategory:ObjectsCategory:EquipmentCategory:Sharp ToolsCategory:Weapons"
+    },
+    {
+      "title": "Cake Knife",
+      "skill": "Metal Working",
+      "materials": "Steel Nugget x5",
+      "reference": "Hand",
+      "how": "*Gather the 5 ingredients into your inventory: 5 Steel Nuggets *Select the recipe: Craft > The Symbel > Cutlery > Cake Knife *Click the Craft button Category:The Symbel",
+      "description": "A steel knife meant especially for serving cake and decorating a Table. The Cake Knife provides a boost when feasting."
+    },
+    {
+      "title": "Clothier's Thimble",
+      "skill": "Metal Working",
+      "materials": "Silver Nugget x1",
+      "reference": "",
+      "how": "raft > ewelry > lothier's Thimble",
+      "description": "A ring in the form of a thimble that protects the all-important fingers, increasing dexterity and sewing. {| border=\"1\" cellpadding=\"1\" cellspacing=\"1\" style=\"width: 300px;\" | style=\"text-align: center;\"|Quality | style=\"text-align: center;\"|Dexterity | style=\"text-align: center;\"|Sewing |- | style=\"text-align: center;\"|10 | style=\"text-align: center;\"| +1 or +2 | style=\"text-align: center;\"| +5 |} ''Requires confirmation of stats''"
+    },
+    {
+      "title": "Forge Ring",
+      "skill": "Metal Working",
+      "materials": "Silver Nugget x2",
+      "reference": "",
+      "how": "raft > ewelry > orge Ring",
+      "description": "A ring that increases strength and smithing. {| border=\"1\" cellpadding=\"1\" cellspacing=\"1\" style=\"width: 300px;\" | style=\"text-align: center;\"|Quality | style=\"text-align: center;\"|Strength | style=\"text-align: center;\"|Smithing |- | style=\"text-align: center;\"|10 | style=\"text-align: center;\"| +6 | style=\"text-align: center;\"| +10 |- | style=\"text-align: center;\"|100 | style=\"text-align: center;\"| +15 | style=\"text-align: center;\"| +31 |} ''Requires confirmation of stats''"
+    },
+    {
+      "title": "Frying Pan",
+      "skill": "Metal Working",
+      "materials": "Bar of Common Metal",
+      "reference": "Smithy's Hammer, Anvil",
+      "how": "You need to equip a smithy's hammer and you need an anvil to make a frying pan. Make it from one bar of common metal. Craft > Tools > Frying Pan",
+      "description": "A frying pan. Needed to fry eggs and make pancakes."
+    },
+    {
+      "title": "Hirdsman's Helmet",
+      "skill": "Metal Working",
+      "materials": "Bar of Wrought Iron, Block of Wood",
+      "reference": "Smithy's Hammer, Anvil",
+      "how": "You need to equip a smithy's hammer and you need an anvil to make a hirdsman's helmet. Craft > Metal Working > Armor > Hirdsman's Helmet Category:Equipment Category:Clothing Category:Armor",
+      "description": "While anyone with the proper skills can make it, this item can only be worn by a member of the hird, a special rank appointed by the chieftain of a village. Hirdsmen can be summoned by the chieftain."
+    },
+    {
+      "title": "Merchant's Ring",
+      "skill": "Metal Working",
+      "materials": "Gold Nugget",
+      "reference": "",
+      "how": "raft > ewelry > erchant's Ring",
+      "description": "A ring that increases to all base attributes. {| border=\"1\" cellpadding=\"1\" cellspacing=\"1\" style=\"width: 200px;\" | style=\"text-align: center;\"|Quality | style=\"text-align: center;\"|All Attributes |- | style=\"text-align: center;\"|10 | style=\"text-align: center;\"| +3 |}"
+    },
+    {
+      "title": "Occult Ring",
+      "skill": "Metal Working",
+      "materials": "Gold Nugget x2",
+      "reference": "",
+      "how": "raft > ewelry > ccult Ring",
+      "description": "A ring containing the knowledge of the hidden. Increases perception and intelligence. {| border=\"1\" cellpadding=\"1\" cellspacing=\"1\" style=\"width: 300px;\" | style=\"text-align: center;\"|Quality | style=\"text-align: center;\"|Perception | style=\"text-align: center;\"|Intelligence |- | style=\"text-align: center;\"|10 | style=\"text-align: center;\"| +8 | style=\"text-align: center;\"| +8 |} ''Requires confirmation of stats''"
+    },
+    {
+      "title": "Plate Armor",
+      "skill": "Metal Working",
+      "materials": "Bar of Steel x6",
+      "reference": "Smithy's Hammer, Anvil",
+      "how": "raft > Mtal Working > rmor > Plte Armor Category:Equipment Category:Clothing Category:Armor Category:Content Category:Objects",
+      "description": "is a piece of high-end chest armor. It deflects four times as much damage as it absorbs, making it more durable than other armors. {| border=\"1\" cellpadding=\"1\" cellspacing=\"1\" style=\"width: 300px;\" | style=\"text-align: center;\"|Quality | style=\"text-align: center;\"|Hitpoints | style=\"text-align: center;\"|Armor Class |- | style=\"text-align: center;\"|10 | style=\"text-align: center;\"|5000 | style=\"text-align: center;\"|150/75 |- | style=\"text-align: center;\"|40 | style=\"text-align: center;\"|20000 | style=\"text-align: center;\"|300/150 |- | style=\"text-align: center;\"|90 | style=\"text-align: center;\"|50000 | style=\"text-align: center;\"|450/225 |}"
+    },
+    {
+      "title": "Ring of Brodgar (Jewelry)",
+      "skill": "Metal Working",
+      "materials": "Gold Nugget, River Pearl x3",
+      "reference": "",
+      "how": "raft > ewelry > ing of Brodgar Category:Equipment",
+      "description": "A Ring of Brodgar is a highly prized ring that boosts learning ability. {| border=\"1\" cellpadding=\"1\" cellspacing=\"1\" style=\"width: 250px;\" | style=\"text-align: center;\"|Quality | style=\"text-align: center;\"|Effect |- | style=\"text-align: center;\"|10 | style=\"text-align: center;\"| +15% Learning Ability |}"
+    },
+    {
+      "title": "Scythe",
+      "skill": "Metal Working",
+      "materials": "Bar of Bronze, or Bar of Cast Iron, or Bar of Wrought Iron, or Bar of Steel; AND Block of Wood x3",
+      "reference": "Smithy's Hammer, Anvil",
+      "how": "You need to equip a smithy's hammer and you need an anvil to make a scythe. Craft > Metal Working > Scythe Category:Equipment Category:Sharp Tools",
+      "description": "Quoting Jorb, \"You harvest faster while having the scythe equipped, obviously.\""
+    },
+    {
+      "title": "Shovel",
+      "skill": "Metal Working",
+      "materials": "Bar of Bronze, or Bar of Cast Iron, or Bar of Wrought Iron, or Bar of Steel, Block of Wood x3",
+      "reference": "Smithy's Hammer, Anvil",
+      "how": "Craft > Metal Working > Shoel",
+      "description": "A shovel can be used with little stamina drain to rapidly dig for clay/sand/soil. Using a shovel to remove tree stumps halves the time compared to using an axe. Equipping a shovel also greatly reduces stamina drain, (cuts the drain to your stamina by half) when using Adventure > Landscaping > Plow Field for those single spots that are too much of a hassle to grab a plow for."
+    },
+    {
+      "title": "Silver for the Ferryman",
+      "skill": "Metal Working",
+      "materials": "Silver Nugget",
+      "reference": "",
+      "how": "raft > ewelry > ilver for the Ferryman",
+      "description": "A ring that prevents the wearer from drowning. Essential for those foolish enough to buy the Swimming skill. One use only."
+    },
+    {
+      "title": "Silver River Goblet",
+      "skill": "Metal Working",
+      "materials": "Bar of Silver, River Pearl x8",
+      "reference": "Hand",
+      "how": "*Gather the 9 ingredients into your inventory: 1 Bar of Silver and 8 River Pearls *Select the recipe: Craft > The Symbel > Cups & Goblets > Silver River Goblet *Click the Craft button Category:The Symbel",
+      "description": "A luxurious goblet made from silver and decorated with river pearls. Used to decorate a Table to provide a boost when feasting."
+    },
+    {
+      "title": "Tankard",
+      "skill": "Metal Working",
+      "materials": "Tin Nugget x5",
+      "reference": "Smithy's Hammer, Anvil",
+      "how": "You need to equip a smithy's hammer and you need an anvil to make a tankard. Craft > Metal Working > 1 = Tankard",
+      "description": "A tankard is used for drinking Weißbier from a Wine Barrel or Wine Bottle. That means you cannot drink Weißbier out of a Glass because that makes sense."
+    },
+    {
+      "title": "Thane's Ring",
+      "skill": "Metal Working",
+      "materials": "Gold Nugget x2, Silver Nugget x2",
+      "reference": "",
+      "how": "raft > ewelry > hane's Ring",
+      "description": "A Thane's Ring is a ring for those who would lead in battle. It increases melee combat, strength, agility, and charisma. {| border=\"1\" cellpadding=\"1\" cellspacing=\"1\" style=\"width: 500px;\" | style=\"text-align: center;\"|Quality | style=\"text-align: center;\"|Melee Combat | style=\"text-align: center;\"|Strength | style=\"text-align: center;\"|Agility | style=\"text-align: center;\"|Charisma |- | style=\"text-align: center;\"|10 | style=\"text-align: center;\"| +10 | style=\"text-align: center;\"| +10 | style=\"text-align: center;\"| +5 | style=\"text-align: center;\"| +5 |} ''Requires confirmation of stats''"
+    },
+    {
+      "title": "Tin Fly",
+      "skill": "Metal Working",
+      "materials": "Tin Nugget, Chicken Feather x2",
+      "reference": "",
+      "how": "Craft > Tools > Fishing Gear > Tin Fly",
+      "description": "The is a fishing lure, which is used together with a fully equipped fishing pole to catch fish."
+    },
+    {
+      "title": "Boar Tusk Snuff",
+      "skill": "Militia Training",
+      "materials": "Poppy Flower, Boar Tusk",
+      "reference": "Quern",
+      "how": "You need a Poppy Flower and a Boar Tusk to craft boar tusk snuff. The Militia Training skill is required. Craft > Potions & Herbs > Boar Tusk Snuff",
+      "description": "By using boar tusk snuff, your Strength is increased temporarily (15 seconds) by adding the Quality level of the Boar Tusk Snuff I.E. Your Strength = 20 Boar Tusk Snuff Quality = 50 Strength is thus = 70 It is just superstition among players, but rumor has it that snorting Boar Tusk Snuff before embarking on an adventure brings you and your party luck. (and makes you high)"
+    },
+    {
+      "title": "Copper Ore",
+      "skill": "Mining",
+      "materials": "Copper Mine",
+      "reference": "Mining Tool",
+      "how": "Copper Ore is obtained by mining in a Copper Mine. To turn it into usable metal, it must be smelted in an Ore Smelter.",
+      "description": "Copper Ore is a mined piece of rock and mineral from which a Bar of Copper can be gained."
+    },
+    {
+      "title": "Gold Ore",
+      "skill": "Mining",
+      "materials": "Gold Mine",
+      "reference": "Mining Tool",
+      "how": "",
+      "description": ""
+    },
+    {
+      "title": "Iron Ore",
+      "skill": "Mining",
+      "materials": "Iron Mine",
+      "reference": "Mining Tool",
+      "how": "Iron Ore is obtained by mining in an Iron Mine. To turn it into usable metal, it must be smelted in an Ore Smelter.",
+      "description": "Iron Ore is a mined piece of rock and mineral from which a Bar of Cast Iron can be gained."
+    },
+    {
+      "title": "Silver Ore",
+      "skill": "Mining",
+      "materials": "Silver Mine",
+      "reference": "Mining Tool",
+      "how": "Silver Ore is obtained by Mining in a Silver Mine. To turn it into usable metal, it must be smelted in an Ore Smelter.",
+      "description": "Silver Ore is a mined piece of rock and mineral from which a Silver Nugget can be gained."
+    },
+    {
+      "title": "Tin Ore",
+      "skill": "Mining",
+      "materials": "Tin Mine",
+      "reference": "Mining Tool",
+      "how": "Tin Ore is obtained by mining in a Tin Mine. To turn it into usable metal, it must be smelted in an Ore Smelter.",
+      "description": "Tin Ore is a mined piece of rock and mineral from which a Bar of Tin can be gained."
+    },
+    {
+      "title": "Filet of Bream",
+      "skill": "N/A",
+      "materials": "Bream",
+      "reference": "",
+      "how": "",
+      "description": "|caption = |hunger = 30 |xsize = 1 |ysize = 1 |skillreq = N/A |str = 0 |agi = 0 |int = 0 |con = 0 |per = 0 |cha = 0 |dex = 0 |psy = 0 |hurt = 0 }}"
+    },
+    {
+      "title": "Filet of Brill",
+      "skill": "N/A",
+      "materials": "Brill",
+      "reference": "",
+      "how": "",
+      "description": "|caption = |xsize = 1 |ysize = 1 |skillreq = N/A |type = Inventory |objectsreq = Brill |hunger = 30 |str = 0 |agi = 0 |int = 0 |con = 0 |per = 0 |cha = 0 |dex = 0 |psy = 0 |hurt = 0 }} Quality is directly linked to fish Q Gives 2STR 2AGI"
+    },
+    {
+      "title": "Filet of Pike",
+      "skill": "N/A",
+      "materials": "Pike",
+      "reference": "",
+      "how": "",
+      "description": "|caption = |xsize = 1 |ysize = 1 |skillreq = N/A |type = Inventory |objectsreq = Pike |hunger = 30 |str = 0 |agi = 0 |int = 0 |con = 0 |per = 0 |cha = 0 |dex = 0 |psy = 0 |hurt = 0 }}"
+    },
+    {
+      "title": "Fir Bough",
+      "skill": "none",
+      "materials": "none",
+      "reference": "Fir Tree",
+      "how": "Right click on a sufficiently grown fir tree and select the appropriate option. Each fir tree will provide 5 boughs.",
+      "description": "Besides their specific use in crafts, fir boughs can double as Branches in crafting; though they aren't usable as fuel. Fir boughs may be used in any construction or recipe that lists \"Any Bough\" as an ingredient."
+    },
+    {
+      "title": "High Hat",
+      "skill": "Not Applicable",
+      "materials": "Not Applicable",
+      "reference": "Not Applicable",
+      "how": "This is sometimes found in the newbie chest when creating a new character. There are no known ways by which players can create these. Category:Equipment Category:Clothing",
+      "description": "|image = Image:.png |caption = |xsize = 1 |ysize = 1 |skillreq = Not Applicable |objectsreq = Not Applicable |producedby = Not Applicable }} A hat to make your character fashionable (or not)."
+    },
+    {
+      "title": "String",
+      "skill": "Not Applicable",
+      "materials": "Hide Strap, Plant Fibres, Silk Thread, Spindly Taproot, Stinging Nettle, or Yarn",
+      "reference": "Nothing",
+      "how": "",
+      "description": "String is not an actual object, but refers to Hide Strap, Plant Fibres, Silk Thread, Spindly Taproot, Stinging Nettle, and Yarn. Almost anything that requires string can be made with any combination of these objects. An exception is Fishing Line."
+    },
+    {
+      "title": "Earthworm",
+      "skill": "Nothing",
+      "materials": "Nothing",
+      "reference": "Forest Terrain}}",
+      "how": "Digging in Forest Terrain has a chance to get an earthworm. Adventure > Dig",
+      "description": "Earthworms can be equipped on a Fishing Pole to be used as Bait. Note that bait, unlike lures, must be replaced after each attempt at catching a fish. However, they greatly increase the chance of catching a fish on each try."
+    },
+    {
+      "title": "Tea",
+      "skill": "Plant Lore",
+      "materials": "Green Tea Leaves x2, or Black Tea Leaves x2; AND Tea Pot; Mug",
+      "reference": "Cauldron or Clay Cauldron",
+      "how": "",
+      "description": "Tea fills up about 45% stamina per full mug. Drinking tea does not decrease hunger like drinking water does. Tea also grants you \"The Warmth of Tea\" Buff which gradually increase your LP learning rate as the duration pass to an additional base 20%. The quality of tea affects the rate at which the learning rate increases each interval; this in turn increases the highest point of learning rate you can obtain when the buff is as its peak. There is no difference between green tea and black tea."
+    },
+    {
+      "title": "Acre Clay",
+      "skill": "Pottery",
+      "materials": "None",
+      "reference": "By hand digging on a mudflat",
+      "how": "To obtain Acre Clay you have to dig in a mudflat that's close to a quality clay node. As of November 8th, 2010 every clay has a specific color when kilned into bricks. When Acre Clay is Kilned it makes Red Bricks.",
+      "description": "Acre Clay is one of the variations of Clay. Any of these variations work as the regular clay did. This is one of the two types of clay that can be made into bricks."
+    },
+    {
+      "title": "Ball Clay",
+      "skill": "Pottery",
+      "materials": "None",
+      "reference": "Shallow Water",
+      "how": "To obtain Ball Clay you have to dig in shallow water that's close to a quality clay node.",
+      "description": "Ball Clay is one of the variations of Clay. Any of these variations work as the regular clay did, and all of these variations can be made into bricks. <span style=\"color:rgb(0,0,0);font-family:sans-serif;line-height:19px;\">When Ball Clay is burnt in the kiln it makes Yellow Bricks.</span>"
+    },
+    {
+      "title": "Earthenware Platter",
+      "skill": "Pottery",
+      "materials": "Acre Clay x4",
+      "reference": "Kiln",
+      "how": "Gather the ingredients into your inventory and execute the recipe: raft > The ymbel > lates > Earthenware Platter Mold the clay into an unburnt earthenware platter and place into a kiln with at least 6 branches worth of fuel. It takes approximately 20 minutes to fire the plate. Category:The Symbel",
+      "description": "s are placed on Tables for decorative purposes as well to reduce how full food makes you and how many FEPs food provides. Q26 gives 13,3% Hunger Mod, 1% FEP Mod"
+    },
+    {
+      "title": "Jar",
+      "skill": "Pottery",
+      "materials": "Clay x3",
+      "reference": "Kiln",
+      "how": "To make a jar, you need the pottery skill and 3 blocks of clay. Craft > Ceramics > ar *Use the craft menu to mold the clay, and then fire the unburnt jar in a kiln with 4 branches loaded. *In about 20 minutes you will get an empty jar.",
+      "description": "Jars can hold 1.0 L of Rennet, Ink or Rustroot Extract."
+    },
+    {
+      "title": "Pipe",
+      "skill": "Pottery",
+      "materials": "Clay x2",
+      "reference": "Kiln",
+      "how": "To make a pipe, you need the pottery skill and 2 blocks of clay. You also need to have discovered tobacco. Use the craft menu to mold the clay, and then fire the unburnt clay pipe in a kiln. You will need a minimum of 4 branches as fuel. To gain a pipe recipe, you need to discover \"harvesting\" of tobacco/hemp and picking it up once leaves/buds are dried from herbalist table. Although cured hemp is used with the pipe. You can only gain skill from removing Tobacco from the Herbalist table. Craft > Ceramics > Ppe",
+      "description": "Pipes can be equipped in the alternate head slot. They can be filled with Cured Hemp Buds or Tobacco and lit, causing the character's pipe to emit smoke for 5 minutes, as well as turning them into a small light source. *Smoking Cured Hemp Buds produces the \"In The Fog\" buff. The longer the character smokes, the more potent the buff is (whether quality affects duration or effect is unknown). \"In The Fog\" increases FEP gain from foods. *Smoking Tobacco reduces Travel Weariness and gives the \"Smoke & Fire\" buff that temporarily increases Psyche."
+    },
+    {
+      "title": "Porcelain Plate",
+      "skill": "Pottery",
+      "materials": "Bone Clay x2",
+      "reference": "Kiln",
+      "how": "raft > The ymbel > lates > Porcelain Plate Then burn the unburnt porcelain plate in a Kiln. Cooking time in the kiln is roughly 35-40 minutes, i.e. 7-8 Branches worth of fuel. Category:Content Category:Objects Category:The Symbel",
+      "description": "A can be placed on a Table, and affects the hunger modifier and FEP bonus when feasting. At q15 it gives 30% food modifier and 3 FEP bonus"
+    },
+    {
+      "title": "Raw Glass",
+      "skill": "Pottery",
+      "materials": "Sand",
+      "reference": "Crucible",
+      "how": "Dig on beach tiles to get sand. Burn sand in a Kiln to get raw glass. At least four branches required. Category:Content Category:Objects",
+      "description": "You need raw glass for several glass products."
+    },
+    {
+      "title": "Sand",
+      "skill": "Pottery",
+      "materials": "None",
+      "reference": "Beach",
+      "how": "Adventure > Dig Sand can be acquired by digging at the beach. Beaches are found around some lakes. The character will continue extracting sand until either the inventory is full or the player instructs the character to do otherwise.",
+      "description": "Sand is used to create Raw Glass. Sand, like many powders, disappears when dropped on the ground."
+    },
+    {
+      "title": "Soil",
+      "skill": "Pottery",
+      "materials": "None",
+      "reference": "Forest Terrain, Grassland",
+      "how": "Adventure > Dig Soil is dug from any forest tiles or grassland. It takes approximately 3.5 seconds to dig up one unit of soil. Note that if you find a source of high quality soil, the quality will decrease the more you dig there. However, it will restore itself to its original value over time.",
+      "description": "Soil is a resource that is used in creating tree saplings to plant for trees. It is also one of the primary factor if the quality of trees planted. Because trees are used to create many different structures and furniture, the quality of trees are very important thus high quality soil is valued and may be traded to people that lacks access to them. As of now, there is no known way in increasing the quality of soil other than finding it. However, an easy way to find quality soil is by foraging, as quality of foraged plant is directly relational to the soil it is on. For more information on finding high quality soil, go to this link. '''Update''' As of the the creation of World 4, soil nodes ha"
+    },
+    {
+      "title": "Stoneware Vase",
+      "skill": "Pottery",
+      "materials": "Gray Clay x5",
+      "reference": "Kiln",
+      "how": "Gather the ingredients into your inventory and execute the recipe: raft > The ymbel > ecorative Items > Stoneware Vase Place the Unburnt Stoneware Vase into the Kiln and fuel with at least 7 branches worth of fuel. Firing takes approximately 35 minutes. Category:The Symbel",
+      "description": "Stoneware Vases are placed on Tables for decorative purposes as well to reduce how full food makes you and how many FEPs food provides."
+    },
+    {
+      "title": "Bone Saw",
+      "skill": "Primitive Tools",
+      "materials": "Bone Material, Branch",
+      "reference": "Nothing",
+      "how": "Craft > Tools > Bone Saw Category:Equipment",
+      "description": "A bone saw is required to make boards from a log. You get 4 boards from each log instead of the 6 boards you get with a saw. The quality of a bone saw is affected by survival and capped by bone quality. The formula for bone saw quality is Q1 = ((5 * boneQuality) + branchQuality)/6 if (Survival > Q1) then BoneSawQuality = Q1 if (Survival < Q1) then BoneSawQuality = (Q1 + Survival)/2 Note: To craft a bone saw, one must have discovered bones (and branches)"
+    },
+    {
+      "title": "Stone Axe",
+      "skill": "Primitive Tools",
+      "materials": "Branch, Stone",
+      "reference": "Nothing",
+      "how": "Craft > Tools > Stone Axe Category:Equipment Category:Sharp Tools Category:Weapons Category:Mining Tools",
+      "description": "|image = Image:.png |caption = |xsize = 1 |ysize = 1 |lpgain = 7 |skillreq = Primitive Tools |objectsreq = Branch, Stone |producedby = Nothing }} A stone axe is made from 1 stone and 1 branch. It can be used to chop down a tree, shear a sheep, for combat or mine in a cave. It increases the effectiveness of chipping stone and destroying objects Damage: 100 base Quality of axe is = (BranchQ+StoneQ)/2 and softcapped by Survival skill."
+    },
+    {
+      "title": "Torch",
+      "skill": "Primitive Tools (?)",
+      "materials": "Branch, Linen Cloth",
+      "reference": "",
+      "how": "Craft [C] > Torch [r].",
+      "description": "{{infobox object |name = |image = Image:.png |caption = |xsize = 1 |ysize = 1 |skillreq = Primitive Tools (?) |objectsreq = Branch, Linen Cloth }}"
+    },
+    {
+      "title": "Vile Vapor of Vandalism",
+      "skill": "Ranging",
+      "materials": "None",
+      "reference": "",
+      "how": "Right-click on the smoking footprint (specifically, the footprint itself) and select track to collect a limited number of scents. Category:Content Category:Scents Category:Objects",
+      "description": "This is a foul scent left behind whenever someone moves onto a personal claim or village claim which they are not authorized to be on and destroys objects such as cupboards or structures such as trees. It can be used to try to find the perpetrator and the perpetrator's hearth fire."
+    },
+    {
+      "title": "Milestone",
+      "skill": "Road Building",
+      "materials": "- Initial Milestone:, Stone x150, Rope x4,, A Beautiful Dream! x5",
+      "reference": "",
+      "how": "uild > onstruction > Miestone Once you have an initial milestone constructed, you can build mini milestones by right clicking the initial milestone. Continue right clicking the new milestones to create more. Link them, and you have a path-findable road. If you use a sign to connect the last stone to itself, it will make a character following the trail turn around at the end and start following the trail in the opposite direction instead of stopping at the end of the trail. You can no longer extend this trail. If you want to extend it, you'll have to destroy the last milestone. Then the new last milestone will have gone back to default last milestone behaviour.",
+      "description": "Road Building allows you to construct milestone objects that you or another Hearthling can then follow."
+    },
+    {
+      "title": "Silk Cloth",
+      "skill": "Sewing, Silkfarming",
+      "materials": "Silk Thread x10",
+      "reference": "Loom|name = Silk Cloth}}",
+      "how": "Craft > Cloth Making > Material > Silk Cloth",
+      "description": "The final step in the silk process. It's also the hardest. You need a total of 10 Silk Threads, which takes 100 Silk Filaments. The Silk Cloth may be used for the Cylinder Hat, Merchant's Robe, Ranger's Cape, Ranger's Shirt, or Ranger's Pants, as well as to make a Silk Napkin or Silk Tablecloth (Symbel items)"
+    },
+    {
+      "title": "Bone Glue",
+      "skill": "skillreq::Hunting",
+      "materials": "Bone Material x10",
+      "reference": "Cauldron or Clay Cauldron}}",
+      "how": "requires 10 pieces of bone material, and is made using a cauldron. There needs to be at least 5.0 liter of hot water in the cauldron. Right click the boiling cauldron, then: Craft > Potions & Herbs > Bone Glue",
+      "description": "You need bone glue to build and later to repair a battering ram, which cannot be used until the glue has dried."
+    },
+    {
+      "title": "Rock Lobster Lure",
+      "skill": "Stone Working",
+      "materials": "Stone",
+      "reference": "Nothing",
+      "how": "The rock lobster lure is made with one stone. Craft > Tools > Fishing Gear > Rock Lobster Lure The quality of the rock lobster lure depends on your survival skill.",
+      "description": "The rock lobster lure is a fishing lure, which is used together with a fully equipped fishing pole to catch fish."
+    },
+    {
+      "title": "Party Hat",
+      "skill": "The Symbel",
+      "materials": "Parchment x2, Ink (0.5 L), Poppy Flower x4, String x2",
+      "reference": "",
+      "how": "Craft > Cloth Making > Hats > Party Hat Category:Equipment Category:Clothing",
+      "description": "Party Hat: +10 Charisma at Quality 10."
+    },
+    {
+      "title": "Antler Steak Cutlery",
+      "skill": "Unknown",
+      "materials": "Deer Antlers, Block of Wood",
+      "reference": "",
+      "how": "Gather the ingredients into your inventory and execute the recipe: raft > The ymbel > utlery > Antler Steak Cutlery Category:The Symbel",
+      "description": "Antler Steak Cutlery are placed on Tables for decorative purposes as well to reduce how full food makes you and how many FEPs food provides."
+    },
+    {
+      "title": "Black Pepper",
+      "skill": "Unknown",
+      "materials": "Dried Pepper Drupes x5 (Quern) or Dried Pepper Drupes x10 (Peppermill)",
+      "reference": "Quern or Peppermill",
+      "how": "You need a Quern to make a black pepper. raft > Cooing > Blck Pepper",
+      "description": "is a food ingredient that increases the FEP gain of foods that it is sprinkled over. Apply to food by picking up and right clicking on target food. {| border=\"1\" cellpadding=\"1\" cellspacing=\"1\" style=\"width: 200px;\" | style=\"text-align: center;\"|'''Quality''' | style=\"text-align: center;\"|'''FEP increase''' |- | style=\"text-align: center;\"|10 | style=\"text-align: center;\"|50% |}"
+    },
+    {
+      "title": "Boiled Pepper Drupes",
+      "skill": "Unknown",
+      "materials": "Peppercorn",
+      "reference": "Cauldron or Clay Cauldron",
+      "how": "You need a cauldron with at least 0.5 litres of hot water to make a boiled pepper drupes. raft > Cooing > Igredients > Boiled epper Drupes Category:Objects",
+      "description": "Boiled Pepper Drupes are a food ingredient created by boiling Peppercorn. The boiled drupes must be then dried into Dried Pepper Drupes on an Herbalist Table and either ground into Black Pepper or put in a Peppermill before they can be used. The quality of the boiled pepper drupes is softcapped by the sqrt(Farming skill * perception). The quality of the cauldron and water used also determines the final outcome."
+    },
+    {
+      "title": "Charcoal",
+      "skill": "Unknown",
+      "materials": "Block of Wood or Board",
+      "reference": "Kiln",
+      "how": "Charcoal is produced by burning blocks of wood and boards in a kiln. Both provide 2 pieces of charcoal. You need to burn 2 branches or 1 board to make charcoal from boards or 4 branches to make it from blocks of wood. About 17 minutes to make charcoal from blocks. Boards, blocks of wood and <u>charcoal</u> can also be used as fuel.",
+      "description": "Charcoal is used as fuel for the alloying crucible, ore smelter and finery forge, and is an ingredient in the steelmaking process. Coal acts as two branches worth of fuel when using kilns, ovens, smelters, crucibles, cauldrons, and any other wood-fueled objects."
+    },
+    {
+      "title": "Coiled Rope Hotpad",
+      "skill": "Unknown",
+      "materials": "Rope, Bone Glue, Beeswax",
+      "reference": "",
+      "how": "Gather the 3 ingredients into your inventory and execute the recipe: Craft > The Symbel > Coasters, Trivets & Hotpads > Coiled Rope Hotpad Category:The Symbel",
+      "description": "A hotpad used for decorating a Table to provide a small FEP boost when sitting and eating at it. Q26 gives 3% of hunger modifer and 0% of FEP bonus."
+    },
+    {
+      "title": "Dried Pepper Drupes",
+      "skill": "Unknown",
+      "materials": "Boiled Pepper Drupes",
+      "reference": "Herbalist Table",
+      "how": "Place the boiled drupes on the herbalist table and wait roughly two real-life days.",
+      "description": "A food ingredient required to make Black Pepper. Created by drying Boiled Pepper Drupes on an Herbalist Table."
+    },
+    {
+      "title": "Drinking Horn",
+      "skill": "Unknown",
+      "materials": "Boar Tusk, Nugget of Any Common Metal x2",
+      "reference": "",
+      "how": "Gather the ingredients into your inventory and execute the recipe: Craft > The Symbel > Cups & Goblets > Drinking Horn Category:The Symbel",
+      "description": "Drinking Horns are placed on Tables for decorative purposes as well to reduce how full food makes you and how many FEPs food provides."
+    },
+    {
+      "title": "Druid's Cloak",
+      "skill": "Unknown",
+      "materials": "Unknown",
+      "reference": "Developers",
+      "how": "",
+      "description": "|image = image:Druidscloak.png |caption = |xsize = 1 |ysize = 2 |lpgain = Unknown |skillreq = Unknown |objectsreq = Unknown |producedby = Developers }}"
+    },
+    {
+      "title": "Fresh Rabbit Fur",
+      "skill": "Unknown",
+      "materials": "Rabbit Corpse",
+      "reference": "",
+      "how": "Butcher a Rabbit Corpse. Category:Hides",
+      "description": "You can dry fresh rabbit fur on a drying frame to get a rabbit fur."
+    },
+    {
+      "title": "Hard Metal Cutlery",
+      "skill": "Unknown",
+      "materials": "Cast Iron Nugget x4, or Bronze Nugget x4, or Steel Nugget x4",
+      "reference": "",
+      "how": "",
+      "description": "Q28 gives 4.8% Hunger Mod, 1% FEP Mod Q40 gives 13.5% Hunger Mod, 2% FEP Mod Category:The Symbel"
+    },
+    {
+      "title": "Intestines",
+      "skill": "Unknown",
+      "materials": "Corpse (only certain kinds)",
+      "reference": "Sharp Tool",
+      "how": "Intestines are left behind after a player butchers certain animals. Animals that leave intestines after being butchered are: cow/auroch (8); sheep/mouflon (4); fox (2); boar (4); deer (6); bear(8). The quality of intestine obtain is based on the level of the animal as well as the type of animal as well. From lowest to highest are Auroch/Mouflon, Fox, Boar, Deer, Bear.",
+      "description": "Intestines are used with the Sausage Making skill to produce many goods. You may also need the Basic Mechanics skill so you can make the Meat Grinder. They are also used in the cheese making process, as a component of rennet. You can now also use intestines as fishing bait."
+    },
+    {
+      "title": "Linen Napkin",
+      "skill": "Unknown",
+      "materials": "Linen Cloth",
+      "reference": "",
+      "how": "",
+      "description": "s are used for decorating a Table to provide a small FEP boost when sitting and eating at it. A quality 10 or below reduces Hunger by 0.8% and gives a 0% FEP bonus. A quality 65 napkin reduces Hunger by 6.3% and gives a 2% FEP bonus. Category:The Symbel"
+    },
+    {
+      "title": "Linen Tablecloth",
+      "skill": "Unknown",
+      "materials": "Linen Cloth x5",
+      "reference": "",
+      "how": "",
+      "description": "s are used for decorating a Table to provide a small FEP boost when sitting and eating at it. Q65 gives 6.7% Hunger Mod, 0% FEP mod Q51 gives 4.2% Hunger Mod, 0% FEP mod Category:The Symbel"
+    },
+    {
+      "title": "Metal Mug",
+      "skill": "Unknown",
+      "materials": "Nugget of Any Common Metal x5",
+      "reference": "",
+      "how": "Gather the ingredients into your inventory and execute the recipe: Craft > The Symbel > Cups & Goblets > Metal Mug Category:The Symbel",
+      "description": "Metal Mugs are placed on Tables for decorative purposes as well to reduce how full food makes you."
+    },
+    {
+      "title": "Metal Plate",
+      "skill": "Unknown",
+      "materials": "Nugget of Any Common Metal x8",
+      "reference": "",
+      "how": "Gather the ingredients into your inventory and execute the recipe: Craft > The Symbel > Plates > Metal Plate Category:The Symbel",
+      "description": "Metal Plates are placed on Tables for decorative purposes as well to reduce how full food makes you and how many FEPs food provides. Q10 gives 7% Hunger Mod, 1% FEP Mod Q40 gives 10.1% Hunger Mod, 3% FEP Mod"
+    },
+    {
+      "title": "Metal Saucière",
+      "skill": "Unknown",
+      "materials": "Bar of Common Metal",
+      "reference": "",
+      "how": "",
+      "description": "Q66 gives 31.6% Hunger mod, 5% FEP Mod Q33 gives 14.4% Hunger Mod, 3% FEP Mod Q9 gives 14.7% Hunger Mod, 1% FEP Mod Q2 gives 7.1% Hunger Mod, 0% FEP Mod The effect it has on the Hunger Mod is not as strong when you have other objects on the table, so a 66ql Metal Sauciere on a table with 100% Hunger bonus will reduce it by 31.6% but on a table with 59% Hunger bonus will reduce it by 14.5%. (Tested results) ''Know any more qualitites? Edit them in!'' Category:The Symbel"
+    },
+    {
+      "title": "Peppermill",
+      "skill": "Unknown",
+      "materials": "Block of Wood, Nugget of Bronze or Nugget of Iron or Nugget of Steel",
+      "reference": "",
+      "how": "raft > The ymbel > ecorative Items Category:The Symbel",
+      "description": "A is used to create Black Pepper. A quality 47 gives 16.7% base hunger modifier and 2% base food event bonus when placed on a Table."
+    },
+    {
+      "title": "Poppy Garland",
+      "skill": "Unknown",
+      "materials": "Straw x8, Poppy Flower x6, Blood Stern x4",
+      "reference": "",
+      "how": "",
+      "description": "Poppy Garlands are placed on Tables for decorative purposes as well to reduce how full food makes you and how many FEPs food provides."
+    },
+    {
+      "title": "Raw Bear Hide",
+      "skill": "Unknown",
+      "materials": "Bear Corpse",
+      "reference": "Sharp Tool",
+      "how": "Raw Bear Hides are obtained by killing a bear and skinning it while holding a sharp object such as a stone axe.But be patient the hide is drying for 16 hours. When dried on a drying frame and tanned in a tanning tub, bear hide provides the largest quality leather of all the animals. Alternatively it can be used to make a Bear Cape or Chieftain's Hat. Obtaining a bear hide can be dangerous as bears are the most dangerous animals of the game and will attack unprovoked. Category:Hides",
+      "description": "The quality of a is affected by survival and the sharp tool quality (ie.: stone axe)."
+    },
+    {
+      "title": "Raw Meat",
+      "skill": "Unknown",
+      "materials": "Corpse",
+      "reference": "Sharp Tool",
+      "how": "can be acquired from animal corpses such as Chickens, Rabbits, or Boars. Equip any Sharp Tool, then right click on the corpse and select Butcher from the action list. '''Eating raw meat (chicken atleast) takes HHP away! '''<u>'''Eat too much and you die!'''</u>",
+      "description": "can be roasted over a Fire, or made into Sausages."
+    },
+    {
+      "title": "Raw Sheep Skin",
+      "skill": "Unknown",
+      "materials": "Sheep Corpse, or Mouflon Corpse",
+      "reference": "Sharp Tool",
+      "how": "Equip any sharp tool, then right click on the corpse and select \"Skin\" from the action list. Category:Hides",
+      "description": "The quality of a is affected by survival and the sharp tool quality (ie.: stone axe). Put this onto a Drying frame to create a Dried Sheep Skin."
+    },
+    {
+      "title": "Soft Metal Cutlery",
+      "skill": "Unknown",
+      "materials": "Nugget of Any Common Metal x4",
+      "reference": "",
+      "how": "Gather the ingredients into your inventory and execute the recipe: raft > The ymbel > utlery > Soft Metal Cutlery Category:The Symbel",
+      "description": "Soft Metal Cutlery are placed on Tables for decorative purposes as well to reduce how full food makes you. Q10 gives 3.6% Hunger Mod, 0% FEP Mod Q19 gives 6.5% Hunger Mod, 0% FEP Mod Q41 gives 9.5% Hunger Mod, 0% FEP Mod"
+    },
+    {
+      "title": "Stitched Leather Coaster",
+      "skill": "Unknown",
+      "materials": "Leather, String x2",
+      "reference": "",
+      "how": "",
+      "description": "* Q12 gives 0.8% Hunger Mod and 0% FEP Bonus * Q1024 gives 150% Hunger Mod, 70% FEP bonus quality formula: (q leather+q string)/2 + perception lvl Category:The Symbel"
+    },
+    {
+      "title": "Tobacco",
+      "skill": "Unknown",
+      "materials": "Cured Tobacco Leaf",
+      "reference": "Quern",
+      "how": "You need a Cured Tobacco Leaf and a Quern to make tobacco. Quality is softcapped by sqrt(perception * farming). Craft > Potions & Herbs > Tobacco",
+      "description": "Smoking tobacco reduces Travel Weariness, gives the \"Smoke & Fire\" buff that temporarily increases Psyche, and creates a small light source around your player."
+    },
+    {
+      "title": "Water",
+      "skill": "Unknown",
+      "materials": "Any of the following: Kuksa, Waterskin, Waterflask, Bucket, Wine Barrel",
+      "reference": "Well",
+      "how": "Water can be acquired from a Well or from any water tile. Category:Liquids",
+      "description": "Water is a resource that requires a container that can hold liquid and is used for many forms of crafting. Most water is of quality 10 but occasionally there will be areas that will have higher quality. There is no other way of having high quality waters other than discovering these areas. Because if this, high quality water is fairly valued and may be traded as commodity if the other party does not have access or has not discovered high quality water. Water is one factor in obtaining high quality trees. For more information on finding high quality water, see Finding high quality water, clay, and soil. Water can also be used to regain stamina much like Tea, except it will drain hunger at the"
+    },
+    {
+      "title": "Wood Plate",
+      "skill": "Unknown",
+      "materials": "Block of Wood",
+      "reference": "",
+      "how": "Gather the ingredients into your inventory and execute the recipe: Craft > The Symbel > Plates > Wood Plate Category:The Symbel",
+      "description": "Wooden Plates are placed on Tables for decorative purposes as well to reduce how full food makes you."
+    },
+    {
+      "title": "Wooden Cup",
+      "skill": "Unknown",
+      "materials": "Block of Wood",
+      "reference": "",
+      "how": "",
+      "description": "Wooden Cup are placed on Tables for decorative purposes as well to reduce how full food makes you."
+    },
+    {
+      "title": "Grape Juice",
+      "skill": "Winemaking",
+      "materials": "Grapes",
+      "reference": "Wine Press",
+      "how": "Put Grapes into a Winepress use it. This will put grape juice in the press (shown as a bar); two full pressings will fill the press with juice. With an empty bucket selected, right-click the press to fill the bucket with juice.",
+      "description": "|image = Image:.png |caption = |xsize = 2 |ysize = 2(Bucket) |skillreq = Winemaking |objectsreq = Grapes |producedby = Wine Press }}"
+    },
+    {
+      "title": "Grape Seeds",
+      "skill": "Winemaking",
+      "materials": "Grapes",
+      "reference": "Winepress",
+      "how": "Eat raw grapes, or press them in a winepress to get grape seeds.",
+      "description": "You must have winemaking to plant grape seeds."
+    },
+    {
+      "title": "Vinegar",
+      "skill": "Winemaking",
+      "materials": "Wine; Wine Bottle",
+      "reference": "Wine Barrel",
+      "how": "To produce vinegar, you need a winepress and a lot of grapes (50 grapes for 10l). Put the grape juice into a wine barrel and wait for one ingame week till the juice turns into wine. Wait one week again and you have vinegar. Vinegar can be stored in Wine Bottles. Category:Content Category:Objects Category:Liquids",
+      "description": "You need vinegar to make rennet."
+    }
+  ]
+}

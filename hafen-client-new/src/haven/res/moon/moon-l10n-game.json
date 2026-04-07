@@ -1,0 +1,672 @@
+{
+  "pairs": [
+    [
+      "Make tanning fluid (fill tanning tub with water and bark)",
+      "Сделайте дубильную жидкость (налейте в чану воду и кору)"
+    ],
+    [
+      "Acquire leather (put hide in tub with tanning fluid of least 5% concentration)",
+      "Получите кожу (положите шкуру в чану с дубильной жидкостью не ниже 5%)"
+    ],
+    [
+      "Mining Quality",
+      "Качество добычи"
+    ],
+    [
+      "Demolition Damage",
+      "Урон разрушению"
+    ],
+    [
+      "When used:",
+      "При использовании:"
+    ],
+    [
+      "Grievous damage:",
+      "Жестокий урон:"
+    ],
+    [
+      "Armor penetration:",
+      "Бронепробитие:"
+    ],
+    [
+      "Attack weight:",
+      "Вес атаки:"
+    ],
+    [
+      "Attack type:",
+      "Тип атаки:"
+    ],
+    [
+      "Off Balance",
+      "Потеря равновесия"
+    ],
+    [
+      "Total:",
+      "Итого:"
+    ],
+    [
+      "Contents:",
+      "Содержимое:"
+    ],
+    [
+      "Quality:",
+      "Качество:"
+    ],
+    [
+      "Damage:",
+      "Урон:"
+    ],
+    [
+      "Range:",
+      "Дальность:"
+    ],
+    [
+      "Cooldown:",
+      "Перезарядка:"
+    ],
+    [
+      "Openings:",
+      "Зазоры:"
+    ],
+    [
+      "Energy:",
+      "Энергия:"
+    ],
+    [
+      "Hunger:",
+      "Голод:"
+    ],
+    [
+      "Satiation:",
+      "Сытость:"
+    ],
+    [
+      "Strength",
+      "Сила"
+    ],
+    [
+      "Agility",
+      "Ловкость"
+    ],
+    [
+      "Intelligence",
+      "Интеллект"
+    ],
+    [
+      "Constitution",
+      "Телосложение"
+    ],
+    [
+      "Perception",
+      "Восприятие"
+    ],
+    [
+      "Charisma",
+      "Харизма"
+    ],
+    [
+      "Dexterity",
+      "Проворство"
+    ],
+    [
+      "Will",
+      "Воля"
+    ],
+    [
+      "Psyche",
+      "Психика"
+    ],
+    [
+      "Striking",
+      "Ударный"
+    ],
+    [
+      "Blunt",
+      "Дробящий"
+    ],
+    [
+      "Piercing",
+      "Колющий"
+    ],
+    [
+      "Slashing",
+      "Режущий"
+    ],
+    [
+      "Reeling",
+      "Шатание"
+    ],
+    [
+      "Cornered",
+      "В углу"
+    ],
+    [
+      "Opportunity",
+      "Уязвимость"
+    ],
+    [
+      "Dizzy",
+      "Головокружение"
+    ],
+    [
+      "Stunned",
+      "Оглушение"
+    ],
+    [
+      "Unarmed Combat",
+      "Рукопашный бой"
+    ],
+    [
+      "Melee Combat",
+      "Ближний бой"
+    ],
+    [
+      "Marksmanship",
+      "Стрельба"
+    ],
+    [
+      "Exploration",
+      "Разведка"
+    ],
+    [
+      "Stealth",
+      "Скрытность"
+    ],
+    [
+      "Sewing",
+      "Шитьё"
+    ],
+    [
+      "Smithing",
+      "Кузнечное дело"
+    ],
+    [
+      "Masonry",
+      "Каменное дело"
+    ],
+    [
+      "Carpentry",
+      "Плотницкое дело"
+    ],
+    [
+      "Cooking",
+      "Готовка"
+    ],
+    [
+      "Farming",
+      "Земледелие"
+    ],
+    [
+      "Survival",
+      "Выживание"
+    ],
+    [
+      "Lore",
+      "Знания"
+    ],
+    [
+      "Abilities",
+      "Навыки"
+    ],
+    [
+      "Base Attributes",
+      "Базовые атрибуты"
+    ],
+    [
+      "Food Event Points",
+      "Очки событий еды"
+    ],
+    [
+      "Food Satiations",
+      "Сытость по еде"
+    ],
+    [
+      "Hunger Level",
+      "Уровень голода"
+    ],
+    [
+      "Current",
+      "Текущие"
+    ],
+    [
+      "Completed",
+      "Завершённые"
+    ],
+    [
+      "Craft",
+      "Крафт"
+    ],
+    [
+      "Inventory",
+      "Инвентарь"
+    ],
+    [
+      "Equipment",
+      "Экипировка"
+    ],
+    [
+      "Minimap",
+      "Миникарта"
+    ],
+    [
+      "World Map",
+      "Карта мира"
+    ],
+    [
+      "Chat",
+      "Чат"
+    ],
+    [
+      "Search",
+      "Поиск"
+    ],
+    [
+      "Kin",
+      "Родня"
+    ],
+    [
+      "Party",
+      "Группа"
+    ],
+    [
+      "System",
+      "Система"
+    ],
+    [
+      "Area chat",
+      "Локальный чат"
+    ],
+    [
+      "You",
+      "Вы"
+    ],
+    [
+      "chance",
+      "шанс"
+    ],
+    [
+      " chance)",
+      " шанс)"
+    ],
+    [
+      " chance}",
+      " шанс}"
+    ],
+    [
+      "Shirt",
+      "Рубашка"
+    ],
+    [
+      "Pants",
+      "Штаны"
+    ],
+    [
+      "Shoes",
+      "Обувь"
+    ],
+    [
+      "Cape",
+      "Плащ"
+    ],
+    [
+      "Hat",
+      "Шляпа"
+    ],
+    [
+      "Ring",
+      "Кольцо"
+    ],
+    [
+      "Amulet",
+      "Амулет"
+    ],
+    [
+      "Belt",
+      "Пояс"
+    ],
+    [
+      "Gloves",
+      "Перчатки"
+    ],
+    [
+      "Chest",
+      "Грудь"
+    ],
+    [
+      "Back",
+      "Спина"
+    ],
+    [
+      "Head",
+      "Голова"
+    ],
+    [
+      "Eyes",
+      "Глаза"
+    ],
+    [
+      "Mouth",
+      "Рот"
+    ],
+    [
+      "Torso",
+      "Торс"
+    ],
+    [
+      "Left hand",
+      "Левая рука"
+    ],
+    [
+      "Right hand",
+      "Правая рука"
+    ],
+    [
+      "Tool",
+      "Инструмент"
+    ],
+    [
+      "Weapon",
+      "Оружие"
+    ],
+    [
+      "Key",
+      "Ключ"
+    ],
+    [
+      "Study time:",
+      "Время изучения:"
+    ],
+    [
+      "Learning points:",
+      "Очки обучения:"
+    ],
+    [
+      "Experience cost:",
+      "Стоимость опыта:"
+    ],
+    [
+      "Mental weight:",
+      "Умственный вес:"
+    ],
+    [
+      "Buy",
+      "Купить"
+    ],
+    [
+      "Reset",
+      "Сброс"
+    ],
+    [
+      "Attention:",
+      "Внимание:"
+    ],
+    [
+      "Learning cost:",
+      "Стоимость обучения:"
+    ],
+    [
+      "Experience points:",
+      "Очки опыта:"
+    ],
+    [
+      "Quest Log",
+      "Журнал заданий"
+    ],
+    [
+      "Temperature",
+      "Температура"
+    ],
+    [
+      "Beginning of Lumberjacking",
+      "Начало дровосечества"
+    ],
+    [
+      "Fell a tree",
+      "Срубите дерево"
+    ],
+    [
+      "Acquire a block of wood",
+      "Получите полено"
+    ],
+    [
+      "Health & Wounds",
+      "Здоровье и раны"
+    ],
+    [
+      "Martial Arts & Combat Schools",
+      "Боевые школы"
+    ],
+    [
+      "Lore & Skills",
+      "Знания и умения"
+    ],
+    [
+      "Beginning of Tanning",
+      "Начало дубления"
+    ],
+    [
+      "Beginning of Hunting",
+      "Начало охоты"
+    ],
+    [
+      "Construct a tanning tub",
+      "Постройте дубильную чану"
+    ],
+    [
+      "Raspberry",
+      "Малина"
+    ],
+    [
+      "Stone Axe",
+      "Каменный топор"
+    ],
+    [
+      "Punch",
+      "Удар"
+    ],
+    [
+      "Artful Evasion",
+      "Искусное уклонение"
+    ],
+    [
+      "Bloodlust",
+      "Жажда крови"
+    ],
+    [
+      "Chin Up",
+      "Выше нос"
+    ],
+    [
+      "Cleave",
+      "Разрубание"
+    ],
+    [
+      "Dash",
+      "Рывок"
+    ],
+    [
+      "Feigned Dodge",
+      "Притворный уворот"
+    ],
+    [
+      "Flex",
+      "Напряжение"
+    ],
+    [
+      "Trauma",
+      "Травма"
+    ],
+    [
+      "Bruise",
+      "Ушиб"
+    ],
+    [
+      "Concussion",
+      "Сотрясение"
+    ],
+    [
+      "Fell Slash",
+      "Сокрушающий разрез"
+    ],
+    [
+      "Crushing Trauma",
+      "Дробящая травма"
+    ],
+    [
+      "Chop",
+      "Рубка"
+    ],
+    [
+      "Full Circle",
+      "Полный круг"
+    ],
+    [
+      "Go for the Jugular",
+      "Удар в горло"
+    ],
+    [
+      "Haymaker",
+      "Размашистый удар"
+    ],
+    [
+      "Jump",
+      "Прыжок"
+    ],
+    [
+      "Kick",
+      "Пинок"
+    ],
+    [
+      "Errands for Angmund",
+      "Поручения Ангмунда"
+    ],
+    [
+      "Erands for Angmund",
+      "Поручения Ангмунда"
+    ],
+    [
+      "Frisgard's Tasks",
+      "Задания Фрисгарда"
+    ],
+    [
+      "The Forager's Path",
+      "Путь собирателя"
+    ],
+    [
+      "Hunting Grounds",
+      "Охотничьи угодья"
+    ],
+    [
+      "Beginning of Foraging",
+      "Начало собирательства"
+    ],
+    [
+      "Beginning of Forging",
+      "Начало кузнечного дела"
+    ],
+    [
+      "Tasked by Siegward",
+      "Поручение Зигварда"
+    ],
+    [
+      "Beginning of Farming",
+      "Начало земледелия"
+    ],
+    [
+      "Beginning of Pottery",
+      "Начало гончарного дела"
+    ],
+    [
+      "Abandon quest",
+      "Отказаться от задания"
+    ],
+    [
+      "Greet Carurch",
+      "Поприветствовать Карурча"
+    ],
+    [
+      "Light a fire",
+      "Разжечь огонь"
+    ],
+    [
+      "Tell Angmund of your exploits",
+      "Рассказать Ангмунду о своих подвигах"
+    ],
+    [
+      "Planting, and sowing, and all things",
+      "Посев, посадка и всё то,"
+    ],
+    [
+      "growing, are all on your mind, demanding",
+      "что связано с выращиванием, занимает ваши мысли и требует"
+    ],
+    [
+      "that you...",
+      "чтобы вы..."
+    ],
+    [
+      "Acquire seeds",
+      "Добыть семена"
+    ],
+    [
+      "Plant crops (on plowed ground)",
+      "Посадить культуры (на вспаханной земле)"
+    ],
+    [
+      "Harvest crops (x1)",
+      "Собрать урожай (x1)"
+    ],
+    [
+      "Nasty Wart",
+      "Злободавка"
+    ],
+    [
+      "Something Broken",
+      "Что-то сломано"
+    ],
+    [
+      "Starvation",
+      "Голодание"
+    ],
+    [
+      "Saved school ",
+      "Сохранённая школа "
+    ],
+    [
+      "Used:",
+      "Использовано:"
+    ],
+    [
+      "Weapon: Any heavy, edged weapon",
+      "Оружие: любое тяжёлое рубящее оружие"
+    ],
+    [
+      "Initiative points: +2",
+      "Очки инициативы: +2"
+    ],
+    [
+      "Attack weight: According to weapon",
+      "Вес атаки: зависит от оружия"
+    ],
+    [
+      "Attack type: Singlehanded, Oppressive",
+      "Тип атаки: одноручная, давящая"
+    ],
+    [
+      "Ew! The Toad Butt dried out a long time ago,",
+      "Фу! Жабья задница высохла уже давно,"
+    ],
+    [
+      "but left this Nasty Wart behind. We're not sure",
+      "но оставила после себя эту злободавку. Трудно сказать,"
+    ],
+    [
+      "this will ever heal.",
+      "заживёт ли это когда-нибудь."
+    ],
+    [
+      "Charisma -1",
+      "Харизма -1"
+    ]
+  ]
+}

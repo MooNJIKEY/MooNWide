@@ -1,0 +1,378 @@
+/*
+ *  This file is part of the Haven & Hearth game client.
+ *  Copyright (C) 2009 Fredrik Tolf <fredrik@dolda2000.com>, and
+ *                     Björn Johannessen <johannessen.bjorn@gmail.com>
+ *
+ *  Redistribution and/or modification of this file is subject to the
+ *  terms of the GNU Lesser General Public License, version 3, as
+ *  published by the Free Software Foundation.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  Other parts of this source tree adhere to other copying
+ *  rights. Please see the file `COPYING' in the root directory of the
+ *  source tree for details.
+ *
+ *  A copy the GNU Lesser General Public License is distributed along
+ *  with the source tree of which this file is a part in the file
+ *  `doc/LPGL-3'. If it is missing for any reason, please see the Free
+ *  Software Foundation's website at <http://www.fsf.org/>, or write
+ *  to the Free Software Foundation, Inc., 59 Temple Place, Suite 330,
+ *  Boston, MA 02111-1307 USA
+ */
+
+package haven;
+
+import java.io.*;
+import java.net.*;
+import java.util.*;
+
+public class Bootstrap implements UI.Receiver, UI.Runner {
+    public static final Config.Variable<String> authuser = Config.Variable.prop("haven.authuser", null);
+    public static final Config.Variable<NamedSocketAddress> authserv = Config.Variable.proph("haven.server", AuthClient.DEFPORT, new NamedSocketAddress("localhost", AuthClient.DEFPORT));
+    public static final Config.Variable<NamedSocketAddress> gameserv = Config.Variable.proph("haven.gameserv", 1870, null);
+    public static final Config.Variable<Integer> gameport = Config.Variable.propi("haven.gameport", 1870);
+    public static final Config.Variable<byte[]> authck = Config.Variable.propb("haven.authck", null);
+    public static final Config.Variable<byte[]> authtoken = Config.Variable.propb("haven.inittoken", null);
+    public static final Config.Variable<String[]> servargs = Config.Variable.def(() -> null);
+    public static boolean useinitauth = true;
+    /**
+     * If set before {@link Session#close()}, the next {@link Bootstrap} run uses these credentials
+     * immediately (same as choosing a saved session on the login screen). Cleared after read.
+     * Access only via {@link #takePendingReconnectCred}, {@link #setPendingReconnectCred},
+     * {@link #clearPendingReconnectCred} — parallel session spawns can race otherwise.
+     */
+    private static AuthClient.Credentials pendingReconnectCred = null;
+    private static final Object pendingCredLock = new Object();
+
+    public static void setPendingReconnectCred(AuthClient.Credentials cred) {
+	synchronized(pendingCredLock) {
+	    pendingReconnectCred = cred;
+	}
+    }
+
+    public static void clearPendingReconnectCred() {
+	synchronized(pendingCredLock) {
+	    pendingReconnectCred = null;
+	}
+    }
+
+    /** Atomically take and clear pending reconnect credentials, or return null. */
+    public static AuthClient.Credentials takePendingReconnectCred() {
+	synchronized(pendingCredLock) {
+	    AuthClient.Credentials c = pendingReconnectCred;
+	    pendingReconnectCred = null;
+	    return(c);
+	}
+    }
+    public final NamedSocketAddress server;
+    public final String confname;
+    Queue<Message> msgs = new LinkedList<Message>();
+    String inituser = null;
+    byte[] initcookie = null;
+    byte[] inittoken = null;
+
+    public static class Message {
+	int id;
+	String name;
+	Object[] args;
+
+	public Message(int id, String name, Object... args) {
+	    this.id = id;
+	    this.name = name;
+	    this.args = args;
+	}
+    }
+
+    public Bootstrap(NamedSocketAddress server) {
+	this.server = server;
+	this.confname = server.host;
+    }
+
+    public Bootstrap() {
+	this(authserv.get());
+	if(useinitauth) {
+	    if((authuser.get() != null) && (authck.get() != null)) {
+		setinitcookie(authuser.get(), authck.get());
+		useinitauth = false;
+	    } else if((authuser.get() != null) && (authtoken.get() != null)) {
+		setinittoken(authuser.get(), authtoken.get());
+		useinitauth = false;
+	    }
+	}
+    }
+
+    public void setinitcookie(String username, byte[] cookie) {
+	inituser = username;
+	initcookie = cookie;
+    }
+
+    public void setinittoken(String username, byte[] token) {
+	inituser = username;
+	inittoken = token;
+    }
+
+    private String getpref(String name, String def) {
+	return(Utils.getpref(name + "@" + confname, def));
+    }
+
+    private void setpref(String name, String val) {
+	Utils.setpref(name + "@" + confname, val);
+    }
+
+    private static byte[] getprefb(String name, String confname, byte[] def, boolean zerovalid) {
+	String sv = Utils.getpref(name + "@" + confname, null);
+	if(sv == null)
+	    return(def);
+	byte[] ret = Utils.hex.dec(sv);
+	if((ret.length == 0) && !zerovalid)
+	    return(def);
+	return(ret);
+    }
+
+    private static String mangleuser(String user) {
+	if(user.length() <= 32)
+	    return(user);
+	/* Mangle name because Java pref names have a somewhat
+	 * ridiculously short limit. */
+	return(Utils.hex.enc(Digest.hash(Digest.MD5, user.getBytes(Utils.utf8))));
+    }
+
+    public static byte[] gettoken(String user, String confname) {
+	return(getprefb("savedtoken-" + mangleuser(user), confname, null, false));
+    }
+
+    public static void rottokens(String user, String confname, boolean creat, boolean rm) {
+	List<String> names = new ArrayList<>(Utils.getprefsl("saved-tokens@" + confname, new String[] {}));
+	creat = creat || (!rm && names.contains(user));
+	if(rm || creat)
+	    names.remove(user);
+	if(creat)
+	    names.add(0, user);
+	Utils.setprefsl("saved-tokens@" + confname, names);
+    }
+
+    public static void settoken(String user, String confname, byte[] token) {
+	String prefnm = user;
+	Utils.setpref("savedtoken-" + mangleuser(user) + "@" + confname, (token == null) ? "" : Utils.hex.enc(token));
+	rottokens(user, confname, token != null, true);
+    }
+
+    private Message getmsg() throws InterruptedException {
+	Message msg;
+	synchronized(msgs) {
+	    while((msg = msgs.poll()) == null)
+		msgs.wait();
+	    return(msg);
+	}
+    }
+
+    private static void preferhost(List<InetSocketAddress> hosts, SocketAddress prev) {
+	if((prev == null) || !(prev instanceof InetSocketAddress))
+	    return;
+	InetAddress host = ((InetSocketAddress)prev).getAddress();
+	Collections.sort(hosts, (a, b) -> {
+		boolean pa = Utils.eq(a.getAddress(), host), pb = Utils.eq(b.getAddress(), host);
+		if(pa && pb)
+		    return(0);
+		else if(pa)
+		    return(-1);
+		else if(pb)
+		    return(1);
+		else
+		    return(0);
+	    });
+    }
+
+    public UI.Runner run(UI ui) throws InterruptedException {
+	ui.setreceiver(this);
+	ui.newwidgetp(1, ($1, $2) -> new LoginScreen(confname), 0, new Object[] {Coord.z});
+	String loginname = getpref("loginname", "");
+	boolean savepw = false;
+	NamedSocketAddress defserv = new NamedSocketAddress(server.host, gameport.get());
+	Session sess;
+	retry: do {
+	    byte[] cookie, token;
+	    Session.User acct;
+	    SocketAddress authaddr = null;
+	    List<NamedSocketAddress> hosts = Collections.emptyList();
+	    if(initcookie != null) {
+		acct = new Session.User(inituser);
+		cookie = initcookie;
+		initcookie = null;
+	    } else if((inituser != null) && (inittoken != null)) {
+		ui.uimsg(1, "prg", "Authenticating...");
+		byte[] inittoken = this.inittoken;
+		this.inittoken = null;
+		authed: try(AuthClient auth = new AuthClient(server)) {
+		    authaddr = auth.address();
+		    if(!Arrays.equals(inittoken, getprefb("lasttoken-" + mangleuser(inituser), confname, null, false))) {
+			String authed = null;
+			try {
+			    authed = new AuthClient.TokenCred(inituser, inittoken).tryauth(auth);
+			} catch(AuthClient.Credentials.AuthException e) {
+			}
+			setpref("lasttoken-" + mangleuser(inituser), Utils.hex.enc(inittoken));
+			if(authed != null) {
+			    acct = new Session.User(authed);
+			    cookie = auth.getcookie();
+			    if(Connection.encrypt.get())
+				acct.alias(auth.getalias());
+			    hosts = auth.gethosts(defserv);
+			    settoken(authed, confname, auth.gettoken());
+			    break authed;
+			}
+		    }
+		    if((token = gettoken(inituser, confname)) != null) {
+			try {
+			    String authed = new AuthClient.TokenCred(inituser, token).tryauth(auth);
+			    acct = new Session.User(authed);
+			    cookie = auth.getcookie();
+			    if(Connection.encrypt.get())
+				acct.alias(auth.getalias());
+			    hosts = auth.gethosts(defserv);
+			    break authed;
+			} catch(AuthClient.Credentials.AuthException e) {
+			    settoken(inituser, confname, null);
+			}
+		    }
+		    ui.uimsg(1, "error", "Launcher login expired");
+		    continue retry;
+		} catch(IOException e) {
+		    ui.uimsg(1, "error", e.getMessage());
+		    continue retry;
+		}
+	    } else {
+		AuthClient.Credentials creds;
+		if((creds = takePendingReconnectCred()) != null) {
+		    loginname = creds.name();
+		    savepw = false;
+		    ui.uimsg(1, "prg", "Authenticating...");
+		} else {
+		    ui.uimsg(1, "login");
+		    while(true) {
+			Message msg = getmsg();
+			if(msg.id == 1) {
+			    if(msg.name == "login") {
+				creds = (AuthClient.Credentials)msg.args[0];
+				savepw = (Boolean)msg.args[1];
+				loginname = creds.name();
+				break;
+			    }
+			}
+		    }
+		    ui.uimsg(1, "prg", "Authenticating...");
+		}
+		try(AuthClient auth = new AuthClient(server)) {
+		    authaddr = auth.address();
+		    try {
+			acct = new Session.User(creds.tryauth(auth));
+		    } catch(AuthClient.Credentials.AuthException e) {
+			settoken(creds.name(), confname, null);
+			ui.uimsg(1, "error", e.getMessage());
+			continue retry;
+		    }
+		    cookie = auth.getcookie();
+		    if(Connection.encrypt.get())
+			acct.alias(auth.getalias());
+		    if(savepw) {
+			byte[] ntoken = (creds instanceof AuthClient.TokenCred) ? ((AuthClient.TokenCred)creds).token : auth.gettoken();
+			settoken(acct.name, confname, ntoken);
+		    }
+		    hosts = auth.gethosts(defserv);
+		} catch(UnknownHostException e) {
+		    ui.uimsg(1, "error", "Could not locate server");
+		    continue retry;
+		} catch(IOException e) {
+		    ui.uimsg(1, "error", e.getMessage());
+		    continue retry;
+		}
+	    }
+	    ui.uimsg(1, "prg", "Connecting...");
+	    try {
+		MoonConnectLog.log("bootstrap: game TCP/UDP login phase, resolving game server addresses");
+		MoonConnectLog.log("bootstrap: UDP chain is: " + HavenNetProxy.gameChainDescription());
+		List<InetSocketAddress> addrs = new ArrayList<>();
+		NamedSocketAddress ea = gameserv.get();
+		if(ea != null) {
+		    for(InetAddress addr : Utils.hostaddrs(ea.host))
+			addrs.add(new InetSocketAddress(addr, ea.port));
+		    if(addrs.isEmpty())
+			throw(new UnknownHostException(ea.host));
+		} else {
+		    if(hosts.isEmpty()) {
+			for(InetAddress addr : Utils.hostaddrs(defserv.host))
+			    addrs.add(new InetSocketAddress(addr, defserv.port));
+			if(addrs.isEmpty())
+			    throw(new UnknownHostException(ea.host));
+		    } else {
+			for(NamedSocketAddress addr : hosts) {
+			    for(InetAddress host : Utils.hostaddrs(addr.host))
+				addrs.add(new InetSocketAddress(host, addr.port));
+			}
+			if(addrs.isEmpty())
+			    throw(new UnknownHostException(server.host));
+		    }
+		}
+		preferhost(addrs, authaddr);
+		MoonConnectLog.log("bootstrap: trying " + addrs.size() + " game server address(es)");
+		boolean gameUdpUnreachable = false;
+		Connection.SessionConnError lastSessConn = null;
+		connect: {
+		    for(int i = 0; i < addrs.size(); i++) {
+			if(i > 0)
+			    ui.uimsg(1, "prg", String.format("Connecting (address %d/%d)...", i + 1, addrs.size()));
+			try {
+			    MoonConnectLog.log("bootstrap: Session to " + addrs.get(i));
+			    sess = new Session(addrs.get(i), acct, Connection.encrypt.get(), cookie);
+			    break connect;
+			} catch(Connection.SessionConnError err) {
+			    lastSessConn = err;
+			    MoonConnectLog.log("bootstrap: SessionConnError for " + addrs.get(i) + " - " + err.getMessage());
+			    gameUdpUnreachable = true;
+			    if(Connection.isSocks5UdpNotSupported(err))
+				MoonConnectLog.hint(
+				    "SOCKS5 UDP ASSOCIATE is not supported by your proxy (rep=7). Haven game traffic is UDP; use a SOCKS server with UDP (Dante, 3proxy, etc.) or a VPN/TUN, or leave the game proxy chain empty.",
+				    "SOCKS5 ne podderzhivaet UDP ASSOCIATE (rep=7). Igra idet po UDP; nuzhen SOCKS s UDP (Dante, 3proxy) ili VPN/TUN, ili uberite proksi v nastrojkah igry.");
+			    if(i + 1 < addrs.size()) {
+				ui.uimsg(1, "prg", String.format(
+				    "Game server unreachable (%d/%d), trying next address...", i + 1, addrs.size()));
+			    }
+			} catch(Connection.SessionError err) {
+			    ui.uimsg(1, "error", err.getMessage());
+			    continue retry;
+			}
+		    }
+		    String fail;
+		    if(lastSessConn != null && Connection.isSocks5UdpNotSupported(lastSessConn))
+			fail = LocalizationManager.tr("moon.connect.socks.no_udp");
+		    else if(gameUdpUnreachable)
+			fail = LocalizationManager.tr("moon.connect.game.unreachable");
+		    else
+			fail = LocalizationManager.tr("moon.connect.game.noserver");
+		    ui.uimsg(1, "error", fail);
+		    continue retry;
+		}
+	    } catch(UnknownHostException e) {
+		ui.uimsg(1, "error", "Could not locate server");
+		continue retry;
+	    }
+	    setpref("loginname", loginname);
+	    rottokens(loginname, confname, false, false);
+	    break retry;
+	} while(true);
+	ui.destroy(1);
+	haven.error.ErrorHandler.setprop("usr", sess.user.name);
+	return(new RemoteUI(sess));
+    }
+
+    public void rcvmsg(int widget, String msg, Object... args) {
+	synchronized(msgs) {
+	    msgs.add(new Message(widget, msg, args));
+	    msgs.notifyAll();
+	}
+    }
+}
