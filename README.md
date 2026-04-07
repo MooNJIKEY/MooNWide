@@ -1,6 +1,6 @@
 # MooNWide
 
-Prebuilt Haven & Hearth client. This repository is a ready-to-run game package, not a source tree.
+Prebuilt Haven & Hearth client. This repository is a ready-to-run game package with the current client runtime and sources for development.
 
 ## Quick start
 
@@ -10,18 +10,20 @@ Prebuilt Haven & Hearth client. This repository is a ready-to-run game package, 
 
 For Steam login and integration, use `Run-MooNWide-Steam.bat`.
 
-## Updates
+## Auto update
 
-- GitHub auto-update is disabled in this Steam-ready package.
-- Update this build through Steam / Workshop, or replace the package manually with a newer release.
-- `Update-MooNWide.bat` only shows a notice and does not download anything.
+- `Run-MooNWide.bat` checks GitHub before launch.
+- `Run-MooNWide-Steam.bat` does the same.
+- If a newer package exists, it is downloaded and installed automatically, then the launcher restarts itself.
+- `Update-MooNWide.bat` runs the same updater manually.
+- The updater installs only the player-facing package files and skips development-only paths such as `hafen-client-new`.
 
 ## What is included
 
 - ready client jars
 - trimmed bundled Java runtime in `jre\`
 - Windows launchers
-- launcher and update helper scripts
+- GitHub updater
 - required native libraries and game resources
 
 You do not need to build anything before playing.
