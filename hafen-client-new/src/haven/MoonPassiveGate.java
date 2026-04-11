@@ -139,7 +139,11 @@ public final class MoonPassiveGate {
 	    ResDrawable rd = gate.getattr(ResDrawable.class);
 	    if(rd == null || rd.sdt == null || rd.sdt.rbuf == null || rd.sdt.rbuf.length == 0)
 		return null;
-	    return (rd.sdt.rbuf[0] != 0);
+	    /*
+	     * Arch gates use the first sdt byte as a closed/blocked state in this client branch.
+	     * Returning it directly made closed polebiggate look "open", so the opener RMB was skipped.
+	     */
+	    return (rd.sdt.rbuf[0] == 0);
 	}
     }
 
