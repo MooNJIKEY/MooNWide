@@ -24,6 +24,9 @@ public final class MoonKeybinds {
     public static final KeyBinding kb_toggleAlwaysDaylight = KeyBinding.get("mw-toggle/always-daylight", KeyMatch.nil);
     public static final KeyBinding kb_toggleQualityObjects = KeyBinding.get("mw-toggle/quality-objects", KeyMatch.nil);
     public static final KeyBinding kb_toggleCropHide = KeyBinding.get("mw-toggle/crop-hide", KeyMatch.nil);
+    /** Cycle live camera mode on the current map; default Shift+Z. */
+    public static final KeyBinding kb_cycleCameraMode = KeyBinding.get("mw-toggle/camera-cycle",
+	KeyMatch.forcode(KeyEvent.VK_Z, KeyMatch.S));
     /**
      * Default Shift+B: cycle global hitbox mode for all gobs — off / outlines / outlines only.
      * Uses physical {@code VK_B} so it works when {@link KeyEvent#getKeyChar()} is undefined under some layouts.
@@ -145,6 +148,14 @@ public final class MoonKeybinds {
 		MoonCropMode.refresh(gui.map);
 	    msgToggle(gui, "keybind.mw.crop-hide", MoonConfig.cropHide);
 	    return(true);
+	}
+	if(kb_cycleCameraMode.key().match(ev)) {
+	    if(gui.map != null) {
+		String next = gui.map.cycleCameraMode();
+		gui.ui.msg(LocalizationManager.tr("msg.camera-cycle") + ": " + next, java.awt.Color.WHITE, null);
+		return(true);
+	    }
+	    return(false);
 	}
 	if(kb_toggleTreeHitbox.key().match(ev) || isHardwiredShiftB(ev)) {
 	    int mode = (MoonConfig.globalHitboxMode + 1) % 3;

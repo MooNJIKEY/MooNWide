@@ -104,6 +104,14 @@ public class MapView extends PView implements DTarget, Console.Directory {
     /** Rate limit for diablo-move auto clicks (reduces redundant traffic). */
     private static final double MOON_AUTOMOVE_CLICK_MIN_DT = 0.06;
     private static final double MOVE_TRACE_MIN_VISIBLE_DT = 0.35;
+    private static final double MOON_GATE_ASSIST_PRECLICK_TIMEOUT = 0.65;
+    private static final double MOON_GATE_ASSIST_RETRY_DT = 0.22;
+    private static final double MOON_GATE_ASSIST_CLOSE_DT = 0.01;
+    private static final double MOON_GATE_ASSIST_EXPIRE_DT = 3.0;
+    private static final double MOON_GATE_ASSIST_SUPPRESS_DT = 0.90;
+    private static final int MOON_GATE_STAGE_OPEN = 0;
+    private static final int MOON_GATE_STAGE_PASS = 1;
+    private static final int MOON_GATE_STAGE_CLOSE = 2;
     private double moonLastAutomoveClickTs = -1e9;
     /** Separate throttle so Diablo-move spam does not block manual-route waypoint clicks. */
     private double moonLastPathClickTs = -1e9;
@@ -118,6 +126,16 @@ public class MapView extends PView implements DTarget, Console.Directory {
     /** Client-side route preview for navigation/pathfinder movement. */
     private Coord2d moonRouteTraceTarget = null;
     private final ArrayDeque<Coord2d> moonRouteTraceQueue = new ArrayDeque<>();
+    private MoonPassiveGate.Assist moonGateAssist = null;
+    private int moonGateAssistMods = 0;
+    private int moonGateAssistStage = 0;
+    private int moonGateAssistAttempts = 0;
+    private double moonGateAssistStartedAt = 0.0;
+    private double moonGateAssistNextAt = 0.0;
+    private boolean moonGateAssistCrossed = false;
+    private boolean moonGateAssistCloseSent = false;
+    private long moonGateSuppressId = 0L;
+    private double moonGateSuppressUntil = 0.0;
     private Text moveSpeedText = null;
     private double moveSpeedValue = Double.NaN;
     public double shake = 0.0;
@@ -277,6 +295,146 @@ public class MapView extends PView implements DTarget, Console.Directory {
 	    return;
 	if(button == 1 || button == 3)
 	    setMoveTraceTarget(mc, modflags);
+    }
+
+    private void moonClearGateAssist() {
+	moonGateAssist = null;
+	moonGateAssistMods = 0;
+	moonGateAssistStage = 0;
+	moonGateAssistAttempts = 0;
+	moonGateAssistStartedAt = 0.0;
+	moonGateAssistNextAt = 0.0;
+	moonGateAssistCrossed = false;
+	moonGateAssistCloseSent = false;
+    }
+
+    private boolean moonGateAssistSuppressed(MoonPassiveGate.Assist assist, double now) {
+	return assist != null && assist.gateId == moonGateSuppressId && now < moonGateSuppressUntil;
+    }
+
+    private void moonSuppressGateAssist(MoonPassiveGate.Assist assist, double now, String reason) {
+	if(assist != null) {
+	    moonGateSuppressId = assist.gateId;
+	    moonGateSuppressUntil = now + MOON_GATE_ASSIST_SUPPRESS_DT;
+	}
+	if(reason != null && !reason.isBlank())
+	    MoonPassiveGate.noteBlocked(reason);
+    }
+
+    private boolean moonSendGateUseClick(MoonPassiveGate.Assist assist) {
+	if(assist == null)
+	    return(false);
+	GameUI gui = getparent(GameUI.class);
+	Gob gate = assist.gate(this);
+	if(gui == null || gate == null || gate.removed)
+	    return(false);
+	return(MoonSmartInteract.sendRawGobClick(gui, gate, 3));
+    }
+
+    private boolean moonStartGateAssist(MoonPassiveGate.Assist assist, int mods) {
+	if(assist == null)
+	    return(false);
+	double now = Utils.rtime();
+	if(moonGateAssistSuppressed(assist, now)) {
+	    MoonPassiveGate.noteBlocked("close suppressed/already sent");
+	    return(false);
+	}
+	int sendMods = mods & ~UI.MOD_META;
+	Boolean open = assist.gateLikelyOpen(this);
+	boolean needOpen = (open == null) || !open.booleanValue();
+	if(needOpen && !moonSendGateUseClick(assist)) {
+	    MoonPassiveGate.noteBlocked("open failed");
+	    return(false);
+	}
+	if(!moonSyntheticMapClick(assist.target, null, 1, sendMods)) {
+	    MoonPassiveGate.noteBlocked("pass click failed");
+	    return(false);
+	}
+	moonGateAssist = assist;
+	moonGateAssistMods = sendMods;
+	moonGateAssistStage = MOON_GATE_STAGE_PASS;
+	moonGateAssistAttempts = 1;
+	moonGateAssistStartedAt = now;
+	moonGateAssistNextAt = moonGateAssistStartedAt + MOON_GATE_ASSIST_RETRY_DT;
+	moonGateAssistCrossed = false;
+	moonGateAssistCloseSent = false;
+	MoonPassiveGate.noteAction((needOpen ? "open+pass " : "pass open ") + assist.gateName);
+	return(true);
+    }
+
+    private void moonContinueAfterGate(MoonPassiveGate.Assist assist) {
+	if(assist == null || !assist.hasContinueTarget())
+	    return;
+	if(moonSyntheticMapClick(assist.finalTarget, null, 1, moonGateAssistMods)) {
+	    updateMoveTrace(assist.finalTarget, 1, moonGateAssistMods);
+	    MoonPassiveGate.noteAction("continue " + assist.gateName);
+	}
+    }
+
+    private void moonTickGateAssist(Gob player) {
+	MoonPassiveGate.Assist assist = moonGateAssist;
+	if(assist == null)
+	    return;
+	double now = Utils.rtime();
+	if(player == null || (now - moonGateAssistStartedAt) >= MOON_GATE_ASSIST_EXPIRE_DT) {
+	    moonClearGateAssist();
+	    return;
+	}
+	Gob gate = assist.gate(this);
+	if(gate == null || gate.removed) {
+	    moonClearGateAssist();
+	    return;
+	}
+	if(!moonGateAssistCrossed && assist.playerCrossedPlane(this, player)) {
+	    moonGateAssistCrossed = true;
+	    MoonPassiveGate.noteAction("crossed " + assist.gateName);
+	}
+	if(moonGateAssistStage == MOON_GATE_STAGE_CLOSE) {
+	    if(moonGateAssistCloseSent) {
+		moonClearGateAssist();
+		return;
+	    }
+	    if(now < moonGateAssistNextAt)
+		return;
+	    if(!moonGateAssistCrossed) {
+		moonSuppressGateAssist(assist, now, "close suppressed/already sent");
+		moonClearGateAssist();
+		return;
+	    }
+	    if(assist.playerCanClose(this, player)) {
+		moonGateAssistCloseSent = true;
+		moonSendGateUseClick(assist);
+		MoonPassiveGate.noteAction("close once " + assist.gateName);
+		moonSuppressGateAssist(assist, now, "close suppressed/already sent");
+		moonContinueAfterGate(assist);
+	    } else {
+		moonSuppressGateAssist(assist, now, "close suppressed/already sent");
+		moonContinueAfterGate(assist);
+	    }
+	    moonClearGateAssist();
+	    return;
+	}
+	if(assist.playerPassed(this, player)) {
+	    moonGateAssistStage = MOON_GATE_STAGE_CLOSE;
+	    moonGateAssistNextAt = now + MOON_GATE_ASSIST_CLOSE_DT;
+	    MoonPassiveGate.noteAction("close pending " + assist.gateName);
+	    return;
+	}
+	if(now < moonGateAssistNextAt)
+	    return;
+	if(moonGateAssistAttempts >= 4) {
+	    MoonPassiveGate.noteBlocked("pass failed");
+	    moonClearGateAssist();
+	    return;
+	}
+	if(moonSyntheticMapClick(assist.target, null, 1, moonGateAssistMods)) {
+	    moonGateAssistAttempts++;
+	    moonGateAssistStage = MOON_GATE_STAGE_PASS;
+	    moonGateAssistNextAt = now + MOON_GATE_ASSIST_RETRY_DT;
+	    MoonPassiveGate.noteAction("retry pass " + assist.gateName);
+	} else {
+	    moonGateAssistNextAt = now + 0.15;
+	}
     }
 
     /**
@@ -2876,11 +3034,13 @@ public class MapView extends PView implements DTarget, Console.Directory {
 	}
 	Gob pl = player();
 	if(pl == null) {
+	    moonClearGateAssist();
 	    clearMoveTraceTarget();
 	    moonClearRouteTrace();
 	    moveSpeedText = null;
 	    moveSpeedValue = Double.NaN;
 	}
+	moonTickGateAssist(pl);
 	if(pl != null) {
 	    try {
 		Coord2d pc = new Coord2d(pl.getc());
@@ -3333,10 +3493,27 @@ public class MapView extends PView implements DTarget, Console.Directory {
     private boolean moonSendResolvedMapClick(Coord pc, Coord2d mc, ClickData inf, int clickb, int mods) {
 	if(mc == null)
 	    return(false);
+	moonClearGateAssist();
 	boolean isAlt = (mods & UI.MOD_META) != 0;
 	if(isAlt && clickb == 3)
 	    return(moonStartSmoothMove(mc));
-	if(moonTryPassiveLmbPathfinding(mc, inf, clickb, mods))
+	boolean gateAssist = false;
+	MoonPassiveGate.Assist gate = MoonPassiveGate.resolveAssist(this, mc, inf, clickb, mods);
+	if(gate != null) {
+	    if(moonStartGateAssist(gate, mods)) {
+		updateMoveTrace(gate.target, clickb, mods);
+		MoonPathfinder.cancelActiveSmoothMove();
+		MoonPathWalker.cancelActive();
+		moonClearRouteTrace();
+		if(inf == null && diabloHeld)
+		    diabloLastMC = gate.target;
+		return(true);
+	    }
+	    mc = gate.target;
+	    inf = null;
+	    gateAssist = true;
+	}
+	if(!gateAssist && moonTryPassiveLmbPathfinding(mc, inf, clickb, mods))
 	    return(true);
 	boolean queueOnly = false;
 	if(isAlt && inf == null && clickb == 1) {
@@ -3935,6 +4112,37 @@ public class MapView extends PView implements DTarget, Console.Directory {
 	} catch(Exception e) {
 	    return(new SOrthoCam());
 	}
+    }
+
+    private static final String[] moonCameraCycle = {"ortho", "follow", "bad", "worse"};
+
+    private static String moonCameraLabel(String id) {
+	if("follow".equals(id))
+	    return(LocalizationManager.tr("opt.vanilla.cam.follow"));
+	if("bad".equals(id))
+	    return(LocalizationManager.tr("opt.vanilla.cam.free"));
+	if("worse".equals(id))
+	    return(LocalizationManager.tr("opt.vanilla.cam.legacy"));
+	return(LocalizationManager.tr("opt.vanilla.cam.ortho"));
+    }
+
+    public String cycleCameraMode() {
+	String cur = Utils.getpref("defcam", "ortho");
+	int idx = -1;
+	for(int i = 0; i < moonCameraCycle.length; i++) {
+	    if(moonCameraCycle[i].equals(cur)) {
+		idx = i;
+		break;
+	    }
+	}
+	String next = moonCameraCycle[(idx + 1 + moonCameraCycle.length) % moonCameraCycle.length];
+	Class<? extends Camera> ct = camtypes.get(next);
+	if(ct == null)
+	    return(moonCameraLabel(cur));
+	camera = makecam(ct, new String[0]);
+	Utils.setpref("defcam", next);
+	Utils.setprefb("camargs", Utils.serializeStringArrayForPrefs(new String[0]));
+	return(moonCameraLabel(next));
     }
 
     private Map<String, Console.Command> cmdmap = new TreeMap<String, Console.Command>();

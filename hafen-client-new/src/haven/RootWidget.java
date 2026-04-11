@@ -65,6 +65,16 @@ public class RootWidget extends ConsoleHost implements UI.Notice.Handler, Widget
 	return(null);
     }
 
+    private boolean moonRouteToSyslog(String msg, Color color) {
+	GameUI gui = moonFindGameUI(this);
+	if(gui == null || gui.syslog == null || msg == null || msg.isEmpty())
+	    return(false);
+	gui.syslog.append(msg, (color != null) ? color : Color.WHITE);
+	lastmsg = null;
+	lastmsgRaw = null;
+	return(true);
+    }
+
     public boolean globtype(GlobKeyEvent ev) {
 	if(ev.propagate(this))
 	    return(true);
@@ -192,6 +202,8 @@ public class RootWidget extends ConsoleHost implements UI.Notice.Handler, Widget
     }
 
     public void msg(String msg, Color color) {
+	if(moonRouteToSyslog(msg, color))
+	    return;
 	lastmsgRaw = msg;
 	lastmsgCol = color;
 	lastmsgTrGen = LocalizationManager.autoTranslateUiGenerationSampled();
@@ -203,6 +215,10 @@ public class RootWidget extends ConsoleHost implements UI.Notice.Handler, Widget
     public boolean msg(UI.Notice msg) {
 	if(msg.handler(this))
 	    return(true);
+	if(moonRouteToSyslog(msg.message(), msg.color())) {
+	    ui.sfxrl(msg.sfx());
+	    return(true);
+	}
 	msg(msg.message(), msg.color());
 	ui.sfxrl(msg.sfx());
 	return(true);

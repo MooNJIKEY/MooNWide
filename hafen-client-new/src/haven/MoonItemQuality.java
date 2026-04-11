@@ -39,6 +39,20 @@ public final class MoonItemQuality {
     private MoonItemQuality() {}
 
     /**
+     * Reads quality for a concrete inventory item. If the item is a stack/container widget with
+     * child {@link GItem}s in {@link GItem#contents}, their qualities are averaged directly so the
+     * overlay does not depend on tooltip propagation quirks.
+     */
+    public static double readQ(GItem item) {
+	if(item == null)
+	    return 0;
+	double stacked = readQFromContents(item);
+	if(stacked > 0)
+	    return stacked;
+	return readQ(item.info());
+    }
+
+    /**
      * Reads a positive quality from item infos (QBuff, {@code *quality*} types, nested
      * {@link ItemInfo.Contents}, declared fields {@code q}/{@code quality}, then tooltip text).
      */
@@ -57,6 +71,22 @@ public final class MoonItemQuality {
 		return r;
 	} catch(Loading ignored) {}
 	return 0;
+    }
+
+    private static final class QualityAgg {
+	double sum;
+	int count;
+
+	void add(double q) {
+	    if(q > 0) {
+		sum += q;
+		count++;
+	    }
+	}
+
+	double avg() {
+	    return(count > 0 ? (sum / count) : 0);
+	}
     }
 
     /** Last resort: one blob of all string fields so keywords and digits can span lines/entries. */
@@ -100,15 +130,6 @@ public final class MoonItemQuality {
     private static double readQRecursive(List<ItemInfo> infos) {
 	if(infos == null)
 	    return 0;
-	for(ItemInfo inf : infos) {
-	    if(inf == null)
-		continue;
-	    if(inf instanceof ItemInfo.Contents) {
-		double sub = readQRecursive(((ItemInfo.Contents)inf).sub);
-		if(sub > 0)
-		    return sub;
-	    }
-	}
 	/* Any ItemInfo with a numeric q/qual/quality field (covers QBuff and obfuscated tt classes). */
 	for(ItemInfo inf : infos) {
 	    if(inf == null || inf instanceof ItemInfo.Contents)
@@ -123,7 +144,53 @@ public final class MoonItemQuality {
 	    if(v > 0)
 		return v;
 	}
+	QualityAgg nested = new QualityAgg();
+	for(ItemInfo inf : infos) {
+	    if(inf instanceof ItemInfo.Contents) {
+		collectContentQuality(((ItemInfo.Contents)inf).sub, nested);
+	    }
+	}
+	if(nested.count > 0)
+	    return nested.avg();
 	return 0;
+    }
+
+    private static void collectContentQuality(List<ItemInfo> infos, QualityAgg out) {
+	if(infos == null || out == null)
+	    return;
+	double own = 0;
+	for(ItemInfo inf : infos) {
+	    if(inf == null || inf instanceof ItemInfo.Contents)
+		continue;
+	    own = readQFromResourceQuality(inf);
+	    if(own <= 0)
+		own = reflectNumericQuality(inf);
+	    if(own <= 0)
+		own = reflectStringQualityFields(inf);
+	    if(own > 0)
+		break;
+	}
+	if(own > 0)
+	    out.add(own);
+	for(ItemInfo inf : infos) {
+	    if(inf instanceof ItemInfo.Contents)
+		collectContentQuality(((ItemInfo.Contents)inf).sub, out);
+	}
+    }
+
+    private static double readQFromContents(GItem item) {
+	Widget contents = item.contents;
+	if(contents == null)
+	    return 0;
+	QualityAgg nested = new QualityAgg();
+	for(Widget ch : contents.children()) {
+	    if(!(ch instanceof GItem))
+		continue;
+	    double q = readQ((GItem)ch);
+	    if(q > 0)
+		nested.add(q);
+	}
+	return nested.avg();
     }
 
     /**

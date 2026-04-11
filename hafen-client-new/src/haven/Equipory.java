@@ -335,28 +335,12 @@ public class Equipory extends Widget implements DTarget {
     }
 
     static boolean isBrokenWear(List<ItemInfo> info) {
-	if(info == null)
-	    return(false);
-	for(ItemInfo tip : info) {
-	    if(!tip.getClass().getName().endsWith(".Wear"))
-		continue;
-	    Integer max = reflectInt(tip, "m");
-	    Integer dmg = reflectInt(tip, "d");
-	    if((max != null) && (dmg != null))
-		return((max - dmg) <= 0);
-	}
-	return(false);
+	return(MoonItemStats.isBroken(info));
     }
 
     static int[] armorValues(List<ItemInfo> info) {
-	if(info == null)
-	    return(null);
-	for(ItemInfo tip : info) {
-	    int[] parsed = armorValuesDeep(tip, new IdentityHashMap<>(), 0);
-	    if(parsed != null)
-		return(parsed);
-	}
-	return(null);
+	MoonItemStats.ArmorInfo armor = MoonItemStats.armor(info);
+	return((armor == null) ? null : new int[] {armor.hard, armor.soft});
     }
 
     private static int[] armorValuesDeep(Object obj, IdentityHashMap<Object, Boolean> seen, int depth) {

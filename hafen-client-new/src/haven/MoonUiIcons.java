@@ -71,6 +71,16 @@ public class MoonUiIcons {
             if("slot.empty".equals(key)) {
                 g.drawOval(5, 5, 14, 14);
                 g.drawLine(12, 4, 12, 9);
+            } else if("moon.macros".equals(key)) {
+                g.drawRect(5, 5, 5, 5);
+                g.drawRect(14, 5, 5, 5);
+                g.drawRect(5, 14, 5, 5);
+                g.drawRect(14, 14, 5, 5);
+            } else if("moon.passivegate".equals(key)) {
+                g.drawLine(7, 5, 7, 19);
+                g.drawLine(17, 5, 17, 19);
+                g.drawLine(7, 8, 17, 8);
+                g.drawLine(12, 8, 12, 19);
             } else {
                 g.fillOval(9, 9, 6, 6);
             }

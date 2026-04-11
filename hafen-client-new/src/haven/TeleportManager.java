@@ -242,6 +242,22 @@ public final class TeleportManager {
 	return mapPickArmed;
     }
 
+    public static long cooldownRemainingMs() {
+	long left = MoonConfig.teleportCooldownMs - (System.currentTimeMillis() - lastTeleportAtMs);
+	return Math.max(0L, left);
+    }
+
+    public static String statusSummary() {
+	if(!MoonConfig.teleportNavEnabled)
+	    return "disabled";
+	if(mapPickArmed)
+	    return "map-pick armed";
+	long left = cooldownRemainingMs();
+	if(left > 0L)
+	    return String.format(Locale.ROOT, "cooldown %.1fs", left / 1000.0);
+	return "ready (" + points.size() + " points)";
+    }
+
     public static void toggleMapPick(GameUI gui) {
 	setMapPickArmed(gui, !mapPickArmed);
     }

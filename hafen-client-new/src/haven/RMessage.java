@@ -45,6 +45,8 @@ public class RMessage extends PMessage {
     public static final int RMSG_ADDWDG = 15;
     public static final int RMSG_WDGBAR = 16;
     public static final int RMSG_USERAGENT = 17;
+    /** Optional client→server REL separator (empty payload); server must accept the type in wire protocol. */
+    public static final int RMSG_BEATING = 18;
 
     public double last = 0;
     public int retx = 0;

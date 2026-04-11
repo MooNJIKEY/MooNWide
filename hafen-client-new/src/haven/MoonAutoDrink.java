@@ -498,6 +498,24 @@ public class MoonAutoDrink {
         pendingRetried = false;
     }
 
+    public static boolean isBusy() {
+        return pendingFlower || pendingTransfer || pendingReturn;
+    }
+
+    public static String statusSummary(GameUI gui) {
+        if(!MoonConfig.autoDrink)
+            return "disabled";
+        if(pendingTransfer)
+            return "transferring drink item";
+        if(pendingFlower)
+            return "waiting flower menu";
+        if(pendingReturn)
+            return "returning borrowed item";
+        int stam = (gui != null) ? getCurrentStamina(gui) : -1;
+        String th = Integer.toString(effectiveDrinkThreshold());
+        return (stam >= 0) ? ("armed, stam " + stam + "% / " + th + "%") : ("armed, threshold " + th + "%");
+    }
+
     /* ── Debug ── */
 
     private static String descWItem(WItem wi) {

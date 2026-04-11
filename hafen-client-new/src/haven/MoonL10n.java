@@ -498,6 +498,8 @@ public class MoonL10n {
         ru.put("bots.hub.nav.tip", "Сохранённые точки (короткие переходы)");
         en.put("menu.bots", "Bots");
         ru.put("menu.bots", "Боты");
+        en.put("menu.macros", "Macros");
+        ru.put("menu.macros", "РњР°РєСЂРѕСЃС‹");
         en.put("menu.tpnav", "Navigation: saved points");
         ru.put("menu.tpnav", "Навигация: точки");
         en.put("tp.title", "Navigation");
@@ -618,10 +620,14 @@ public class MoonL10n {
         ru.put("keybind.mw.tp-quick2", "Навигация: 2-я точка");
         en.put("keybind.mw.tp-quick3", "Navigate: 3rd recent point");
         ru.put("keybind.mw.tp-quick3", "Навигация: 3-я точка");
+        en.put("keybind.mw.camera-cycle", "Cycle camera mode (Shift+Z)");
+        ru.put("keybind.mw.camera-cycle", "СЃРјРµРЅР° СЂРµР¶РёРјР° РєР°РјРµСЂС‹ (Shift+Z)");
         en.put("menu.caveflat", "Mine: flat (no walls)");
         ru.put("menu.caveflat", "Шахта: без стен");
         en.put("menu.safedig", "Mine: safe tiles");
         ru.put("menu.safedig", "Шахта: безопасные клетки");
+        en.put("menu.passivegate", "Passive small gate");
+        ru.put("menu.passivegate", "РџР°СЃСЃРёРІРЅР°СЏ РєР°Р»РёС‚РєР°");
         en.put("menu.combathud", "Combat: damage HUD");
         ru.put("menu.combathud", "Бой: урон HUD");
         en.put("menu.resettaken", "Reset damage taken");
@@ -634,6 +640,18 @@ public class MoonL10n {
         ru.put("msg.safedig.on", "Подсветка клеток вкл.");
         en.put("msg.safedig.off", "Safe-dig tile highlight off.");
         ru.put("msg.safedig.off", "Подсветка клеток выкл.");
+        en.put("msg.passivegate.on", "Passive small gate traverse on.");
+        ru.put("msg.passivegate.on", "РџР°СЃСЃРёРІРЅС‹Р№ РїСЂРѕС…РѕРґ С‡РµСЂРµР· РєР°Р»РёС‚РєСѓ РІРєР».");
+        en.put("msg.passivegate.off", "Passive small gate traverse off.");
+        ru.put("msg.passivegate.off", "РџР°СЃСЃРёРІРЅС‹Р№ РїСЂРѕС…РѕРґ С‡РµСЂРµР· РєР°Р»РёС‚РєСѓ РІС‹РєР».");
+        /* Override a few earlier mojibake labels introduced during manual porting. */
+        ru.put("menu.macros", "Макросы");
+        ru.put("keybind.mw.camera-cycle", "Смена режима камеры (Shift+Z)");
+        en.put("msg.camera-cycle", "Camera mode");
+        ru.put("msg.camera-cycle", "Режим камеры");
+        ru.put("menu.passivegate", "Пассивная калитка");
+        ru.put("msg.passivegate.on", "Пассивный проход через калитку вкл.");
+        ru.put("msg.passivegate.off", "Пассивный проход через калитку выкл.");
         en.put("msg.combathud.on", "Combat damage HUD on.");
         ru.put("msg.combathud.on", "HUD урона в бою вкл.");
         en.put("msg.combathud.off", "Combat damage HUD off.");

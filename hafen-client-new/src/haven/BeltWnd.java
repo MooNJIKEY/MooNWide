@@ -143,6 +143,8 @@ public class BeltWnd extends MoonPanel implements DTarget, DropTarget {
 	    if(ev.b == 1) {
 		activateBeltSlot(bidx);
 	    } else if(ev.b == 3) {
+		if(gui.clearSpecialBeltSlot(bidx))
+		    return true;
 		gui.wdgmsg("setbelt", bidx, null);
 	    }
 	    return true;
@@ -227,6 +229,7 @@ public class BeltWnd extends MoonPanel implements DTarget, DropTarget {
     public boolean drop(Coord c, Coord ul) {
 	int si = slotAt(c);
 	if(si >= 0) {
+	    gui.clearSpecialBeltSlot(beltIdx(si));
 	    gui.wdgmsg("setbelt", beltIdx(si), 0);
 	    return true;
 	}
@@ -243,6 +246,9 @@ public class BeltWnd extends MoonPanel implements DTarget, DropTarget {
 	    int bidx = beltIdx(si);
 	    if(thing instanceof MenuGrid.Pagina) {
 		MenuGrid.Pagina pag = (MenuGrid.Pagina)thing;
+		if(gui.setSpecialBeltSlot(bidx, pag))
+		    return true;
+		gui.clearSpecialBeltSlot(bidx);
 		try {
 		    if(pag.id instanceof Indir)
 			gui.wdgmsg("setbelt", bidx, "res", pag.res().name);

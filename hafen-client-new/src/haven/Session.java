@@ -317,6 +317,15 @@ public class Session implements Resource.Resolver {
 	conn.queuemsg(pmsg);
     }
 
+    /**
+     * After {@link #queuemsg}, block until the connection thread has attempted to transmit the last queued REL
+     * (best-effort “flush” so back-to-back REL frames are less likely to batch in one UDP payload).
+     * Dev / netprof helper; uses {@link Connection#waitLastRelSendAttempt(double)}.
+     */
+    public void flushOutgoingRel(double maxWaitSec) {
+	conn.waitLastRelSendAttempt(maxWaitSec);
+    }
+
     /** Wake the connection I/O thread (same effect as after each {@link #queuemsg}). */
     public void wakeConnection() {
 	conn.wakeIo();

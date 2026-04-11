@@ -68,6 +68,15 @@ public class Fightsess extends Widget {
     private static final Color HUD_HP_DARK = new Color(18, 82, 28, 216);
     private static final Color HUD_IP = new Color(82, 120, 244, 228);
     private static final Color HUD_IP_DARK = new Color(18, 36, 102, 214);
+    private static final Color HUD_ENEMY_IP = new Color(210, 98, 78, 228);
+    private static final Color HUD_ENEMY_IP_DARK = new Color(88, 26, 22, 214);
+    private static final Color HUD_STAM = new Color(114, 204, 142, 226);
+    private static final Color HUD_STAM_DARK = new Color(28, 76, 42, 214);
+    private static final Color HUD_OPEN_STRIKING = new Color(220, 92, 92, 236);
+    private static final Color HUD_OPEN_BLUNT = new Color(222, 184, 84, 236);
+    private static final Color HUD_OPEN_PIERCING = new Color(102, 160, 244, 236);
+    private static final Color HUD_OPEN_SLASHING = new Color(112, 208, 120, 236);
+    private static final Color HUD_OPEN_REELING = new Color(196, 112, 236, 236);
     private static final Color HUD_SLOT = new Color(12, 8, 18, 184);
     private static final Color HUD_SLOT_EDGE = new Color(228, 204, 142, 168);
     private static final Color HUD_SELF_EDGE = new Color(118, 224, 142, 210);
@@ -391,6 +400,108 @@ public class Fightsess extends Widget {
 	    drawHudText(g, text, ul.add(sz.div(2)), textScale, 11f, HUD_TEXT, true);
     }
 
+    private void drawMoonInfoBox(GOut g, Coord ul, Coord sz, Color edge) {
+	g.chcolor(12, 8, 18, 166);
+	g.frect(ul, sz);
+	g.chcolor(edge);
+	g.rect(ul, sz);
+	g.chcolor(255, 248, 232, 34);
+	g.rect(ul.add(1, 1), sz.sub(2, 2));
+	g.chcolor();
+    }
+
+    private void drawMoonOpeningsPanel(GOut g, Coord ul, Coord sz, String title, MoonCombatEngine.ActiveStance stance,
+	EnumMap<MoonCombatEngine.OpeningType, Double> openings, boolean selfSide) {
+	drawMoonInfoBox(g, ul, sz, selfSide ? HUD_SELF_EDGE : HUD_TARGET_EDGE);
+	drawHudTextLeft(g, title, ul.add(UI.scale(8), UI.scale(5)), 1.0, 10f, HUD_TEXT_SOFT, true);
+	String stanceText = (stance == null || stance.label == null || stance.label.isBlank()) ? "Stance: none" : ("Stance: " + stance.label);
+	drawHudTextLeft(g, stanceText, ul.add(UI.scale(8), UI.scale(18)), 1.0, 8.5f, HUD_TEXT_SOFT, false);
+	List<Map.Entry<MoonCombatEngine.OpeningType, Double>> lines = new ArrayList<>(openings.entrySet());
+	lines.sort((a, b) -> Double.compare(b.getValue(), a.getValue()));
+	int drawn = 0;
+	int y = ul.y + UI.scale(33);
+	for(Map.Entry<MoonCombatEngine.OpeningType, Double> entry : lines) {
+	    double value = entry.getValue();
+	    if(value <= 0.01)
+		continue;
+	    Coord rowUl = Coord.of(ul.x + UI.scale(8), y + drawn * UI.scale(13));
+	    drawMoonOpeningRow(g, rowUl, sz.x - UI.scale(16), entry.getKey(), value);
+	    drawn++;
+	    if(drawn >= 3)
+		break;
+	}
+	if(drawn == 0) {
+	    drawHudTextLeft(g, "Clear", ul.add(UI.scale(8), UI.scale(41)), 1.0, 10f, HUD_TEXT, true);
+	    drawHudTextLeft(g, "0%", ul.add(sz.x - UI.scale(36), UI.scale(41)), 1.0, 10f, HUD_TEXT_SOFT, true);
+	}
+    }
+
+    private void drawMoonOpeningRow(GOut g, Coord ul, int width, MoonCombatEngine.OpeningType type, double frac) {
+	Coord barSz = Coord.of(Math.max(UI.scale(56), width - UI.scale(54)), UI.scale(10));
+	Color accent = openingColor(type);
+	g.chcolor(0, 0, 0, 92);
+	g.frect(ul.add(UI.scale(38), UI.scale(1)), barSz);
+	g.chcolor();
+	int fill = Utils.clip((int)Math.round((barSz.x - UI.scale(2)) * Utils.clip(frac, 0.0, 1.0)), 0, Math.max(0, barSz.x - UI.scale(2)));
+	if(fill > 0)
+	    MoonUiTheme.drawVerticalGradient(g, ul.add(UI.scale(39), UI.scale(2)), Coord.of(fill, Math.max(1, barSz.y - UI.scale(2))),
+		accent, accent.darker());
+	g.chcolor(255, 248, 232, 50);
+	g.rect(ul.add(UI.scale(38), UI.scale(1)), barSz);
+	g.chcolor();
+	drawHudTextLeft(g, openingShort(type), ul, 1.0, 9f, accent, true);
+	drawHudTextLeft(g, String.format(Locale.ROOT, "%d%%", (int)Math.round(frac * 100.0)),
+	    ul.add(UI.scale(40 + barSz.x + 4), 0), 1.0, 9f, HUD_TEXT, true);
+    }
+
+    private static String openingShort(MoonCombatEngine.OpeningType type) {
+	return switch(type) {
+	case STRIKING -> "STR";
+	case BLUNT -> "BLU";
+	case PIERCING -> "PIE";
+	case SLASHING -> "SLA";
+	case REELING -> "REL";
+	};
+    }
+
+    private static Color openingColor(MoonCombatEngine.OpeningType type) {
+	return switch(type) {
+	case STRIKING -> HUD_OPEN_STRIKING;
+	case BLUNT -> HUD_OPEN_BLUNT;
+	case PIERCING -> HUD_OPEN_PIERCING;
+	case SLASHING -> HUD_OPEN_SLASHING;
+	case REELING -> HUD_OPEN_REELING;
+	};
+    }
+
+    private List<MoonFightCombatContext.BuffSnapshot> hudBuffSnapshots(Bufflist bl) {
+	ArrayList<MoonFightCombatContext.BuffSnapshot> out = new ArrayList<>();
+	if(bl == null)
+	    return out;
+	for(Buff buff : bl.children(Buff.class)) {
+	    if(buff == null || buff.res == null)
+		continue;
+	    try {
+		Resource r = buff.res.get();
+		if(r == null)
+		    continue;
+		StringBuilder sb = new StringBuilder();
+		if(r.name != null)
+		    sb.append(r.name);
+		Resource.Tooltip tt = r.layer(Resource.tooltip);
+		if(tt != null && tt.t != null) {
+		    if(sb.length() > 0)
+			sb.append(' ');
+		    sb.append(tt.t);
+		}
+		out.add(new MoonFightCombatContext.BuffSnapshot(r.name != null ? r.name : "", sb.toString(),
+		    buff.buffameter(), buff.buffcmeter()));
+	    } catch(Loading ignored) {
+	    }
+	}
+	return out;
+    }
+
     private static double meterFrac(GameUI gui, String name) {
 	if(gui == null || name == null)
 	    return(-1);
@@ -546,14 +657,20 @@ public class Fightsess extends Widget {
 	Gob self = playerGob();
 	Gob tgt = currentGob();
 	Fightview.Relation rel = fv.current;
-	drawMoonPanel(g, infoAnchor, Coord.of(UI.scale(374), UI.scale(86)), infoSc);
-	int portraitSz = Math.max(UI.scale(34), (int)Math.round(UI.scale(42) * infoSc));
-	Coord selfC = infoAnchor.add((int)Math.round(-UI.scale(142) * infoSc), (int)Math.round(-UI.scale(6) * infoSc));
-	Coord tgtC = infoAnchor.add((int)Math.round(UI.scale(142) * infoSc), (int)Math.round(-UI.scale(6) * infoSc));
+	List<MoonFightCombatContext.BuffSnapshot> selfSnaps = hudBuffSnapshots(fv.buffs);
+	List<MoonFightCombatContext.BuffSnapshot> oppSnaps = (rel != null) ? hudBuffSnapshots(rel.buffs) : List.of();
+	EnumMap<MoonCombatEngine.OpeningType, Double> selfOpenings = MoonCombatEngine.openingsFromSnapshots(selfSnaps);
+	EnumMap<MoonCombatEngine.OpeningType, Double> oppOpenings = MoonCombatEngine.openingsFromSnapshots(oppSnaps);
+	MoonCombatEngine.ActiveStance selfStance = MoonCombatEngine.stanceFromSnapshots(selfSnaps);
+	MoonCombatEngine.ActiveStance oppStance = MoonCombatEngine.stanceFromSnapshots(oppSnaps);
+	drawMoonPanel(g, infoAnchor, Coord.of(UI.scale(560), UI.scale(154)), infoSc);
+	int portraitSz = Math.max(UI.scale(38), (int)Math.round(UI.scale(48) * infoSc));
+	Coord selfC = infoAnchor.add((int)Math.round(-UI.scale(246) * infoSc), (int)Math.round(-UI.scale(36) * infoSc));
+	Coord tgtC = infoAnchor.add((int)Math.round(UI.scale(246) * infoSc), (int)Math.round(-UI.scale(36) * infoSc));
 	drawMoonPortrait(g, self, selfC, portraitSz, HUD_SELF_EDGE);
 	drawMoonPortrait(g, tgt, tgtC, portraitSz, HUD_TARGET_EDGE);
 
-	Coord cdc = infoAnchor.add(0, (int)Math.round(-UI.scale(4) * infoSc));
+	Coord cdc = infoAnchor.add(0, (int)Math.round(-UI.scale(38) * infoSc));
 	double atkSpan = fv.atkct - fv.atkcs;
 	if(atkSpan > 1e-6 && now < fv.atkct) {
 	    double a = (now - fv.atkcs) / atkSpan;
@@ -562,20 +679,19 @@ public class Fightsess extends Widget {
 	    g.chcolor();
 	}
 	drawCenteredTex(g, cdframe, cdc, infoSc * 1.08);
-	String delta = (rel == null) ? "0" : String.format(Locale.ROOT, "%+d", rel.ip - rel.oip);
-	drawHudText(g, delta, cdc, infoSc, 12f, HUD_TEXT, true);
+	String delta = (rel == null) ? "ADV 0" : String.format(Locale.ROOT, "ADV %+d", rel.ip - rel.oip);
+	drawHudText(g, delta, cdc, infoSc, 10.5f, HUD_TEXT, true);
 
 	String label = (tgt == null) ? "Combat ready" : gobLabel(tgt);
-	drawHudText(g, label, infoAnchor.add(0, (int)Math.round(UI.scale(24) * infoSc)), infoSc, 13f, HUD_TEXT, true);
+	drawHudText(g, label, infoAnchor.add(0, (int)Math.round(-UI.scale(6) * infoSc)), infoSc, 13f, HUD_TEXT, true);
 
 	double targetHp = gobHealthFrac(tgt);
 	double selfHp = meterFrac(gui, "hp");
 	double hpFill = (targetHp >= 0) ? targetHp : selfHp;
-	String hpLabel = (targetHp >= 0)
-	    ? ("Target HP " + pctText(targetHp))
-	    : ((selfHp >= 0) ? ("Self HP " + pctText(selfHp)) : "HP unknown");
-	Coord hpUl = infoAnchor.add((int)Math.round(-UI.scale(116) * infoSc), (int)Math.round(UI.scale(38) * infoSc));
-	Coord hpSz = Coord.of((int)Math.round(UI.scale(222) * infoSc), (int)Math.round(UI.scale(18) * infoSc));
+	String hpLabel = (targetHp >= 0) ? ("Enemy HP " + pctText(targetHp)) :
+	    ((selfHp >= 0) ? ("Self HP " + pctText(selfHp)) : "HP unknown");
+	Coord hpUl = infoAnchor.add((int)Math.round(-UI.scale(130) * infoSc), (int)Math.round(UI.scale(14) * infoSc));
+	Coord hpSz = Coord.of((int)Math.round(UI.scale(260) * infoSc), (int)Math.round(UI.scale(18) * infoSc));
 	drawMoonBar(g, hpUl, hpSz, hpFill, HUD_HP, HUD_HP_DARK, hpLabel, 1.0);
 
 	double stam = meterFrac(gui, "stam");
@@ -584,13 +700,24 @@ public class Fightsess extends Widget {
 	double nrj = meterFrac(gui, "nrj");
 	if(nrj < 0)
 	    nrj = Utils.clip(CombatManager.getLastEnergy(), 0.0, 1.0);
-	double ipFill = (rel == null || (rel.ip + rel.oip) <= 0) ? -1 : (rel.ip / (double)Math.max(1, rel.ip + rel.oip));
-	String ipLabel = (rel == null)
-	    ? String.format(Locale.ROOT, "ST %s | EN %s", pctText(stam), pctText(nrj))
-	    : String.format(Locale.ROOT, "IP %d:%d | ST %s | EN %s", rel.ip, rel.oip, pctText(stam), pctText(nrj));
-	Coord ipUl = hpUl.add(0, (int)Math.round(UI.scale(22) * infoSc));
-	Coord ipSz = Coord.of(hpSz.x, (int)Math.round(UI.scale(16) * infoSc));
-	drawMoonBar(g, ipUl, ipSz, ipFill, HUD_IP, HUD_IP_DARK, ipLabel, 1.0);
+	Coord selfIpUl = infoAnchor.add((int)Math.round(-UI.scale(258) * infoSc), (int)Math.round(UI.scale(6) * infoSc));
+	Coord selfIpSz = Coord.of((int)Math.round(UI.scale(110) * infoSc), (int)Math.round(UI.scale(18) * infoSc));
+	drawMoonBar(g, selfIpUl, selfIpSz, 1.0, HUD_IP, HUD_IP_DARK,
+	    String.format(Locale.ROOT, "YOU IP %d", rel != null ? rel.ip : 0), 0.95);
+	Coord oppIpUl = infoAnchor.add((int)Math.round(UI.scale(148) * infoSc), (int)Math.round(UI.scale(6) * infoSc));
+	Coord oppIpSz = Coord.of((int)Math.round(UI.scale(110) * infoSc), (int)Math.round(UI.scale(18) * infoSc));
+	drawMoonBar(g, oppIpUl, oppIpSz, 1.0, HUD_ENEMY_IP, HUD_ENEMY_IP_DARK,
+	    String.format(Locale.ROOT, "ENEMY IP %d", rel != null ? rel.oip : 0), 0.95);
+	Coord statUl = infoAnchor.add((int)Math.round(-UI.scale(130) * infoSc), (int)Math.round(UI.scale(36) * infoSc));
+	Coord statSz = Coord.of((int)Math.round(UI.scale(260) * infoSc), (int)Math.round(UI.scale(16) * infoSc));
+	drawMoonBar(g, statUl, statSz, stam, HUD_STAM, HUD_STAM_DARK,
+	    String.format(Locale.ROOT, "ST %s | EN %s", pctText(stam), pctText(nrj)), 0.95);
+
+	Coord selfOpenUl = infoAnchor.add((int)Math.round(-UI.scale(278) * infoSc), (int)Math.round(UI.scale(60) * infoSc));
+	Coord openSz = Coord.of((int)Math.round(UI.scale(238) * infoSc), (int)Math.round(UI.scale(62) * infoSc));
+	drawMoonOpeningsPanel(g, selfOpenUl, openSz, "Your openings", selfStance, selfOpenings, true);
+	Coord oppOpenUl = infoAnchor.add((int)Math.round(UI.scale(40) * infoSc), (int)Math.round(UI.scale(60) * infoSc));
+	drawMoonOpeningsPanel(g, oppOpenUl, openSz, "Enemy openings", oppStance, oppOpenings, false);
 
 	try {
 	    Indir<Resource> lastact = fv.lastact;
@@ -600,7 +727,7 @@ public class Fightsess extends Widget {
 	    }
 	    if(lastact != null) {
 		Tex ut = lastact.get().flayer(Resource.imgc).tex();
-		Coord lc = lastActionCenter(false, infoAnchor, infoSc);
+		Coord lc = infoAnchor.add((int)Math.round(-UI.scale(176) * infoSc), (int)Math.round(-UI.scale(36) * infoSc));
 		Coord utsz = Coord.of((int)Math.round(UI.scale(34) * infoSc), (int)Math.round(UI.scale(34) * infoSc));
 		g.image(ut, lc.sub(utsz.div(2)), utsz);
 		drawCenteredTex(g, useframe, lc, infoSc * 0.86);
@@ -616,7 +743,7 @@ public class Fightsess extends Widget {
 		}
 		if(lastact != null) {
 		    Tex ut = lastact.get().flayer(Resource.imgc).tex();
-		    Coord lc = lastActionCenter(true, infoAnchor, infoSc);
+		    Coord lc = infoAnchor.add((int)Math.round(UI.scale(176) * infoSc), (int)Math.round(-UI.scale(36) * infoSc));
 		    Coord utsz = Coord.of((int)Math.round(UI.scale(34) * infoSc), (int)Math.round(UI.scale(34) * infoSc));
 		    g.image(ut, lc.sub(utsz.div(2)), utsz);
 		    drawCenteredTex(g, useframe, lc, infoSc * 0.86);
@@ -626,19 +753,6 @@ public class Fightsess extends Widget {
 	} else if(this.lastact2 != null) {
 	    this.lastact2 = null;
 	    this.lastacttip2 = null;
-	}
-
-	int idx = 0;
-	for(Buff buff : fv.buffs.children(Buff.class)) {
-	    Coord dc = selfBuffCoord(infoAnchor, idx++, infoSc);
-	    buff.draw(g.reclip(dc, buff.sz));
-	}
-	if(fv.current != null) {
-	    idx = 0;
-	    for(Buff buff : fv.current.buffs.children(Buff.class)) {
-		Coord dc = oppBuffCoord(infoAnchor, idx++, infoSc);
-		buff.draw(g.reclip(dc, buff.sz));
-	    }
 	}
     }
 
@@ -726,7 +840,7 @@ public class Fightsess extends Widget {
     private Coord sectionHalfSize(SplitSection sec) {
 	if(moonCombatHudMode()) {
 	    switch(sec) {
-	    case INFO: return Coord.of(UI.scale(260), UI.scale(74)).mul(sectionScale(sec));
+	    case INFO: return Coord.of(UI.scale(298), UI.scale(92)).mul(sectionScale(sec));
 	    case LAST: return Coord.z;
 	    default:   return Coord.of(UI.scale(160), UI.scale(82)).mul(sectionScale(sec));
 	    }

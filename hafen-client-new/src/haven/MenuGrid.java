@@ -190,12 +190,34 @@ public class MenuGrid extends Widget implements KeyBinding.Bindable {
 	public final String key;
 	public final String title;
 	private final Consumer<Interaction> action;
+	private Pagina forcedParent;
+	private boolean forcedParentSet = false;
 
 	public SpecialPagina(MenuGrid scm, String key, String title, Consumer<Interaction> action) {
 	    super(scm, key, moonSpecialRes);
 	    this.key = key;
 	    this.title = title;
 	    this.action = action;
+	}
+
+	public SpecialPagina forceParent(Pagina parent) {
+	    this.forcedParent = parent;
+	    this.forcedParentSet = true;
+	    return(this);
+	}
+
+	public SpecialPagina forceRoot() {
+	    this.forcedParent = null;
+	    this.forcedParentSet = true;
+	    return(this);
+	}
+
+	@Override
+	public Pagina parent() {
+	    /* Client-only specials have no resource-defined parent chain. Without an explicit forced
+	     * parent they must live at root; falling back to super.parent() recurses through the
+	     * special button's parent() implementation and can overflow the stack. */
+	    return(forcedParentSet ? forcedParent : null);
 	}
 
 	public PagButton button() {
@@ -218,7 +240,7 @@ public class MenuGrid extends Widget implements KeyBinding.Bindable {
 		    }
 
 		    public Pagina parent() {
-			return(null);
+			return(((SpecialPagina)pag).parent());
 		    }
 
 		    public String name() {
@@ -556,6 +578,8 @@ public class MenuGrid extends Widget implements KeyBinding.Bindable {
 	    return(true);
 	if(a == null || b == null)
 	    return(false);
+	if((a instanceof SpecialPagina) || (b instanceof SpecialPagina))
+	    return(Objects.equals(a.id, b.id));
 	Resource ra = a.res();
 	Resource rb = b.res();
 	if(ra == rb)
@@ -587,8 +611,6 @@ public class MenuGrid extends Widget implements KeyBinding.Bindable {
 	synchronized(paginae) {
 	    open = new LinkedList<Pagina>();
 	    for(Pagina pag : paginae) {
-		if(pag instanceof SpecialPagina)
-		    continue;
 		open.add(pag);
 		if(pag.anew > 0) {
 		    try {
@@ -632,24 +654,32 @@ public class MenuGrid extends Widget implements KeyBinding.Bindable {
      * call-site compatibility but ignored: every special uses the same square placeholder art
      * ({@link #ensureMoonSpecialPlaceholder}) so mmap / random HUD icons never appear in the grid.
      */
-    public void registerSpecial(String key, String title, String res, java.util.function.Consumer<Interaction> action) {
+    public SpecialPagina registerSpecial(String key, String title, String res, java.util.function.Consumer<Interaction> action) {
 	if(key == null)
-	    return;
-	synchronized(paginae) {
-	    if(specialpag.containsKey(key))
-		return;
+	    return(null);
+	synchronized(pmap) {
+	    Pagina existing = pmap.get(key);
+	    if(existing instanceof SpecialPagina)
+		return((SpecialPagina)existing);
 	}
 	try {
 	    Resource.local().loadwait("gfx/hud/sc-next");
 	} catch(Exception e) {
-	    return;
+	    return(null);
 	}
-	addSpecial(new SpecialPagina(this, key, title, action));
+	SpecialPagina pag = new SpecialPagina(this, key, title, action);
+	addSpecial(pag);
 	updlayout();
+	return(pag);
     }
 
     private void addSpecial(SpecialPagina pag) {
+	synchronized(pmap) {
+	    pmap.put(pag.id, pag);
+	    pmap.put(pag.key, pag);
+	}
 	synchronized(paginae) {
+	    paginae.add(pag);
 	    specialpag.put(pag.key, pag);
 	}
     }
@@ -659,12 +689,6 @@ public class MenuGrid extends Widget implements KeyBinding.Bindable {
 	    List<PagButton> cur = new ArrayList<>();
 	    recons = !cons(this.cur, cur);
 	    Collections.sort(cur, Comparator.comparing(PagButton::sortkey));
-	    /* Client specials are not in paginae — they must not participate in cons() graph
-	     * traversal (that broke server branches like Build / craft). Append at root only. */
-	    if(this.cur == null) {
-		for(SpecialPagina sp : specialpag.values())
-		    cur.add(sp.button());
-	    }
 	    this.curbtns = cur;
 	    int i = curoff;
 	    for(int y = 0; y < gsz.y; y++) {

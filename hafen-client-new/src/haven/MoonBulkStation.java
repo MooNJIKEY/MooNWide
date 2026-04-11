@@ -164,6 +164,22 @@ public final class MoonBulkStation {
 	clearTake();
     }
 
+    public static boolean isActive() {
+	return fillActive || takeActive || tubSessionActive;
+    }
+
+    public static String statusSummary() {
+	if(tubSessionActive)
+	    return("ttub " + tubPhase.name().toLowerCase(Locale.ROOT));
+	if(fillActive)
+	    return("fill " + ((fillTargetKey != null) ? fillTargetKey : "?") + " " + fillSteps + "/" + Math.max(1, fillRepeatBudget));
+	if(takeActive)
+	    return("take-all round " + takeRound);
+	if(MoonConfig.bulkStationFill || MoonConfig.bulkStationTakeAll)
+	    return("armed");
+	return("disabled");
+    }
+
     private static void clearTubSession() {
 	tubSessionActive = false;
 	tubPhase = TubPhase.IDLE;

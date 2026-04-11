@@ -44,6 +44,12 @@ public class MoonConfig {
 
     /** Default on so inventory Q is visible without opening Functions; existing {@code moon-quality-objs} pref still wins. */
     public static boolean qualityObjects = Utils.getprefb("moon-quality-objs", true);
+    /** Item overlay: durability / wear value on items that expose it. */
+    public static boolean itemDurabilityOverlay = Utils.getprefb("moon-item-durability-overlay", true);
+    /** Item overlay: hard/soft armor value on items that expose armor class. */
+    public static boolean itemArmorOverlay = Utils.getprefb("moon-item-armor-overlay", true);
+    /** Passive left-click assist for small gates: click beyond the wicket and the character runs through it. */
+    public static boolean passiveSmallGate = Utils.getprefb("moon-passive-small-gate", false);
 
     /** Bumped when inventory quality overlay prefs change (invalidates per-slot WItem tex cache). */
     public static volatile int invQualitySettingsRev = 0;
@@ -136,6 +142,18 @@ public class MoonConfig {
     public static boolean treeBotAutoPipeline = Utils.getprefb("moon-treebot-auto-pipeline", true);
     /** Show floating status above the player (phase, stamina) while the bot is on. */
     public static boolean treeBotHudLine = Utils.getprefb("moon-treebot-hud-line", true);
+    /** Fishing bot: safe-v1 auto-cast loop on a saved water tile. */
+    public static boolean fishingBotEnabled = Utils.getprefb("moon-fishingbot-on", false);
+    /** Single water tile {@code "tx ty"} for the fishing spot. */
+    public static String fishingBotWaterTile = Utils.getpref("moon-fishingbot-water-tile", "");
+    /** Stop the fishing loop when a threat mob is nearby. */
+    public static boolean fishingBotStopHostile = Utils.getprefb("moon-fishingbot-stop-hostile", true);
+    /** Retry window after one cast before it is treated as timeout. */
+    public static int fishingBotCastTimeoutSec = Utils.clip(Utils.getprefi("moon-fishingbot-timeout-sec", 16), 6, 60);
+    /** Stop after this many consecutive timeouts / failed casts. */
+    public static int fishingBotMaxFailures = Utils.clip(Utils.getprefi("moon-fishingbot-max-failures", 4), 1, 12);
+    /** Stop when the number of free inventory slots falls to this value or lower. */
+    public static int fishingBotMinFreeSlots = Utils.clip(Utils.getprefi("moon-fishingbot-min-free-slots", 1), 0, 16);
     /**
      * 0 = paused between phases; 1 = felling only; 2 = haul to stock; 3 = split/piles (partial).
      * When enabling the bot, set to 1.
@@ -725,6 +743,15 @@ public class MoonConfig {
 	save("moon-quality-objs", v);
 	bumpInvQualitySettingsRev();
     }
+    public static void setItemDurabilityOverlay(boolean v) {
+	itemDurabilityOverlay = v;
+	save("moon-item-durability-overlay", v);
+    }
+    public static void setItemArmorOverlay(boolean v) {
+	itemArmorOverlay = v;
+	save("moon-item-armor-overlay", v);
+    }
+    public static void setPassiveSmallGate(boolean v) { passiveSmallGate = v; save("moon-passive-small-gate", v); }
 
     public static void setInvQualityRounded(boolean v) {
 	invQualityRounded = v;
@@ -917,6 +944,25 @@ public class MoonConfig {
     public static void setTreeBotAvoidMobs(boolean v) { treeBotAvoidMobs = v; save("moon-treebot-mobs", v); }
     public static void setTreeBotWater(boolean v) { treeBotWater = v; save("moon-treebot-water", v); }
     public static void setTreeBotEnabled(boolean v) { treeBotEnabled = v; save("moon-treebot-on", v); }
+    public static void setFishingBotEnabled(boolean v) { fishingBotEnabled = v; save("moon-fishingbot-on", v); }
+    public static void setFishingBotWaterTile(String s) {
+	fishingBotWaterTile = s != null ? s : "";
+	Utils.setpref("moon-fishingbot-water-tile", fishingBotWaterTile);
+	try { Utils.prefs().flush(); } catch(Exception ignored) {}
+    }
+    public static void setFishingBotStopHostile(boolean v) { fishingBotStopHostile = v; save("moon-fishingbot-stop-hostile", v); }
+    public static void setFishingBotCastTimeoutSec(int v) {
+	fishingBotCastTimeoutSec = Utils.clip(v, 6, 60);
+	save("moon-fishingbot-timeout-sec", fishingBotCastTimeoutSec);
+    }
+    public static void setFishingBotMaxFailures(int v) {
+	fishingBotMaxFailures = Utils.clip(v, 1, 12);
+	save("moon-fishingbot-max-failures", fishingBotMaxFailures);
+    }
+    public static void setFishingBotMinFreeSlots(int v) {
+	fishingBotMinFreeSlots = Utils.clip(v, 0, 16);
+	save("moon-fishingbot-min-free-slots", fishingBotMinFreeSlots);
+    }
 
     public static void setTreeBotAutoPipeline(boolean v) {
 	treeBotAutoPipeline = v;

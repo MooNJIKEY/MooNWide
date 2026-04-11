@@ -97,11 +97,14 @@ public class GameUI extends ConsoleHost implements Console.Directory, UI.Notice.
     public MoonTreeBotWnd moonTreeBotWnd;
     public MoonMineBotWnd moonMineBotWnd;
     public MoonAutoDropWnd moonAutoDropWnd;
+    public MoonFishingBotWnd moonFishingBotWnd;
+    public MoonAutomationToolsWnd moonAutomationToolsWnd;
     public ChatUI chat;
     public ChatUI.Channel syslog;
     public Progress prog = null;
     private boolean afk = false;
     public BeltSlot[] belt = new BeltSlot[144];
+    private final BeltSlot[] basebelt = new BeltSlot[144];
     public Belt beltwdg;
     public BeltWnd nkeyBelt, fkeyBelt, numBelt;
     public MapMenuWnd mapmenuwnd;
@@ -224,6 +227,59 @@ public class GameUI extends ConsoleHost implements Console.Directory, UI.Notice.
 	return(new ResBeltSlot(idx, rdt));
     }
 
+    private static String specialBeltPref(int slot) {
+	return("moon-special-belt-" + slot);
+    }
+
+    private MenuGrid.SpecialPagina specialBeltPagina(int slot) {
+	if(menu == null || slot < 0 || slot >= belt.length)
+	    return(null);
+	String key = Utils.getpref(specialBeltPref(slot), null);
+	if(key == null)
+	    return(null);
+	return(menu.specialpag.get(key));
+    }
+
+    private void refreshBeltSlot(int slot) {
+	if(slot < 0 || slot >= belt.length)
+	    return;
+	MenuGrid.SpecialPagina sp = specialBeltPagina(slot);
+	if(sp != null)
+	    belt[slot] = new PagBeltSlot(slot, sp);
+	else
+	    belt[slot] = basebelt[slot];
+    }
+
+    private void refreshAllBeltSlots() {
+	for(int i = 0; i < belt.length; i++)
+	    refreshBeltSlot(i);
+    }
+
+    public boolean setSpecialBeltSlot(int slot, MenuGrid.Pagina pag) {
+	if(!(pag instanceof MenuGrid.SpecialPagina) || slot < 0 || slot >= belt.length)
+	    return(false);
+	Utils.setpref(specialBeltPref(slot), ((MenuGrid.SpecialPagina)pag).key);
+	refreshBeltSlot(slot);
+	return(true);
+    }
+
+    public boolean clearSpecialBeltSlot(int slot) {
+	if(slot < 0 || slot >= belt.length)
+	    return(false);
+	if(Utils.getpref(specialBeltPref(slot), null) == null)
+	    return(false);
+	Utils.setpref(specialBeltPref(slot), null);
+	refreshBeltSlot(slot);
+	return(true);
+    }
+
+    private void setBaseBeltSlot(int slot, BeltSlot val) {
+	if(slot < 0 || slot >= belt.length)
+	    return;
+	basebelt[slot] = val;
+	refreshBeltSlot(slot);
+    }
+
     public abstract class Belt extends Widget implements DTarget, DropTarget {
 	public Belt(Coord sz) {
 	    super(sz);
@@ -259,8 +315,11 @@ public class GameUI extends ConsoleHost implements Console.Directory, UI.Notice.
 	    if(slot != -1) {
 		if(ev.b == 1)
 		    act(slot, new MenuGrid.Interaction(1, ui.modflags()));
-		if(ev.b == 3)
+		if(ev.b == 3) {
+		    if(GameUI.this.clearSpecialBeltSlot(slot))
+			return(true);
 		    GameUI.this.wdgmsg("setbelt", slot, null);
+		}
 		return(true);
 	    }
 	    if(super.mousedown(ev))
@@ -271,6 +330,7 @@ public class GameUI extends ConsoleHost implements Console.Directory, UI.Notice.
 	public boolean drop(Coord c, Coord ul) {
 	    int slot = beltslot(c);
 	    if(slot != -1) {
+		GameUI.this.clearSpecialBeltSlot(slot);
 		GameUI.this.wdgmsg("setbelt", slot, 0);
 		return(true);
 	    }
@@ -284,6 +344,9 @@ public class GameUI extends ConsoleHost implements Console.Directory, UI.Notice.
 	    if(slot != -1) {
 		if(thing instanceof MenuGrid.Pagina) {
 		    MenuGrid.Pagina pag = (MenuGrid.Pagina)thing;
+		    if(GameUI.this.setSpecialBeltSlot(slot, pag))
+			return(true);
+		    GameUI.this.clearSpecialBeltSlot(slot);
 		    try {
 			if(pag.id instanceof Indir)
 			    GameUI.this.wdgmsg("setbelt", slot, "res", pag.res().name);
@@ -577,6 +640,7 @@ public class GameUI extends ConsoleHost implements Console.Directory, UI.Notice.
 
     protected void added() {
 	resize(parent.sz);
+	ensureMoonHudPanels();
 	ui.cons.out = new java.io.PrintWriter(new java.io.Writer() {
 		StringBuilder buf = new StringBuilder();
 		
@@ -1038,7 +1102,7 @@ public class GameUI extends ConsoleHost implements Console.Directory, UI.Notice.
 		    Utils.setprefc("wpos-moon-minimap", mmapwnd.c);
 		}
 		setminimapvisible(Utils.getprefb("moon-minimap-visible", true));
-		mapfile = new MapWnd(file, map, Utils.getprefc("wndsz-map", UI.scale(new Coord(700, 500))), LocalizationManager.tr("map.title"));
+		mapfile = new MapWnd(file, map, Utils.getprefc("wndsz-map", UI.scale(new Coord(900, 620))), LocalizationManager.tr("map.title"));
 		mapfile.show(Utils.getprefb("wndvis-map", false));
 		add(mapfile, Utils.getprefc("wndc-map", new Coord(50, 50)));
 	    }
@@ -1047,32 +1111,41 @@ public class GameUI extends ConsoleHost implements Console.Directory, UI.Notice.
 	    menu = (MenuGrid)child;
 	    /* Action search stays on Z / moon-tools bar; crafting itself is routed into the advanced browser. */
 	    /* Icon: shared MenuGrid placeholder tile — res paths are ignored. */
-	    menu.registerSpecial("moon.bots", LocalizationManager.tr("menu.bots"), null, iact -> toggleMoonBotsWindow());
-	    menu.registerSpecial("moon.tpnav", LocalizationManager.tr("menu.tpnav"), null, iact -> toggleMoonTeleportWindow());
-	    menu.registerSpecial("moon.guide", LocalizationManager.tr("menu.guide"), null, iact -> toggleMoonUiGuideWindow());
-	    menu.registerSpecial("moon.storage", "Storage Search", null, iact -> toggleMoonStorageSearchWindow());
+	    MenuGrid.SpecialPagina macros = menu.registerSpecial("moon.macros", LocalizationManager.tr("menu.macros"), null, null);
+	    if(macros != null)
+		macros.forceRoot();
+	    menu.registerSpecial("moon.bots", LocalizationManager.tr("menu.bots"), null, iact -> toggleMoonBotsWindow()).forceParent(macros);
+	    menu.registerSpecial("moon.tpnav", LocalizationManager.tr("menu.tpnav"), null, iact -> toggleMoonTeleportWindow()).forceParent(macros);
+	    menu.registerSpecial("moon.guide", LocalizationManager.tr("menu.guide"), null, iact -> toggleMoonUiGuideWindow()).forceParent(macros);
+	    menu.registerSpecial("moon.storage", "Storage Search", null, iact -> toggleMoonStorageSearchWindow()).forceParent(macros);
 	    menu.registerSpecial("moon.caveflat", LocalizationManager.tr("menu.caveflat"), null, iact -> {
 		    MoonConfig.setHideCaveWalls(!MoonConfig.hideCaveWalls);
 		    if(map != null && map.glob != null && map.glob.map != null)
 			map.glob.map.invalidateAll();
 		    ui.msg(LocalizationManager.tr(MoonConfig.hideCaveWalls ? "msg.caveflat.on" : "msg.caveflat.off"));
-		});
+		}).forceParent(macros);
 	    menu.registerSpecial("moon.safedig", LocalizationManager.tr("menu.safedig"), null, iact -> {
 		    MoonConfig.setMineSupportSafeTiles(!MoonConfig.mineSupportSafeTiles);
 		    ui.msg(LocalizationManager.tr(MoonConfig.mineSupportSafeTiles ? "msg.safedig.on" : "msg.safedig.off"));
-		});
+		}).forceParent(macros);
 	    menu.registerSpecial("moon.combathud", LocalizationManager.tr("menu.combathud"), null, iact -> {
 		    MoonConfig.setCombatDamageHud(!MoonConfig.combatDamageHud);
 		    ui.msg(LocalizationManager.tr(MoonConfig.combatDamageHud ? "msg.combathud.on" : "msg.combathud.off"));
-		});
+		}).forceParent(macros);
 	    menu.registerSpecial("moon.resettaken", LocalizationManager.tr("menu.resettaken"), null, iact -> {
 		    MoonFightHud.resetTakenDamage();
 		    ui.msg(LocalizationManager.tr("msg.dmg.reset"));
-		});
+		}).forceParent(macros);
+	    menu.registerSpecial("moon.passivegate", LocalizationManager.tr("menu.passivegate"), null, iact -> {
+		    MoonConfig.setPassiveSmallGate(!MoonConfig.passiveSmallGate);
+		    ui.msg(LocalizationManager.tr(MoonConfig.passiveSmallGate ? "msg.passivegate.on" : "msg.passivegate.off"));
+		}).forceParent(macros);
 	    menugridwnd = add(new MenuGridWnd(menu),
 		Utils.getprefc("wpos-moon-menugrid",
 		    sz.sub(UI.scale(200), UI.scale(200))));
 	    initQuickPanels();
+	    refreshAllBeltSlots();
+	    clampMoonHudPanelsNow();
 	    raiseHudOverlay();
 	} else if(place == "fight") {
 	    fv = add((Fightview)child, Utils.getprefc("wpos-fightview", defaultfightc((Fightview)child)));
@@ -1396,6 +1469,7 @@ public class GameUI extends ConsoleHost implements Console.Directory, UI.Notice.
     public void draw(GOut g) {
 	super.draw(g);
 	int by = sz.y;
+	boolean chatanchored = (chatwnd != null) && chatwnd.visible();
 	if(chatwnd != null && chatwnd.visible())
 	    by = Math.min(by, chatwnd.c.y);
 	if(nkeyBelt != null && nkeyBelt.visible())
@@ -1416,10 +1490,17 @@ public class GameUI extends ConsoleHost implements Console.Directory, UI.Notice.
 		lastmsg = null;
 		lastmsgRaw = null;
 	    } else {
+		Coord msgc;
+		if(chatanchored) {
+		    msgc = new Coord(chatwnd.c.x + UI.scale(10),
+			Math.max(UI.scale(20), chatwnd.c.y - UI.scale(10) - lastmsg.sz().y));
+		} else {
+		    msgc = new Coord(msgx, Math.max(UI.scale(20), by - UI.scale(10) - lastmsg.sz().y));
+		}
 		g.chcolor(0, 0, 0, 192);
-		g.frect(new Coord(msgx - UI.scale(2), by - UI.scale(22)), lastmsg.sz().add(UI.scale(4), UI.scale(4)));
+		g.frect(msgc.sub(UI.scale(2, 2)), lastmsg.sz().add(UI.scale(4, 4)));
 		g.chcolor();
-		g.image(lastmsg.tex(), new Coord(msgx, by -= UI.scale(20)));
+		g.image(lastmsg.tex(), msgc);
 	    }
 	}
 	if(chat != null) {
@@ -1562,6 +1643,7 @@ public class GameUI extends ConsoleHost implements Console.Directory, UI.Notice.
 
     private double lastwndsave = 0;
     private double moonMiscRecheck = 0;
+    private double moonHudHealAt = 0;
     private boolean moonGuideDefer;
     public void tick(double dt) {
 	super.tick(dt);
@@ -1576,6 +1658,11 @@ public class GameUI extends ConsoleHost implements Console.Directory, UI.Notice.
 	    }
 	}
 	double now = Utils.rtime();
+	if(now >= moonHudHealAt) {
+	    moonHudHealAt = now + 1.0;
+	    if(moonNeedsHudHeal())
+		ensureMoonHudPanels();
+	}
 	updateWorldEntryState(dt, now);
 	boolean sceneScan = moonSceneScanDue(now);
 	boolean hudRefresh = moonHudRefreshDue(now);
@@ -1598,14 +1685,15 @@ public class GameUI extends ConsoleHost implements Console.Directory, UI.Notice.
 	    afk = false;
 	}
 	mapfiletick();
-	try { MoonMineSweeperTracker.tick(this, dt); } catch(Exception ignored) {}
-	try { MoonAutoDrink.tick(this, dt); } catch(Exception ignored) {}
-	try { MoonCombatBot.tick(this, dt); } catch(Exception ignored) {}
-	try { MoonTreeChopBot.tick(this, dt); } catch(Exception ignored) {}
-	try { MoonAutoDrop.tick(this, dt); } catch(Exception ignored) {}
-	try { MoonMineBot.tick(this, dt); } catch(Exception ignored) {}
-	try { haven.botnative.HavenBotNative.tick(this, dt); } catch(Throwable ignored) {}
-	try { MoonBulkStation.tick(this, Utils.rtime()); } catch(Exception ignored) {}
+	MoonAutomationRegistry.tickModule("mine", this, () -> MoonMineSweeperTracker.tick(this, dt));
+	MoonAutomationRegistry.tickModule("autodrink", this, () -> MoonAutoDrink.tick(this, dt));
+	MoonAutomationRegistry.tickModule("combat", this, () -> MoonCombatBot.tick(this, dt));
+	MoonAutomationRegistry.tickModule("tree", this, () -> MoonTreeChopBot.tick(this, dt));
+	MoonAutomationRegistry.tickModule("autodrop", this, () -> MoonAutoDrop.tick(this, dt));
+	MoonAutomationRegistry.tickModule("mine", this, () -> MoonMineBot.tick(this, dt));
+	MoonAutomationRegistry.tickModule("fishing", this, () -> MoonFishingBot.tick(this, dt));
+	MoonAutomationRegistry.tickModule("native", this, () -> haven.botnative.HavenBotNative.tick(this, dt));
+	MoonAutomationRegistry.tickModule("bulk", this, () -> MoonBulkStation.tick(this, Utils.rtime()));
 	try { MoonSpeedBoost.tick(this, dt); } catch(Exception ignored) {}
 	try { MoonSpeedBoost.tickSpeedMultResend(this, Utils.rtime()); } catch(Exception ignored) {}
 	try { MoonSafeMode.tick(this, dt); } catch(Exception ignored) {}
@@ -1655,7 +1743,7 @@ public class GameUI extends ConsoleHost implements Console.Directory, UI.Notice.
 	} else if(msg == "setbelt") {
 	    int slot = Utils.iv(args[0]);
 	    if(args.length < 2) {
-		belt[slot] = null;
+		setBaseBeltSlot(slot, null);
 	    } else {
 		Indir<Resource> res = ui.sess.getresv(args[1]);
 		Message sdt = Message.nil;
@@ -1663,24 +1751,24 @@ public class GameUI extends ConsoleHost implements Console.Directory, UI.Notice.
 		    sdt = new MessageBuf((byte[])args[2]);
 		ResData rdt = new ResData(res, sdt);
 		ui.sess.glob.loader.defer(() -> {
-			belt[slot] = mkbeltslot(slot, rdt);
+			setBaseBeltSlot(slot, mkbeltslot(slot, rdt));
 		    }, null);
 	    }
 	} else if(msg == "setbelt2") {
 	    int slot = Utils.iv(args[0]);
 	    if(args.length < 2) {
-		belt[slot] = null;
+		setBaseBeltSlot(slot, null);
 	    } else {
 		switch((String)args[1]) {
 		case "p": {
 		    Object id = args[2];
-		    belt[slot] = new PagBeltSlot(slot, menu.paginafor(id, null));
+		    setBaseBeltSlot(slot, new PagBeltSlot(slot, menu.paginafor(id, null)));
 		    break;
 		}
 		case "r": {
 		    Indir<Resource> res = ui.sess.getresv(args[2]);
 		    ui.sess.glob.loader.defer(() -> {
-			    belt[slot] = new PagBeltSlot(slot, PagBeltSlot.resolve(menu, res));
+			    setBaseBeltSlot(slot, new PagBeltSlot(slot, PagBeltSlot.resolve(menu, res)));
 			}, null);
 		    break;
 		}
@@ -1689,7 +1777,7 @@ public class GameUI extends ConsoleHost implements Console.Directory, UI.Notice.
 		    Message sdt = Message.nil;
 		    if(args.length > 2)
 			sdt = new MessageBuf((byte[])args[3]);
-		    belt[slot] = new ResBeltSlot(slot, new ResData(res, sdt));
+		    setBaseBeltSlot(slot, new ResBeltSlot(slot, new ResData(res, sdt)));
 		    break;
 		}
 		}
@@ -2019,6 +2107,20 @@ public class GameUI extends ConsoleHost implements Console.Directory, UI.Notice.
 	setfocus(moonCombatBotWnd);
     }
 
+    public void openMoonTreeBotWindow() {
+	if(moonTreeBotWnd != null) {
+	    moonTreeBotWnd.raise();
+	    setfocus(moonTreeBotWnd);
+	    return;
+	}
+	MoonTreeBotWnd w = new MoonTreeBotWnd(this);
+	Coord c = fitwdg(w, new Coord(sz.x / 2 - w.sz.x / 2, UI.scale(90)));
+	moonTreeBotWnd = add(w, c);
+	fitwdg(moonTreeBotWnd);
+	moonTreeBotWnd.raise();
+	setfocus(moonTreeBotWnd);
+    }
+
     /** Opens or toggles the bots window (combat bot + tree chop). */
     public void toggleMoonBotsWindow() {
 	if(moonBotsWnd != null) {
@@ -2070,6 +2172,34 @@ public class GameUI extends ConsoleHost implements Console.Directory, UI.Notice.
 	fitwdg(moonAutoDropWnd);
 	moonAutoDropWnd.raise();
 	setfocus(moonAutoDropWnd);
+    }
+
+    public void openMoonFishingBotWindow() {
+	if(moonFishingBotWnd != null) {
+	    moonFishingBotWnd.raise();
+	    setfocus(moonFishingBotWnd);
+	    return;
+	}
+	MoonFishingBotWnd w = new MoonFishingBotWnd(this);
+	Coord c = fitwdg(w, new Coord(sz.x / 2 - w.sz.x / 2, UI.scale(120)));
+	moonFishingBotWnd = add(w, c);
+	fitwdg(moonFishingBotWnd);
+	moonFishingBotWnd.raise();
+	setfocus(moonFishingBotWnd);
+    }
+
+    public void openMoonAutomationToolsWindow() {
+	if(moonAutomationToolsWnd != null) {
+	    moonAutomationToolsWnd.raise();
+	    setfocus(moonAutomationToolsWnd);
+	    return;
+	}
+	MoonAutomationToolsWnd w = new MoonAutomationToolsWnd(this);
+	Coord c = fitwdg(w, new Coord(sz.x / 2 - w.sz.x / 2, UI.scale(90)));
+	moonAutomationToolsWnd = add(w, c);
+	fitwdg(moonAutomationToolsWnd);
+	moonAutomationToolsWnd.raise();
+	setfocus(moonAutomationToolsWnd);
     }
 
     /** Opens or toggles saved navigation points ({@link TeleportManager}). */
@@ -2160,45 +2290,141 @@ public class GameUI extends ConsoleHost implements Console.Directory, UI.Notice.
     }
 
     private void initQuickPanels() {
-	gameShortcuts = new MoonQuickPanel("moon-game-shortcuts");
-	gameShortcuts.addButton(LocalizationManager.tr("shortcut.inv"), "custom/paginae/default/wnd/inv",
-	    iact -> toggleInventoryWindow());
-	gameShortcuts.addButton(LocalizationManager.tr("shortcut.equ"), "custom/paginae/default/wnd/equ",
-	    iact -> toggleEquipmentWindow());
-	gameShortcuts.addButton(LocalizationManager.tr("shortcut.chr"), "custom/paginae/default/wnd/char",
-	    iact -> toggleCharacterWindow());
-	gameShortcuts.addButton(LocalizationManager.tr("shortcut.kin"), "custom/paginae/default/wnd/kithnkin",
-	    iact -> toggleKinWindow());
-	gameShortcuts.addButton(LocalizationManager.tr("shortcut.map"), "custom/paginae/default/wnd/smap",
-	    iact -> toggleMinimapWindow());
-	gameShortcuts.addButton(LocalizationManager.tr("shortcut.bigmap"), "custom/paginae/default/wnd/lmap",
-	    iact -> toggleMapWindow());
-	add(gameShortcuts, Utils.getprefc("wpos-moon-game-shortcuts",
-	    Coord.of(sz.x - UI.scale(320), sz.y - UI.scale(60))));
-
-	moonTools = new MoonQuickPanel("moon-tools");
-	moonTools.addButton(LocalizationManager.tr("shortcut.chat"), "custom/paginae/default/wnd/chat",
-	    iact -> toggleChatWindow());
-	moonTools.addButton(LocalizationManager.tr("shortcut.search"), "custom/paginae/default/wnd/search",
-	    iact -> toggleActionSearch());
-	moonTools.addButton(LocalizationManager.tr("shortcut.overlay"), "custom/paginae/default/wnd/builderwindow",
-	    iact -> openOverlayPanel());
-	moonTools.addButton(LocalizationManager.tr("shortcut.combat"), "custom/paginae/default/wnd/fakegrid",
-	    iact -> openCombatPanel());
-	moonTools.addButton(LocalizationManager.tr("shortcut.combatbot"), "custom/paginae/default/wnd/fakegrid",
-	    iact -> openMoonCombatBotWindow());
-	moonTools.addButton(LocalizationManager.tr("shortcut.opts"), "custom/paginae/default/wnd/opts",
-	    iact -> toggleOptionsWindow());
-	add(moonTools, Utils.getprefc("wpos-moon-tools",
-	    Coord.of(sz.x - UI.scale(320), sz.y - UI.scale(110))));
-	moonHandsToolbar = add(new MoonHandsToolbar(this), Utils.getprefc("wpos-moon-hands",
-	    UI.scale(new Coord(12, 200))));
-	moonSpeedWirePanel = add(new MoonSpeedWirePanel(), Utils.getprefc("wpos-moon-speed-wire",
-	    UI.scale(new Coord(12, 360))));
-	if(!Utils.getprefb("moon-speed-wire-visible", true))
-	    moonSpeedWirePanel.hide();
+	if(gameShortcuts == null) {
+	    gameShortcuts = new MoonQuickPanel("moon-game-shortcuts");
+	    gameShortcuts.addButton(LocalizationManager.tr("shortcut.inv"), "custom/paginae/default/wnd/inv",
+		iact -> toggleInventoryWindow());
+	    gameShortcuts.addButton(LocalizationManager.tr("shortcut.equ"), "custom/paginae/default/wnd/equ",
+		iact -> toggleEquipmentWindow());
+	    gameShortcuts.addButton(LocalizationManager.tr("shortcut.chr"), "custom/paginae/default/wnd/char",
+		iact -> toggleCharacterWindow());
+	    gameShortcuts.addButton(LocalizationManager.tr("shortcut.kin"), "custom/paginae/default/wnd/kithnkin",
+		iact -> toggleKinWindow());
+	    gameShortcuts.addButton(LocalizationManager.tr("shortcut.map"), "custom/paginae/default/wnd/smap",
+		iact -> toggleMinimapWindow());
+	    gameShortcuts.addButton(LocalizationManager.tr("shortcut.bigmap"), "custom/paginae/default/wnd/lmap",
+		iact -> toggleMapWindow());
+	    add(gameShortcuts, Utils.getprefc("wpos-moon-game-shortcuts",
+		Coord.of(sz.x - UI.scale(320), sz.y - UI.scale(60))));
+	}
+	if(moonTools == null) {
+	    moonTools = new MoonQuickPanel("moon-tools");
+	    moonTools.addButton(LocalizationManager.tr("shortcut.chat"), "custom/paginae/default/wnd/chat",
+		iact -> toggleChatWindow());
+	    moonTools.addButton(LocalizationManager.tr("shortcut.search"), "custom/paginae/default/wnd/search",
+		iact -> toggleActionSearch());
+	    moonTools.addButton(LocalizationManager.tr("shortcut.overlay"), "custom/paginae/default/wnd/builderwindow",
+		iact -> openOverlayPanel());
+	    moonTools.addButton(LocalizationManager.tr("shortcut.combat"), "custom/paginae/default/wnd/fakegrid",
+		iact -> openCombatPanel());
+	    moonTools.addButton(LocalizationManager.tr("shortcut.combatbot"), "custom/paginae/default/wnd/fakegrid",
+		iact -> openMoonCombatBotWindow());
+	    moonTools.addButton(LocalizationManager.tr("shortcut.opts"), "custom/paginae/default/wnd/opts",
+		iact -> toggleOptionsWindow());
+	    add(moonTools, Utils.getprefc("wpos-moon-tools",
+		Coord.of(sz.x - UI.scale(320), sz.y - UI.scale(110))));
+	}
+	if(moonHandsToolbar == null) {
+	    moonHandsToolbar = add(new MoonHandsToolbar(this), Utils.getprefc("wpos-moon-hands",
+		UI.scale(new Coord(12, 200))));
+	}
+	if(moonSpeedWirePanel == null) {
+	    moonSpeedWirePanel = add(new MoonSpeedWirePanel(), Utils.getprefc("wpos-moon-speed-wire",
+		UI.scale(new Coord(12, 360))));
+	}
+	if(uimode != 2) {
+	    gameShortcuts.show();
+	    moonTools.show();
+	    moonHandsToolbar.show();
+	}
+	if(moonSpeedWirePanel != null) {
+	    if((uimode != 2) && Utils.getprefb("moon-speed-wire-visible", true))
+		moonSpeedWirePanel.show();
+	    else
+		moonSpeedWirePanel.hide();
+	}
 	if(LoginScreen.authmech.get().equals("native"))
 	    ensureSessionSwitcher();
+    }
+
+    private boolean clampHudWidget(Widget wdg) {
+	if(!(wdg instanceof MovableWidget))
+	    return(false);
+	return(((MovableWidget)wdg).clampToParentBounds());
+    }
+
+    private void clampMoonHudPanelsNow() {
+	boolean changed = false;
+	changed = clampHudWidget(menugridwnd) || changed;
+	changed = clampHudWidget(gameShortcuts) || changed;
+	changed = clampHudWidget(moonTools) || changed;
+	if((moonHandsToolbar != null) && !moonHandsToolbar.locked())
+	    changed = clampHudWidget(moonHandsToolbar) || changed;
+	if((moonSpeedWirePanel != null) && !moonSpeedWirePanel.locked())
+	    changed = clampHudWidget(moonSpeedWirePanel) || changed;
+	if(changed)
+	    raiseHudOverlay();
+    }
+
+    private boolean moonNeedsHudHeal() {
+	if(gameShortcuts == null || moonTools == null || moonHandsToolbar == null || moonSpeedWirePanel == null)
+	    return(true);
+	return((menu != null) && (menugridwnd == null));
+    }
+
+    private void ensureMoonHudPanels() {
+	boolean changed = false;
+	initQuickPanels();
+	if((menu != null) && (menugridwnd == null)) {
+	    menugridwnd = add(new MenuGridWnd(menu),
+		Utils.getprefc("wpos-moon-menugrid",
+		    sz.sub(UI.scale(200), UI.scale(200))));
+	    changed = true;
+	}
+	if(uimode != 2) {
+	    if(menugridwnd != null && !menugridwnd.visible()) {
+		menugridwnd.show();
+		changed = true;
+	    }
+	    if(nkeyBelt != null && !nkeyBelt.visible()) {
+		nkeyBelt.show();
+		changed = true;
+	    }
+	    if(fkeyBelt != null) {
+		boolean want = Utils.getprefb("moon-belt-f-vis", false);
+		if(fkeyBelt.visible() != want) {
+		    fkeyBelt.show(want);
+		    changed = true;
+		}
+	    }
+	    if(numBelt != null) {
+		boolean want = Utils.getprefb("moon-belt-num-vis", false);
+		if(numBelt.visible() != want) {
+		    numBelt.show(want);
+		    changed = true;
+		}
+	    }
+	} else {
+	    if(menugridwnd != null && menugridwnd.visible()) {
+		menugridwnd.hide();
+		changed = true;
+	    }
+	    if(nkeyBelt != null && nkeyBelt.visible()) {
+		nkeyBelt.hide();
+		changed = true;
+	    }
+	    if(fkeyBelt != null && fkeyBelt.visible()) {
+		fkeyBelt.hide();
+		changed = true;
+	    }
+	    if(numBelt != null && numBelt.visible()) {
+		numBelt.hide();
+		changed = true;
+	    }
+	}
+	if(changed)
+	    raiseHudOverlay();
+	clampMoonHudPanelsNow();
     }
 
     /** Show / hide {@link #moonSpeedWirePanel} and save visibility pref. */
@@ -2589,8 +2815,31 @@ public class GameUI extends ConsoleHost implements Console.Directory, UI.Notice.
     public static final KeyBinding kb_hide = KeyBinding.get("ui-toggle", KeyMatch.nil);
     public static final KeyBinding kb_logout = KeyBinding.get("logout", KeyMatch.nil);
     public static final KeyBinding kb_switchchr = KeyBinding.get("logout-cs", KeyMatch.nil);
+    private static boolean matchesLayoutSafeHotkey(KeyBinding kb, GlobKeyEvent ev) {
+	KeyMatch key = kb.key();
+	if(key == null || key == KeyMatch.nil)
+	    return(false);
+	if(key.match(ev))
+	    return(true);
+	if((ev.mods & key.modmask) != key.modmatch)
+	    return(false);
+	int code = key.code;
+	if((code == KeyEvent.VK_UNDEFINED) && (key.chr != 0))
+	    code = KeyEvent.getExtendedKeyCodeForChar(Character.toUpperCase(key.chr));
+	return((code != KeyEvent.VK_UNDEFINED) && (ev.code == code));
+    }
+
+    private static boolean matchesLayoutSafeHotkey(KeyBinding kb, GlobKeyEvent ev, int code, int mods) {
+	if(matchesLayoutSafeHotkey(kb, ev))
+	    return(true);
+	if(ev.code != code)
+	    return(false);
+	int emods = (ev.mods & (KeyMatch.S | KeyMatch.C | KeyMatch.M));
+	return(emods == mods);
+    }
+
     private boolean matchesOptionsHotkey(GlobKeyEvent ev) {
-	if(kb_opt.key().match(ev))
+	if(matchesLayoutSafeHotkey(kb_opt, ev, KeyEvent.VK_O, KeyMatch.C))
 	    return(true);
 	/* Fallback by key-code to survive layout/prefs issues after restart.
 	 * Accept both legacy Ctrl+O and reassigned plain O. */
@@ -2600,11 +2849,85 @@ public class GameUI extends ConsoleHost implements Console.Directory, UI.Notice.
 	return((mods == KeyMatch.C) || (mods == 0));
     }
 
+    private boolean handleReservedWindowHotkeys(GlobKeyEvent ev) {
+	if(matchesLayoutSafeHotkey(kb_mw_bot, ev, KeyEvent.VK_B, KeyMatch.M)) {
+	    toggleMoonBotsWindow();
+	    return(true);
+	}
+	if(matchesLayoutSafeHotkey(kb_mw_tpnav, ev)) {
+	    toggleMoonTeleportWindow();
+	    return(true);
+	}
+	if(matchesLayoutSafeHotkey(kb_mw_rec, ev, KeyEvent.VK_R, KeyMatch.M)) {
+	    togglesearch();
+	    return(true);
+	}
+	if(matchesLayoutSafeHotkey(kb_mw_view, ev, KeyEvent.VK_V, KeyMatch.M)) {
+	    showoptpanel(OptWnd::showOverlayPanel);
+	    return(true);
+	}
+	if(matchesLayoutSafeHotkey(kb_mw_map, ev, KeyEvent.VK_M, KeyMatch.M)) {
+	    toggleminimap();
+	    return(true);
+	}
+	if(matchesLayoutSafeHotkey(kb_mw_fight, ev, KeyEvent.VK_F, KeyMatch.M)) {
+	    showoptpanel(OptWnd::showCombatPanel);
+	    return(true);
+	}
+	if(matchesLayoutSafeHotkey(kb_mw_chat, ev, KeyEvent.VK_C, KeyMatch.M)) {
+	    togglechat();
+	    return(true);
+	}
+	if(matchesLayoutSafeHotkey(kb_mw_perf, ev, KeyEvent.VK_P, KeyMatch.M)) {
+	    showoptpanel(OptWnd::showPerformancePanel);
+	    return(true);
+	}
+	if(matchesLayoutSafeHotkey(kb_mw_sys, ev, KeyEvent.VK_O, KeyMatch.M)) {
+	    showoptpanel(OptWnd::showMainPanel);
+	    return(true);
+	}
+	if(matchesLayoutSafeHotkey(kb_chat, ev, KeyEvent.VK_C, KeyMatch.C)) {
+	    if(chatwnd != null && chatwnd.visible() && !chat.hasfocus) {
+		setfocus(chat);
+	    } else {
+		togglechat();
+	    }
+	    return(true);
+	}
+	if(matchesLayoutSafeHotkey(kb_inv, ev, KeyEvent.VK_TAB, 0)) {
+	    toggleInventoryWindow();
+	    return(true);
+	}
+	if(matchesLayoutSafeHotkey(kb_map, ev, KeyEvent.VK_A, KeyMatch.C)) {
+	    toggleMapWindow();
+	    return(true);
+	}
+	if(matchesLayoutSafeHotkey(kb_equ, ev, KeyEvent.VK_E, KeyMatch.C)) {
+	    toggleEquipmentWindow();
+	    return(true);
+	}
+	if(matchesLayoutSafeHotkey(kb_chr, ev, KeyEvent.VK_T, KeyMatch.C)) {
+	    toggleCharacterWindow();
+	    return(true);
+	}
+	if(matchesLayoutSafeHotkey(kb_bud, ev, KeyEvent.VK_B, KeyMatch.C)) {
+	    toggleKinWindow();
+	    return(true);
+	}
+	if(matchesOptionsHotkey(ev)) {
+	    toggleOptionsWindow();
+	    return(true);
+	}
+	return(false);
+    }
+
     public boolean globtype(GlobKeyEvent ev) {
 	if(ev.c == ':') {
 	    entercmd();
 	    return(true);
 	}
+	if(handleReservedWindowHotkeys(ev))
+	    return(true);
 	/* When the action-menu window is open, pagina shortcuts may beat inv/chr/map toggles below. */
 	if(MoonConfig.menuGridKeyboard && menugridwnd != null && menugridwnd.visible() && menugridwnd.tvisible()
 	    && menu != null && menu.moonHandleScmKeys(ev))
@@ -2646,13 +2969,24 @@ public class GameUI extends ConsoleHost implements Console.Directory, UI.Notice.
 	    }
 	    return(true);
 	}
-	/* Dev: double transfer stress (plain K, no modifiers) — uses {@link Widget#ui} on this GameUI. */
-	if(ev.code == KeyEvent.VK_K && (ev.mods & (KeyMatch.S | KeyMatch.C | KeyMatch.M)) == 0) {
+	/* Dev: agnostic sync — plain K run; Shift+K cycle mode; Ctrl+K ORIGINAL; Alt+K DIRTY; Ctrl+Shift+K DOUBLE. */
+	if(ev.code == KeyEvent.VK_K) {
+	    int km = ev.mods & (KeyMatch.S | KeyMatch.C | KeyMatch.M);
 	    try {
-		System.out.println("Stress test triggered!");
-		MoonInventoryStress.stressTransferHotkey(GameUI.this, -1);
+		if(km == (KeyMatch.C | KeyMatch.S))
+		    MoonNetworkProfiler.setAgnosticSyncMode(MoonNetworkProfiler.AGNOSTIC_MODE_DOUBLE_TAKE);
+		else if(km == KeyMatch.C)
+		    MoonNetworkProfiler.setAgnosticSyncMode(MoonNetworkProfiler.AGNOSTIC_MODE_ORIGINAL);
+		else if(km == KeyMatch.M)
+		    MoonNetworkProfiler.setAgnosticSyncMode(MoonNetworkProfiler.AGNOSTIC_MODE_DIRTY_CONTEXT);
+		else if(km == KeyMatch.S)
+		    MoonNetworkProfiler.cycleAgnosticSyncMode();
+		else if(km == 0)
+		    MoonNetworkProfiler.executeAgnosticSyncHotkey(GameUI.this);
+		else
+		    return(super.globtype(ev));
 	    } catch(Throwable t) {
-		System.err.println("[MoonInventoryStress] " + t);
+		System.err.println("[MoonNetworkProfiler] " + t);
 	    }
 	    return(true);
 	}
@@ -2737,33 +3071,6 @@ public class GameUI extends ConsoleHost implements Console.Directory, UI.Notice.
 	if(kb_shoot.key().match(ev) && (Screenshooter.screenurl.get() != null)) {
 	    Screenshooter.take(this, Screenshooter.screenurl.get());
 	    return(true);
-	} else if(kb_mw_bot.key().match(ev)) {
-	    toggleMoonBotsWindow();
-	    return(true);
-	} else if(kb_mw_tpnav.key().match(ev)) {
-	    toggleMoonTeleportWindow();
-	    return(true);
-	} else if(kb_mw_rec.key().match(ev)) {
-	    togglesearch();
-	    return(true);
-	} else if(kb_mw_view.key().match(ev)) {
-	    showoptpanel(OptWnd::showOverlayPanel);
-	    return(true);
-	} else if(kb_mw_map.key().match(ev)) {
-	    toggleminimap();
-	    return(true);
-	} else if(kb_mw_fight.key().match(ev)) {
-	    showoptpanel(OptWnd::showCombatPanel);
-	    return(true);
-	} else if(kb_mw_chat.key().match(ev)) {
-	    togglechat();
-	    return(true);
-	} else if(kb_mw_perf.key().match(ev)) {
-	    showoptpanel(OptWnd::showPerformancePanel);
-	    return(true);
-	} else if(kb_mw_sys.key().match(ev)) {
-	    showoptpanel(OptWnd::showMainPanel);
-	    return(true);
 	} else if(kb_hide.key().match(ev)) {
 	    toggleui();
 	    return(true);
@@ -2773,30 +3080,8 @@ public class GameUI extends ConsoleHost implements Console.Directory, UI.Notice.
 	} else if(kb_switchchr.key().match(ev)) {
 	    act("lo", "cs");
 	    return(true);
-	} else if(kb_chat.key().match(ev)) {
-	    if(chatwnd != null && chatwnd.visible() && !chat.hasfocus) {
-		setfocus(chat);
-	    } else {
-		togglechat();
-	    }
-	    return(true);
 	} else if((ev.c == 27) && (map != null) && !map.hasfocus) {
 	    setfocus(map);
-	    return(true);
-	} else if(kb_inv.key().match(ev)) {
-	    toggleInventoryWindow();
-	    return(true);
-	} else if(kb_equ.key().match(ev)) {
-	    toggleEquipmentWindow();
-	    return(true);
-	} else if(kb_chr.key().match(ev)) {
-	    toggleCharacterWindow();
-	    return(true);
-	} else if(kb_bud.key().match(ev)) {
-	    toggleKinWindow();
-	    return(true);
-	} else if(matchesOptionsHotkey(ev)) {
-	    toggleOptionsWindow();
 	    return(true);
 	}
 	return(super.globtype(ev));
@@ -2854,6 +3139,10 @@ public class GameUI extends ConsoleHost implements Console.Directory, UI.Notice.
     }
 
     public void toggleui(int mode) {
+	/* MooNWide: skip the vanilla "hide absolutely everything" step.
+	 * With Moon panels replacing the old HUD, mode 2 leaves players in an almost empty world view. */
+	if(mode == 2)
+	    mode = 1;
 	Hidepanel[] panels = {blpanel, ulpanel, umpanel, urpanel};
 	switch(uimode = mode) {
 	case 0:
@@ -3004,6 +3293,7 @@ public class GameUI extends ConsoleHost implements Console.Directory, UI.Notice.
 
     public void resize(Coord sz) {
 	super.resize(sz);
+	ensureMoonHudPanels();
 	if(map != null)
 	    map.resize(sz);
 	if(prog != null)
@@ -3168,12 +3458,20 @@ public class GameUI extends ConsoleHost implements Console.Directory, UI.Notice.
 	    logged = ((LogMessage)msg).logmessage();
 	else
 	    logged = new ChatUI.Channel.SimpleMessage(msg.message(), msg.color());
-	msgtime = Utils.rtime();
-	lastmsgRaw = msg.message();
-	lastmsgCol = msg.color();
-	lastmsgTrGen = LocalizationManager.autoTranslateUiGenerationSampled();
-	MoonPerfOverlay.countTextRender();
-	lastmsg = RootWidget.msgfoundry.render(LocalizationManager.autoTranslateProcessed(lastmsgRaw), lastmsgCol);
+	String text = msg.message();
+	if((text != null) && !text.isEmpty()) {
+	    lastmsgRaw = text;
+	    lastmsgCol = (msg.color() != null) ? msg.color() : Color.WHITE;
+	    lastmsgTrGen = LocalizationManager.autoTranslateUiGenerationSampled();
+	    MoonPerfOverlay.countTextRender();
+	    if(lastmsg != null)
+		lastmsg.dispose();
+	    lastmsg = RootWidget.msgfoundry.render(LocalizationManager.autoTranslateProcessed(lastmsgRaw), lastmsgCol);
+	    msgtime = Utils.rtime();
+	} else {
+	    lastmsg = null;
+	    lastmsgRaw = null;
+	}
 	syslog.append(logged);
 	ui.sfxrl(msg.sfx());
 	return(true);

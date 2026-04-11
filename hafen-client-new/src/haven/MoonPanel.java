@@ -178,6 +178,8 @@ public class MoonPanel extends MovableWidget {
 
     @Override
     public void show() {
+	if(visible())
+	    return;
 	appear = 0.0;
 	super.show();
     }

@@ -313,6 +313,17 @@ public class Window extends Widget {
 	if(visible())
 	    parent.setfocus(this);
 	initanim();
+	GameUI gui = getparent(GameUI.class);
+	if(gui != null)
+	    gui.restoreMoonHudZOrder();
+    }
+
+    @Override
+    public void raise() {
+	super.raise();
+	GameUI gui = getparent(GameUI.class);
+	if(gui != null)
+	    gui.restoreMoonHudZOrder();
     }
 
     public void chcap(String cap) {
@@ -322,6 +333,7 @@ public class Window extends Widget {
     public void addchild(Widget child, Object... args) {
 	super.addchild(child, args);
 	MoonStorage.onWindowChildAdded(this, child);
+	MoonMisc.onWindowChildAdded(this);
     }
 
     public void cdestroy(Widget w) {

@@ -168,7 +168,10 @@ public class MapWnd extends Window implements Console.Directory {
     }
 
     private class ViewFrame extends Frame {
+	private static final Coord RESIZE_PAD = UI.scale(8, 8);
+	private static final Coord RESIZE_BOX = UI.scale(18, 18);
 	Coord sc = Coord.z;
+	private boolean resizehover = false;
 
 	ViewFrame() {
 	    super(Coord.z, true);
@@ -186,14 +189,56 @@ public class MapWnd extends Window implements Console.Directory {
 
 	public void resize(Coord sz) {
 	    super.resize(sz);
-	    sc = sz.sub(sizer.sz());
+	    sc = sz.sub(RESIZE_BOX);
 	}
 
 	public void draw(GOut g) {
 	    super.draw(g);
+	    drawResizeGrip(g);
 	}
 
 	public void drawframe(GOut g) {
+	}
+
+	private void drawResizeGrip(GOut g) {
+	    Coord br = sz.sub(1, 1);
+	    int step = UI.scale(4);
+	    int len = UI.scale(10);
+	    boolean active = resizehover || (drag != null);
+	    int alpha = active ? 255 : 170;
+	    int shadow = active ? 120 : 72;
+
+	    g.chcolor(12, 8, 24, shadow);
+	    for(int i = 0; i < 3; i++) {
+		int off = UI.scale(3) + (i * step);
+		g.line(Coord.of(br.x - len - off + UI.scale(1), br.y - off + UI.scale(1)),
+		    Coord.of(br.x - off + UI.scale(1), br.y - len - off + UI.scale(1)), 2);
+	    }
+
+	    g.chcolor(active ? 244 : 214, active ? 224 : 196, 255, alpha);
+	    for(int i = 0; i < 3; i++) {
+		int off = UI.scale(3) + (i * step);
+		g.line(Coord.of(br.x - len - off, br.y - off),
+		    Coord.of(br.x - off, br.y - len - off), 1);
+	    }
+
+	    g.chcolor(188, 146, 246, active ? 224 : 132);
+	    g.line(Coord.of(br.x - UI.scale(14), br.y), br, 1);
+	    g.line(Coord.of(br.x, br.y - UI.scale(14)), br, 1);
+	    g.chcolor();
+	}
+
+	private boolean resizehit(Coord c) {
+	    Coord plate = sc.sub(RESIZE_PAD);
+	    Coord psz = RESIZE_BOX.add(RESIZE_PAD.x * 2, RESIZE_PAD.y * 2);
+	    return(c.isect(plate, psz));
+	}
+
+	@Override
+	public Object tooltip(Coord c, Widget prev) {
+	    if(resizehit(c))
+		return("Drag corner to resize");
+	    return(super.tooltip(c, prev));
 	}
 
 	@Override
@@ -207,11 +252,12 @@ public class MapWnd extends Window implements Console.Directory {
 	private UI.Grab drag;
 	private Coord dragc;
 	public boolean mousedown(MouseDownEvent ev) {
-	    Coord c = ev.c, cc = c.sub(sc);
-	    if((ev.b == 1) && compact() && (cc.x < sizer.sz().x) && (cc.y < sizer.sz().y) && (cc.y >= sizer.sz().y - UI.scale(25) + (sizer.sz().x - cc.x))) {
+	    Coord c = ev.c;
+	    if((ev.b == 1) && resizehit(c)) {
 		if(drag == null) {
 		    drag = ui.grabmouse(this);
 		    dragc = csz().sub(parentpos(MapWnd.this, c));
+		    resizehover = true;
 		    return(true);
 		}
 	    }
@@ -225,10 +271,11 @@ public class MapWnd extends Window implements Console.Directory {
 
 	public void mousemove(MouseMoveEvent ev) {
 	    super.mousemove(ev);
+	    resizehover = resizehit(ev.c);
 	    if(drag != null) {
 		Coord nsz = parentpos(MapWnd.this, ev.c).add(dragc);
-		nsz.x = Math.max(nsz.x, UI.scale(150));
-		nsz.y = Math.max(nsz.y, UI.scale(150));
+		nsz.x = Math.max(nsz.x, UI.scale(260));
+		nsz.y = Math.max(nsz.y, UI.scale(220));
 		MapWnd.this.resize(nsz);
 	    }
 	}
@@ -237,6 +284,7 @@ public class MapWnd extends Window implements Console.Directory {
 	    if((ev.b == 1) && (drag != null)) {
 		drag.remove();
 		drag = null;
+		resizehover = resizehit(ev.c);
 		return(true);
 	    }
 	    return(super.mouseup(ev));

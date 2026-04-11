@@ -3,6 +3,8 @@ package haven;
 import static haven.OCache.posres;
 
 import java.util.Locale;
+import java.util.List;
+import managers.combat.CombatManager;
 
 /**
  * Client-side combat automation. Modes: legacy keywords ({@link MoonConfig#combatBotBrainMode} 0),
@@ -16,21 +18,21 @@ public class MoonCombatBot {
     private static final MoonCombatBrainState combatBrain = new MoonCombatBrainState();
 
     public static void tick(GameUI gui, double dt) {
-	if(!MoonConfig.combatBot)
+	if(!MoonConfig.combatBot) {
+	    reset();
 	    return;
+	}
 	if(gui == null || gui.fv == null)
 	    return;
 
 	Fightview fv = gui.fv;
-	if(fv.lsrel == null || fv.lsrel.isEmpty())
+	if(fv.lsrel == null || fv.lsrel.isEmpty()) {
+	    combatBrain.endFight();
+	    MoonCombatEngine.endFight();
 	    return;
+	}
 
 	double now = Utils.rtime();
-
-	if(fv.atkct > 0 && now < fv.atkct)
-	    return;
-	if(now - lastActionTime < 0.36)
-	    return;
 
 	Fightview.Relation target = fv.current;
 	if(target == null && !fv.lsrel.isEmpty())
@@ -49,14 +51,38 @@ public class MoonCombatBot {
 	}
 	observeOpponentPlay(target);
 
-	int slot = pickActionSlot(fs, fv, target, now);
+	MoonFightCombatContext ctx = MoonFightCombatContext.capture(fs, fv, target, now);
+	MoonCombatEngine.CombatState state = MoonCombatEngine.captureState(gui, fv, target, ctx);
+	MoonCombatEngine.observeState(state);
+
+	if(!MoonCombatEngine.shouldEvaluate(now))
+	    return;
+
+	if(fv.atkct > 0 && now < fv.atkct)
+	    return;
+	if(now - lastActionTime < localActionGapSec())
+	    return;
+
+	List<MoonCombatEngine.ActionProfile> profiles = MoonCombatEngine.scanDeck(state, ctx);
+	MoonCombatEngine.Decision decision = (MoonConfig.combatBotBrainMode > 0)
+	    ? MoonCombatEngine.evaluateBestMove(state, profiles)
+	    : null;
+
+	int slot = (decision != null) ? decision.action.slot : pickActionSlot(fs, fv, target, now, ctx);
 	if(slot < 0)
 	    return;
 
 	try {
-	    logDecisionIfNeeded(fs, fv, target, slot, now);
+	    MoonCombatEngine.ActionProfile action = (decision != null) ? decision.action : MoonCombatEngine.findProfile(profiles, slot);
+	    double score = (decision != null) ? decision.totalScore : estimateChosenScore(ctx, slot);
+	    String note = (decision != null) ? decision.reason : "";
+	    logDecisionIfNeeded(fs, fv, target, slot, now, score, note);
 	    recordSelfCard(fs, slot);
 	    sendUse(fs, gui, fv, slot);
+	    if(action != null) {
+		MoonCombatEngine.notePlayed(state, action, now);
+		MoonAutomationRegistry.noteAction("combat", "play " + action.signature() + (note.isEmpty() ? "" : " | " + note));
+	    }
 	    lastActionTime = now;
 	} catch(Exception e) {
 	    new Warning(e, "CombatBot use error").issue();
@@ -92,7 +118,8 @@ public class MoonCombatBot {
 	combatBrain.recordSelfSlot(slot);
     }
 
-    private static void logDecisionIfNeeded(Fightsess fs, Fightview fv, Fightview.Relation rel, int slot, double now) {
+    private static void logDecisionIfNeeded(Fightsess fs, Fightview fv, Fightview.Relation rel, int slot, double now,
+	double chosenScore, String note) {
 	if(!MoonConfig.combatBotLogAi || rel == null)
 	    return;
 	String rn = "";
@@ -103,21 +130,10 @@ public class MoonCombatBot {
 		    rn = r.name;
 	    }
 	} catch(Loading ignored) {}
-	MoonFightCombatContext ctx = MoonFightCombatContext.capture(fs, fv, rel, now);
-	double score = 0;
-	if(slot >= 0) {
-	    for(MoonFightCombatContext.HandCard c : ctx.hand) {
-		if(c.slot != slot || !c.ready)
-		    continue;
-		score = MoonCombatAI.MoonCardEvaluator.score(c, ctx, combatBrain)
-		    + MoonCombatAI.MoonCombatDecisionMaker.wSynergy * MoonCombatAI.MoonSynergyAnalyzer.bonusFromHistory(combatBrain, c)
-		    + MoonCombatAI.MoonCombatDecisionMaker.wPressure * MoonCombatAI.MoonBreachCalculator.expectedPressure(c, ctx)
-		    + MoonCombatAI.MoonCombatDecisionMaker.wCounter * MoonCombatAI.MoonOpponentPredictor.counterDefenseBonus(c, ctx, combatBrain);
-		break;
-	    }
-	}
-	MoonCombatLogger.logDecision(MoonConfig.combatBotBrainMode, slot, rn, score, rel.ip, rel.oip,
-	    MoonCombatTables.lastLoadError());
+	String extra = MoonCombatTables.lastLoadError();
+	if(note != null && !note.isEmpty())
+	    extra = ((extra == null || extra.isEmpty()) ? note : (extra + " | " + note));
+	MoonCombatLogger.logDecision(MoonConfig.combatBotBrainMode, slot, rn, chosenScore, rel.ip, rel.oip, extra);
     }
 
     private static void sendUse(Fightsess fs, GameUI gui, Fightview fv, int slot) {
@@ -172,8 +188,7 @@ public class MoonCombatBot {
 	}
     }
 
-    private static int pickActionSlot(Fightsess fs, Fightview fv, Fightview.Relation rel, double now) {
-	MoonFightCombatContext ctx = MoonFightCombatContext.capture(fs, fv, rel, now);
+    private static int pickActionSlot(Fightsess fs, Fightview fv, Fightview.Relation rel, double now, MoonFightCombatContext ctx) {
 	combatBrain.observeReadyOpeningInHand(MoonCombatAI.countReadyOpeningArchetypeInHand(ctx));
 	if(MoonConfig.combatBotBrainMode == 0)
 	    return pickLegacySlot(fs, rel, now, ctx);
@@ -253,5 +268,30 @@ public class MoonCombatBot {
 	lastActionTime = 0;
 	prevOppLastUse = -1e9;
 	lastOppGob = Long.MIN_VALUE;
+	combatBrain.endFight();
+	MoonCombatEngine.reset();
+    }
+
+    public static String statusSummary() {
+	return MoonCombatEngine.statusSummary();
+    }
+
+    private static double localActionGapSec() {
+	double configured = CombatManager.getAttackCooldownMs() / 1000.0;
+	return Utils.clip(configured * 0.20, 0.08, 0.14);
+    }
+
+    private static double estimateChosenScore(MoonFightCombatContext ctx, int slot) {
+	if(slot < 0 || ctx == null)
+	    return 0;
+	for(MoonFightCombatContext.HandCard c : ctx.hand) {
+	    if(c.slot != slot || !c.ready)
+		continue;
+	    return MoonCombatAI.MoonCardEvaluator.score(c, ctx, combatBrain)
+		+ MoonCombatAI.MoonCombatDecisionMaker.wSynergy * MoonCombatAI.MoonSynergyAnalyzer.bonusFromHistory(combatBrain, c)
+		+ MoonCombatAI.MoonCombatDecisionMaker.wPressure * MoonCombatAI.MoonBreachCalculator.expectedPressure(c, ctx)
+		+ MoonCombatAI.MoonCombatDecisionMaker.wCounter * MoonCombatAI.MoonOpponentPredictor.counterDefenseBonus(c, ctx, combatBrain);
+	}
+	return 0;
     }
 }

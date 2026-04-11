@@ -14,4 +14,9 @@ public class MoonMiscDeco extends Window.MinimalDeco {
     protected String lockKey() {
 	return "wlock-moonmisc-" + id;
     }
+
+    public boolean sameId(String wndid) {
+	String other = (wndid != null && !wndid.isEmpty()) ? wndid : "misc";
+	return id.equals(other);
+    }
 }

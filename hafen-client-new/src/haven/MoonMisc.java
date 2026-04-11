@@ -47,7 +47,21 @@ public final class MoonMisc {
 	if(!isBeltOrKeyring(w, wndid) && !isMiscStorage(w, wndid))
 	    return;
 	String id = (wndid != null && !wndid.isEmpty()) ? wndid : "misc";
+	if((w.deco instanceof MoonMiscDeco) && ((MoonMiscDeco)w.deco).sameId(id))
+	    return;
 	w.chdeco(new MoonMiscDeco(id));
+    }
+
+    private static void refreshEligibleWindow(GameUI gui, Window w, boolean raise) {
+	if(gui == null || w == null)
+	    return;
+	String wndid = gui.miscWndIdFor(w);
+	if(!isBeltOrKeyring(w, wndid) && !isMiscStorage(w, wndid))
+	    return;
+	applyIfEligible(w, wndid);
+	gui.fitwdg(w);
+	if(raise && w.visible())
+	    w.raise();
     }
 
     /** Heuristic: misc windows that are inventories in world objects (not main inv / craft-only). */
@@ -78,10 +92,8 @@ public final class MoonMisc {
 	if(gui == null)
 	    return;
 	for(Widget ch = gui.child; ch != null; ch = ch.next) {
-	    if(ch instanceof Window) {
-		Window w = (Window)ch;
-		applyIfEligible(w, gui.miscWndIdFor(w));
-	    }
+	    if(ch instanceof Window)
+		refreshEligibleWindow(gui, (Window)ch, false);
 	}
     }
 
@@ -93,6 +105,13 @@ public final class MoonMisc {
 	GameUI gui = w.getparent(GameUI.class);
 	if(gui == null)
 	    return;
-	applyIfEligible(w, gui.miscWndIdFor(w));
+	refreshEligibleWindow(gui, w, false);
+    }
+
+    public static void onWindowChildAdded(Window w) {
+	GameUI gui = w.getparent(GameUI.class);
+	if(gui == null)
+	    return;
+	refreshEligibleWindow(gui, w, true);
     }
 }

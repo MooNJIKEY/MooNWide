@@ -364,6 +364,21 @@ public final class MoonAutoDrop {
 	nextStep = now + STEP_SEC;
     }
 
+    public static boolean isBusy() {
+	return pendingDrop;
+    }
+
+    public static String statusSummary() {
+	int count = selectedIds().size();
+	if(!MoonConfig.mineAutoDropEnabled)
+	    return("disabled");
+	if(count <= 0)
+	    return("enabled, no categories");
+	if(pendingDrop)
+	    return("dropping item (" + count + " cats)");
+	return("armed (" + count + " cats)");
+    }
+
     private static void scheduleIdle(double now) {
 	nextStep = now + IDLE_POLL_SEC;
     }

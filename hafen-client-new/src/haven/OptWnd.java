@@ -1417,6 +1417,7 @@ public class OptWnd extends Window {
 	    y = addbtn(cont, LocalizationManager.tr("keybind.mw.daylight"), MoonKeybinds.kb_toggleAlwaysDaylight, y);
 	    y = addbtn(cont, LocalizationManager.tr("keybind.mw.qual-objs"), MoonKeybinds.kb_toggleQualityObjects, y);
 	    y = addbtn(cont, LocalizationManager.tr("keybind.mw.crop-hide"), MoonKeybinds.kb_toggleCropHide, y);
+	    y = addbtn(cont, LocalizationManager.tr("keybind.mw.camera-cycle"), MoonKeybinds.kb_cycleCameraMode, y);
 	    y = addbtn(cont, LocalizationManager.tr("keybind.mw.speed-wire-panel"), MoonKeybinds.kb_toggleSpeedWirePanel, y);
 	    y = addbtn(cont, LocalizationManager.tr("keybind.mw.tpnav"), GameUI.kb_mw_tpnav, y);
 	    y = addbtn(cont, LocalizationManager.tr("keybind.mw.tp-quick1"), MoonKeybinds.kb_tp_quick1, y);
@@ -3555,6 +3556,24 @@ public class OptWnd extends Window {
 			    gui.reloadAllItemQualityOverlays();
 		    }
 		}, prev.pos("bl").adds(0, 8).x(0));
+
+	    prev = cont.add(new CheckBox(moonText("Показывать прочность предметов", "Show item durability overlay")) {
+		    { a = MoonConfig.itemDurabilityOverlay; }
+		    public void set(boolean val) {
+			MoonConfig.setItemDurabilityOverlay(val);
+			a = val;
+			reload.run();
+		    }
+		}, prev.pos("bl").adds(0, 5).x(0));
+
+	    prev = cont.add(new CheckBox(moonText("Показывать броню на предметах", "Show item armor overlay")) {
+		    { a = MoonConfig.itemArmorOverlay; }
+		    public void set(boolean val) {
+			MoonConfig.setItemArmorOverlay(val);
+			a = val;
+			reload.run();
+		    }
+		}, prev.pos("bl").adds(0, 5).x(0));
 
 	    prev = cont.add(new CheckBox(LocalizationManager.tr("moon.inv.qual.rounded")) {
 		    { a = MoonConfig.invQualityRounded; }

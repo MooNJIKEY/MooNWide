@@ -114,6 +114,8 @@ public class MoonEquWnd extends MovableWidget {
 
     @Override
     public void show() {
+	if(visible())
+	    return;
 	appear = 0.0;
 	super.show();
     }

@@ -33,7 +33,6 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import haven.resutil.FoodInfo;
-import haven.sloth.gui.MovableWidget;
 import static haven.CharWnd.*;
 import static haven.PUtils.*;
 
@@ -281,8 +280,8 @@ public class BAttrWnd extends Widget {
 	}
     }
 
-    /** FEP bar on character sheet (movable prefs {@code wpos-meter-fep-chr}). */
-    public static class FoodMeter extends MovableWidget {
+    /** FEP bar on the character sheet. This embedded meter is fixed in place. */
+    public static class FoodMeter extends Widget {
 	public static final Tex frame =  Resource.loadtex("gfx/hud/chr/foodm");
 	public static final Coord marg = new Coord(5, 5), trmg = new Coord(10, 10);
 	public double cap;
@@ -336,13 +335,7 @@ public class BAttrWnd extends Widget {
 	};
 
 	public FoodMeter() {
-	    /* Distinct from HUD {@link FepMeter} typed pref {@code wpos-meter-fep}. */
-	    this("meter-fep-chr");
-	}
-
-	/** @param movableKey pref keys {@code wpos-}{@code key}, {@code wlock-}{@code key}. */
-	public FoodMeter(String movableKey) {
-	    super(frame.sz(), movableKey);
+	    super(frame.sz());
 	}
 
 	private BufferedImage mktrol(List<El> els, Indir<Resource> trev) {
@@ -516,7 +509,8 @@ public class BAttrWnd extends Widget {
 	attrs.add(aw = add(new Attr(glob, "psy", every), aw.pos("bl")));
 	prev = Frame.around(this, attrs);
 	prev = add(CharWnd.settip(new HeaderImg("chr-hdr-fep", "chr.hdr.fep", width, UI.scale(58)), "gfx/hud/chr/tips/fep"), prev.pos("bl").x(0).adds(0, 12));
-	feps = add(new FoodMeter(), prev.pos("bl").adds(8, 2));
+	Coord fepc = prev.pos("bl").adds(8, 2);
+	feps = add(new FoodMeter(), fepc);
 
 	int ah = attrs.get(attrs.size() - 1).pos("bl").y - attrs.get(0).pos("ul").y;
 	prev = add(CharWnd.settip(new HeaderImg("chr-hdr-satiations", "chr.hdr.satiations", width, UI.scale(58)), "gfx/hud/chr/tips/constip"), width, 0);

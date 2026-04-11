@@ -36,13 +36,19 @@ public class MoonBotsWnd extends MoonChatStylePanel {
 		add(new BotCell("bot.mine", () -> openMineBot(), LocalizationManager.tr("bots.hub.mine.tip")), p);
 		break;
 	    case 4:
-		add(new BotCell("bot.fish", null, LocalizationManager.tr("bots.placeholder.fish")), p);
+		add(new BotCell("bot.fish", () -> openFishingBot(), text("Рыбалка: точка воды, цикл cast/wait/retry и диагностика." ,
+		    "Fishing: water tile, cast/wait/retry cycle, and diagnostics.")), p);
 		break;
 	    default:
-		add(new BotCell("bot.more", null, LocalizationManager.tr("bots.placeholder.more")), p);
+		add(new BotCell("bot.more", () -> openAutomationTools(), text("Automation Tools: assist-модули, legacy queue и JNI-статус.",
+		    "Automation Tools: assists, legacy queue, and JNI status.")), p);
 		break;
 	    }
 	}
+    }
+
+    private static String text(String ru, String en) {
+	return MoonL10n.LANG_RU.equals(MoonL10n.lang()) ? ru : en;
     }
 
     private static Coord contentInnerSz() {
@@ -83,21 +89,19 @@ public class MoonBotsWnd extends MoonChatStylePanel {
     }
 
     private void openTreeSettings() {
-	if(gui.moonTreeBotWnd != null) {
-	    gui.moonTreeBotWnd.raise();
-	    gui.setfocus(gui.moonTreeBotWnd);
-	    return;
-	}
-	MoonTreeBotWnd w = new MoonTreeBotWnd(gui);
-	Coord c = gui.fitwdg(w, new Coord(gui.sz.x / 2 - w.sz.x / 2, UI.scale(90)));
-	gui.moonTreeBotWnd = gui.add(w, c);
-	gui.fitwdg(gui.moonTreeBotWnd);
-	gui.moonTreeBotWnd.raise();
-	gui.setfocus(gui.moonTreeBotWnd);
+	gui.openMoonTreeBotWindow();
     }
 
     private void openMineBot() {
 	gui.openMoonMineBotWindow();
+    }
+
+    private void openFishingBot() {
+	gui.openMoonFishingBotWindow();
+    }
+
+    private void openAutomationTools() {
+	gui.openMoonAutomationToolsWindow();
     }
 
     private static class BotCell extends Widget {

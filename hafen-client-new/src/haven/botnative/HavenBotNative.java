@@ -10,6 +10,8 @@ import haven.GameUI;
 public final class HavenBotNative {
     private static volatile boolean loaded;
     private static volatile boolean nativeReady;
+    private static volatile String loadError = "";
+    private static volatile String loadTarget = "";
 
     static {
 	tryLoad();
@@ -21,21 +23,35 @@ public final class HavenBotNative {
 	String explicit = System.getProperty("haven.botnative.lib", "").trim();
 	try {
 	    if(!explicit.isEmpty()) {
+		loadTarget = explicit;
 		System.load(explicit);
 	    } else {
+		loadTarget = "havenbot";
 		System.loadLibrary("havenbot");
 	    }
 	    nativeReady = nInit();
 	    loaded = true;
-	} catch(UnsatisfiedLinkError e) {
+	    loadError = nativeReady ? "" : "nInit returned false";
+	} catch(Throwable e) {
 	    loaded = false;
 	    nativeReady = false;
+	    loadError = e.toString();
 	}
     }
 
     /** True when {@code havenbot} loaded and C++ {@code nInit} succeeded. */
     public static boolean isAvailable() {
 	return loaded && nativeReady;
+    }
+
+    /** Reason why the bridge is unavailable; empty on success. */
+    public static String loadError() {
+	return loadError;
+    }
+
+    /** Explicit DLL path or logical library name used for the last load attempt. */
+    public static String loadTarget() {
+	return loadTarget;
     }
 
     /** Short native build id (UTF-8); empty if unavailable. */

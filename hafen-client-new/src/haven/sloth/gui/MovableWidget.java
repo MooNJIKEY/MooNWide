@@ -67,11 +67,28 @@ public abstract class MovableWidget extends Widget {
         }
     }
 
+    /** Clamp to parent bounds immediately and persist the corrected position when it changed. */
+    public boolean clampToParentBounds() {
+        if(parent == null || parent.sz == null)
+            return false;
+        Coord before = new Coord(c);
+        keepInParent();
+        if(!c.equals(before)) {
+            savePosition();
+            return true;
+        }
+        return false;
+    }
+
     @Override
     protected void added() {
         if (loadPosition)
             loadPosition();
         super.added();
+        Coord before = new Coord(c);
+        keepInParent();
+        if (!c.equals(before))
+            savePosition();
     }
 
     /** Ctrl+right click to start drag. */

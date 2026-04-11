@@ -29,6 +29,7 @@ package haven;
 import java.util.*;
 import java.util.function.*;
 import haven.render.*;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import haven.ItemInfo.AttrCache;
@@ -37,6 +38,10 @@ import static haven.Inventory.sqsz;
 
 public class WItem extends Widget implements DTarget {
     public static final Resource missing = Resource.local().loadwait("gfx/invobjs/missing");
+    private static final Color ARMOR_COLOR = new Color(255, 230, 170);
+    private static final Color DURABILITY_EMPTY = new Color(222, 74, 84);
+    private static final Color DURABILITY_MID = new Color(242, 194, 76);
+    private static final Color DURABILITY_FULL = new Color(118, 226, 146);
     public final GItem item;
     private Resource cspr = null;
     private Message csdt = Message.nil;
@@ -136,6 +141,17 @@ public class WItem extends Widget implements DTarget {
 	    return(() -> ret);
 	});
     public final AttrCache<Double> itemmeter = new AttrCache<>(this::info, AttrCache.map1(GItem.MeterInfo.class, minf -> minf::meter));
+    public final AttrCache<MoonItemStats.WearInfo> itemwear = new AttrCache<>(this::info, info -> {
+	    MoonItemStats.WearInfo wear = MoonItemStats.wear(info);
+	    return(() -> wear);
+	});
+    public final AttrCache<Tex> itemarmor = new AttrCache<>(this::info, info -> {
+	    MoonItemStats.ArmorInfo armor = MoonItemStats.armor(info);
+	    if(armor == null)
+		return(() -> null);
+	    Tex tex = moonTextTex(String.format("%d/%d", armor.hard, armor.soft), ARMOR_COLOR);
+	    return(() -> tex);
+	});
     /** Cached Q; keyed by {@link GItem#infoseq} (not list identity) so we never keep a stale null after tt/contents updates. */
     private int moonqSeq = -1;
     private Double moonqVal = null;
@@ -144,7 +160,7 @@ public class WItem extends Widget implements DTarget {
 	int seq = item.infoseq;
 	if(seq != moonqSeq) {
 	    try {
-		double q = MoonItemQuality.readQ(item.info());
+		double q = MoonItemQuality.readQ(item);
 		moonqSeq = seq;
 		moonqVal = (q > 0) ? Double.valueOf(q) : null;
 	    } catch(Loading l) {
@@ -208,6 +224,7 @@ public class WItem extends Widget implements DTarget {
 	    if(MoonConfig.qualityObjects) {
 		try { drawQuality(g, sz); } catch(Exception ignored) {}
 	    }
+	    try { drawItemStats(g, sz); } catch(Exception ignored) {}
 	} else {
 	    g.image(missing.layer(Resource.imgc).tex(), Coord.z, sz);
 	}
@@ -220,13 +237,80 @@ public class WItem extends Widget implements DTarget {
 	invQualCache.draw(g, sz, q.doubleValue());
     }
 
-    /** Slots that only call {@link #drawmain} (e.g. hands toolbar mirror) still show Q when enabled. */
-    void moonDrawInventoryQualityMirror(GOut g, Coord sz) {
-	if(!MoonConfig.qualityObjects)
+    private static Tex moonTextTex(String text, Color color) {
+	return(new TexI(Utils.outline2(Text.render(text, color).img, Color.BLACK)));
+    }
+
+    private static void drawBadge(GOut g, Coord pos, Tex tex) {
+	if(tex == null)
 	    return;
+	g.chcolor(10, 8, 18, 170);
+	g.frect(pos, tex.sz().add(1, -1));
+	g.chcolor();
+	g.image(tex, pos);
+    }
+
+    private static Color blend(Color a, Color b, double t) {
+	t = Utils.clip(t, 0.0, 1.0);
+	return(new Color(
+	    (int)Math.round(a.getRed() + ((b.getRed() - a.getRed()) * t)),
+	    (int)Math.round(a.getGreen() + ((b.getGreen() - a.getGreen()) * t)),
+	    (int)Math.round(a.getBlue() + ((b.getBlue() - a.getBlue()) * t)),
+	    (int)Math.round(a.getAlpha() + ((b.getAlpha() - a.getAlpha()) * t))
+	));
+    }
+
+    private static Color durabilityColor(double ratio) {
+	if(ratio <= 0.5)
+	    return(blend(DURABILITY_EMPTY, DURABILITY_MID, ratio * 2.0));
+	return(blend(DURABILITY_MID, DURABILITY_FULL, (ratio - 0.5) * 2.0));
+    }
+
+    private static void drawDurabilityBar(GOut g, Coord sz, MoonItemStats.WearInfo wear) {
+	if(wear == null || wear.max <= 0)
+	    return;
+	double ratio = Utils.clip((double)wear.remaining() / (double)wear.max, 0.0, 1.0);
+	int h = Math.max(1, UI.scale(2));
+	int w = Math.max(3, sz.x - 2);
+	int y = Math.max(0, sz.y - h);
+	int x = 1;
+	int fill = Math.max(0, (int)Math.round(w * ratio));
+	g.chcolor(8, 8, 16, 180);
+	g.frect(Coord.of(x, y), Coord.of(w, h));
+	if(fill > 0) {
+	    Color col = durabilityColor(ratio);
+	    g.chcolor(col);
+	    g.frect(Coord.of(x, y), Coord.of(fill, h));
+	}
+	g.chcolor(255, 255, 255, 42);
+	g.line(Coord.of(x, y), Coord.of(x + w, y), 1);
+	g.chcolor();
+    }
+
+    /** Slots that only call {@link #drawmain} (e.g. hands toolbar mirror) still show item overlays. */
+    void moonDrawInventoryQualityMirror(GOut g, Coord sz) {
+	if(MoonConfig.qualityObjects) {
+	    try {
+		drawQuality(g, sz);
+	    } catch(Exception ignored) {}
+	}
 	try {
-	    drawQuality(g, sz);
+	    drawItemStats(g, sz);
 	} catch(Exception ignored) {}
+    }
+
+    private void drawItemStats(GOut g, Coord sz) {
+	MoonItemStats.WearInfo wear = itemwear.get();
+	if(MoonConfig.itemDurabilityOverlay) {
+	    drawDurabilityBar(g, sz, wear);
+	}
+	if(MoonConfig.itemArmorOverlay) {
+	    Tex armor = itemarmor.get();
+	    if(armor != null) {
+		int pad = (MoonConfig.itemDurabilityOverlay && wear != null) ? (Math.max(1, UI.scale(2)) + 1) : 0;
+		drawBadge(g, Coord.of(0, Math.max(0, sz.y - armor.sz().y - pad)), armor);
+	    }
+	}
     }
 
     public boolean mousedown(MouseDownEvent ev) {
