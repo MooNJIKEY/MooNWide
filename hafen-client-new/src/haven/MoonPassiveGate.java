@@ -16,9 +16,11 @@ public final class MoonPassiveGate {
     private static final double SEARCH_RADIUS = 40 * 11;
     private static final double PASS_LATERAL_CLAMP = 4;
     private static final double PASS_OFFSET = 18;
+    private static final double APPROACH_OFFSET = 14;
     private static final double CROSSING_HALF_WIDTH = 12;
     private static final double BIG_PASS_LATERAL_CLAMP = 12;
     private static final double BIG_PASS_OFFSET = 34;
+    private static final double BIG_APPROACH_OFFSET = 28;
     private static final double BIG_CROSSING_HALF_WIDTH = 32;
     private static final double FUZZY_SEGMENT_RADIUS = 34;
     private static final double SEGMENT_PAD = BIG_CROSSING_HALF_WIDTH + BIG_PASS_OFFSET + 8;
@@ -66,6 +68,7 @@ public final class MoonPassiveGate {
 
     public static final class Assist {
 	public final long gateId;
+	public final Coord2d approachTarget;
 	public final Coord2d target;
 	public final Coord2d finalTarget;
 	public final String gateName;
@@ -74,10 +77,11 @@ public final class MoonPassiveGate {
 	private final double approachRadius;
 	private final double closeRadius;
 
-	private Assist(Gob gate, String gateName, Coord2d target, Coord2d finalTarget, boolean bigGate) {
+	private Assist(Gob gate, String gateName, Coord2d approachTarget, Coord2d target, Coord2d finalTarget, boolean bigGate) {
 	    Coord2d localTarget = target.sub(gate.rc).rot(-gate.a);
 	    this.gateId = gate.id;
 	    this.gateName = gateName;
+	    this.approachTarget = approachTarget;
 	    this.target = target;
 	    this.finalTarget = finalTarget;
 	    this.bigGate = bigGate;
@@ -358,21 +362,43 @@ public final class MoonPassiveGate {
 	return (gate != null && gate.big) ? BIG_CROSSING_HALF_WIDTH : CROSSING_HALF_WIDTH;
     }
 
-    private static Coord2d destinationBeyondGate(Coord2d playerRc, Gob gate, GateDecision decision, double crossY) {
+    private static double passOffset(GateDecision decision) {
+	return (decision != null && decision.big) ? BIG_PASS_OFFSET : PASS_OFFSET;
+    }
+
+    private static double approachOffset(GateDecision decision) {
+	return (decision != null && decision.big) ? BIG_APPROACH_OFFSET : APPROACH_OFFSET;
+    }
+
+    private static double lateralClamp(GateDecision decision) {
+	return (decision != null && decision.big) ? BIG_PASS_LATERAL_CLAMP : PASS_LATERAL_CLAMP;
+    }
+
+    private static double passDirection(Coord2d playerRc, Gob gate) {
 	Coord2d playerLocal = playerRc.sub(gate.rc).rot(-gate.a);
-	double direction = (playerLocal.x <= 0) ? 1.0 : -1.0;
-	double lateral = (decision != null && decision.big) ? BIG_PASS_LATERAL_CLAMP : PASS_LATERAL_CLAMP;
-	double pass = (decision != null && decision.big) ? BIG_PASS_OFFSET : PASS_OFFSET;
-	double y = Math.max(-lateral, Math.min(lateral, crossY));
-	return gate.rc.add(new Coord2d(direction * pass, y).rot(gate.a));
+	return (playerLocal.x <= 0) ? 1.0 : -1.0;
+    }
+
+    private static Coord2d destinationBeyondGate(Coord2d playerRc, Gob gate, GateDecision decision, double crossY) {
+	double direction = passDirection(playerRc, gate);
+	double y = Math.max(-lateralClamp(decision), Math.min(lateralClamp(decision), crossY));
+	return gate.rc.add(new Coord2d(direction * passOffset(decision), y).rot(gate.a));
+    }
+
+    private static Coord2d approachBeforeGate(Coord2d playerRc, Gob gate, GateDecision decision, double crossY) {
+	double direction = passDirection(playerRc, gate);
+	double y = Math.max(-lateralClamp(decision), Math.min(lateralClamp(decision), crossY));
+	return gate.rc.add(new Coord2d(-direction * approachOffset(decision), y).rot(gate.a));
     }
 
     private static Assist createAssist(Coord2d playerRc, Gob gate, GateDecision decision, double crossY, Coord2d finalTarget) {
+	Coord2d approach = approachBeforeGate(playerRc, gate, decision, crossY);
 	Coord2d target = destinationBeyondGate(playerRc, gate, decision, crossY);
 	String gateName = (decision == null || decision.name == null) ? "gate" : decision.name;
 	boolean big = decision != null && decision.big;
-	return new Assist(gate, gateName, target, (finalTarget == null) ? target : finalTarget, big);
+	return new Assist(gate, gateName, approach, target, (finalTarget == null) ? target : finalTarget, big);
     }
+
 
     private static void debug(String line) {
 	if(line == null || line.isBlank())

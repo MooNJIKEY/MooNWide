@@ -105,10 +105,11 @@ public class MapView extends PView implements DTarget, Console.Directory {
     private static final double MOON_AUTOMOVE_CLICK_MIN_DT = 0.06;
     private static final double MOVE_TRACE_MIN_VISIBLE_DT = 0.35;
     private static final double MOON_GATE_ASSIST_PRECLICK_TIMEOUT = 0.65;
-    private static final double MOON_GATE_ASSIST_RETRY_DT = 0.22;
+    private static final double MOON_GATE_ASSIST_RETRY_DT = 0.12;
     private static final double MOON_GATE_ASSIST_CLOSE_DT = 0.01;
-    private static final double MOON_GATE_ASSIST_EXPIRE_DT = 3.0;
+    private static final double MOON_GATE_ASSIST_EXPIRE_DT = 8.0;
     private static final double MOON_GATE_ASSIST_SUPPRESS_DT = 0.90;
+    private static final int MOON_GATE_ASSIST_PASS_RETRIES = 8;
     private static final int MOON_GATE_STAGE_OPEN = 0;
     private static final int MOON_GATE_STAGE_PASS = 1;
     private static final int MOON_GATE_STAGE_CLOSE = 2;
@@ -133,6 +134,7 @@ public class MapView extends PView implements DTarget, Console.Directory {
     private double moonGateAssistStartedAt = 0.0;
     private double moonGateAssistNextAt = 0.0;
     private boolean moonGateAssistCrossed = false;
+    private boolean moonGateAssistOpenSent = false;
     private boolean moonGateAssistCloseSent = false;
     private long moonGateSuppressId = 0L;
     private double moonGateSuppressUntil = 0.0;
@@ -305,6 +307,7 @@ public class MapView extends PView implements DTarget, Console.Directory {
 	moonGateAssistStartedAt = 0.0;
 	moonGateAssistNextAt = 0.0;
 	moonGateAssistCrossed = false;
+	moonGateAssistOpenSent = false;
 	moonGateAssistCloseSent = false;
     }
 
@@ -342,9 +345,29 @@ public class MapView extends PView implements DTarget, Console.Directory {
 	int sendMods = mods & ~UI.MOD_META;
 	Boolean open = assist.gateLikelyOpen(this);
 	boolean needOpen = (open == null) || !open.booleanValue();
-	if(needOpen && !moonSendGateUseClick(assist)) {
-	    MoonPassiveGate.noteBlocked("open failed");
-	    return(false);
+	Gob player = player();
+	if(needOpen && (player == null || !assist.playerNearGate(this, player))) {
+	    if(!moonSyntheticMapClick(assist.approachTarget, null, 1, sendMods)) {
+		MoonPassiveGate.noteBlocked("approach failed");
+		return(false);
+	    }
+	    moonGateAssist = assist;
+	    moonGateAssistMods = sendMods;
+	    moonGateAssistStage = MOON_GATE_STAGE_OPEN;
+	    moonGateAssistAttempts = 1;
+	    moonGateAssistStartedAt = now;
+	    moonGateAssistNextAt = now + 0.35;
+	    moonGateAssistCrossed = false;
+	    moonGateAssistOpenSent = false;
+	    moonGateAssistCloseSent = false;
+	    MoonPassiveGate.noteAction("approach open " + assist.gateName);
+	    return(true);
+	}
+	if(needOpen) {
+	    if(!moonSendGateUseClick(assist)) {
+		MoonPassiveGate.noteBlocked("open failed");
+		return(false);
+	    }
 	}
 	if(!moonSyntheticMapClick(assist.target, null, 1, sendMods)) {
 	    MoonPassiveGate.noteBlocked("pass click failed");
@@ -357,6 +380,7 @@ public class MapView extends PView implements DTarget, Console.Directory {
 	moonGateAssistStartedAt = now;
 	moonGateAssistNextAt = moonGateAssistStartedAt + MOON_GATE_ASSIST_RETRY_DT;
 	moonGateAssistCrossed = false;
+	moonGateAssistOpenSent = needOpen;
 	moonGateAssistCloseSent = false;
 	MoonPassiveGate.noteAction((needOpen ? "open+pass " : "pass open ") + assist.gateName);
 	return(true);
@@ -383,6 +407,36 @@ public class MapView extends PView implements DTarget, Console.Directory {
 	Gob gate = assist.gate(this);
 	if(gate == null || gate.removed) {
 	    moonClearGateAssist();
+	    return;
+	}
+	if(moonGateAssistStage == MOON_GATE_STAGE_OPEN) {
+	    if(assist.playerNearGate(this, player)) {
+		if(!moonSendGateUseClick(assist)) {
+		    MoonPassiveGate.noteBlocked("open failed");
+		    moonClearGateAssist();
+		    return;
+		}
+		moonGateAssistOpenSent = true;
+		if(!moonSyntheticMapClick(assist.target, null, 1, moonGateAssistMods)) {
+		    MoonPassiveGate.noteBlocked("pass click failed");
+		    moonClearGateAssist();
+		    return;
+		}
+		moonGateAssistStage = MOON_GATE_STAGE_PASS;
+		moonGateAssistAttempts = 1;
+		moonGateAssistNextAt = now + MOON_GATE_ASSIST_RETRY_DT;
+		MoonPassiveGate.noteAction("open near+pass " + assist.gateName);
+		return;
+	    }
+	    if(now < moonGateAssistNextAt)
+		return;
+	    if(moonSyntheticMapClick(assist.approachTarget, null, 1, moonGateAssistMods)) {
+		moonGateAssistAttempts++;
+		moonGateAssistNextAt = now + 0.35;
+		MoonPassiveGate.noteAction("retry approach " + assist.gateName);
+	    } else {
+		moonGateAssistNextAt = now + 0.15;
+	    }
 	    return;
 	}
 	if(!moonGateAssistCrossed && assist.playerCrossedPlane(this, player)) {
@@ -422,7 +476,7 @@ public class MapView extends PView implements DTarget, Console.Directory {
 	}
 	if(now < moonGateAssistNextAt)
 	    return;
-	if(moonGateAssistAttempts >= 4) {
+	if(moonGateAssistAttempts >= MOON_GATE_ASSIST_PASS_RETRIES) {
 	    MoonPassiveGate.noteBlocked("pass failed");
 	    moonClearGateAssist();
 	    return;
